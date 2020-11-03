@@ -4,11 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateEditInventoryPage } from './create-edit-inventory.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-import {MatInputModule} from '@angular/material/input';
 
 import { CreateEditInventoryRoutingModule } from './create-edit-inventory-routing.module';
 import { InventoryFormComponent } from './components/inventory-form/inventory-form.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CreateEditInventoryService } from './create-edit-inventory.service';
@@ -21,10 +19,8 @@ import { CreateEditInventoryEffects } from './store/effects/create-edit-inventor
     IonicModule,
     CommonModule,
     FormsModule,
-    MatInputModule,
     ReactiveFormsModule,
     IonicModule,
-    MatFormFieldModule,
     ExploreContainerComponentModule,
     CreateEditInventoryRoutingModule,
     StoreModule.forFeature('createEditInventory', createEditInventoryReducer),
