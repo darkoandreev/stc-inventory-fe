@@ -1,0 +1,11 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Създай нов инвентар
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-inventory-form (submitInventory)="submitInventory($event)"></app-inventory-form>
+</ion-content>

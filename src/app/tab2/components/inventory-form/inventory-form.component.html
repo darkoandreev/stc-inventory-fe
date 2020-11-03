@@ -1,0 +1,126 @@
+<ion-content>
+  <form [formGroup]="inventoryForm" (ngSubmit)="submitInventory.emit(inventoryForm.value)">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Категория*</ion-label>
+                    <ion-select interface="popover" formControlName="categoryId">
+                      <ng-container *ngIf="(facade.categories$ | async)?.length > 0 else emptyCategories;">
+                        <ion-select-option *ngFor="let category of facade.categories$ | async" [value]="category.id">
+                          {{category.name}}
+                        </ion-select-option>
+                      </ng-container>
+                      <ng-template #emptyCategories>
+                        <ion-select-option disabled>Няма категории</ion-select-option>
+                      </ng-template>
+                    </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Име на продукта*</ion-label>
+                  <ion-input type="text" formControlName="name"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-row>
+                  <ion-item>
+                    <ion-label position="floating">Цена(RSD)*</ion-label>
+                    <ion-input type="number" formControlName="amount"></ion-input>
+                  </ion-item>
+                </ion-row>
+              </ion-col>
+              <ion-col size="6">
+                <ion-row>
+                  <ion-item>
+                    <ion-label position="floating">Брой</ion-label>
+                    <ion-input type="number" formControlName="quantity"></ion-input>
+                  </ion-item>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Номер*</ion-label>
+                  <ion-input type="text" formControlName="inventoryNumber"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Период</ion-label>
+                  <ion-datetime formControlName="buyedAt"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Местоположение*</ion-label>
+                  <ion-input type="text" formControlName="location"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Отговорно лице*</ion-label>
+                  <ion-input type="text" formControlName="responsiblePerson"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label>Otpis</ion-label>
+                  <ion-checkbox color="secondary" formControlName="isValid"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label>Amortization</ion-label>
+                  <ion-checkbox color="secondary" formControlName="isAmortization"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Stopa(%)</ion-label>
+                  <ion-input type="number" formControlName="growth"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="stacked">Описание</ion-label>
+                  <ion-textarea formControlName="descriptiton" rows="4" cols="20" placeholder="Въведете повече информация тук..."></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-end">
+              <ion-button type="submit" [disabled]="inventoryForm.invalid">SAVE</ion-button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </form>
+</ion-content>
