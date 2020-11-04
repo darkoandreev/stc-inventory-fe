@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Наличен инвентар
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col size="12">
+      <form [formGroup]="inventoriesForm">
+        <ion-row>
+          <ion-col size="8">
+            <ion-item>
+              <ion-label position="floating">Категория</ion-label>
+              <!-- <ion-select interface="popover" formControlName="categoryId">
+                <ng-container *ngIf="(facade.categories$ | async)?.length > 0 else emptyCategories;">
+                  <ion-select-option *ngFor="let category of facade.categories$ | async" [value]="selectedCategory" (ionChange)="getInventories()">
+                    {{category.name}}
+                  </ion-select-option>
+                </ng-container>
+                <ng-template #emptyCategories>
+                  <ion-select-option disabled>Няма категории</ion-select-option>
+                </ng-template>
+              </ion-select> -->
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item>
+              <ion-label>Otpis</ion-label>
+              <ion-checkbox color="secondary" formControlName="isAmortization" (ionChange)="getInventories($event, 'checkbox')"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <app-inventory-list></app-inventory-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
