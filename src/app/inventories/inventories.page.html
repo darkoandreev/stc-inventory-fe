@@ -4,16 +4,14 @@
       Наличен инвентар
     </ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-row>
-    <ion-col size="12">
       <form [formGroup]="inventoriesForm">
         <ion-row>
-          <ion-col size="8">
+          <ion-searchbar mode="ios" showCancelButton="focus" debounce="500" [animated]="true" (ionChange)="searchInventiry($event)"></ion-searchbar>
+        </ion-row>
+        <ion-row>
+          <ion-col size="7">
             <ion-item>
-              <ion-label position="floating">Категория</ion-label>
+              <ion-label position="floating">Kategorija</ion-label>
               <!-- <ion-select interface="popover" formControlName="categoryId">
                 <ng-container *ngIf="(facade.categories$ | async)?.length > 0 else emptyCategories;">
                   <ion-select-option *ngFor="let category of facade.categories$ | async" [value]="selectedCategory" (ionChange)="getInventories()">
@@ -26,16 +24,17 @@
               </ion-select> -->
             </ion-item>
           </ion-col>
-          <ion-col size="4">
+          <ion-col size="5">
             <ion-item>
-              <ion-label>Otpis</ion-label>
+              <ion-label>Amortizacija</ion-label>
               <ion-checkbox color="secondary" formControlName="isAmortization" (ionChange)="getInventories($event, 'checkbox')"></ion-checkbox>
             </ion-item>
           </ion-col>
         </ion-row>
       </form>
-    </ion-col>
-  </ion-row>
+</ion-header>
+
+<ion-content [fullscreen]="true">
   <ion-row>
     <ion-col size="12">
       <app-inventory-list></app-inventory-list>

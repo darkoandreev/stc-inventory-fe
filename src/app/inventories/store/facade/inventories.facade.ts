@@ -11,7 +11,11 @@ export class InventoriesFacade {
     
     constructor(private store: Store<fromReducer.InventoriesState>){}
 
-    getInventories(categoryId: string, isAmortization: boolean) {
+    getInventories(categoryId?: string, isAmortization?: boolean) {
         this.store.dispatch(fromAction.getInventories({categoryId, isAmortization}));
+    }
+
+    searchInventories(searchTerm: string): void {
+        this.store.dispatch(fromAction.searchInventories({searchTerm}));
     }
 }

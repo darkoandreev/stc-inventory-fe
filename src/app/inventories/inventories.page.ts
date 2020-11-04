@@ -25,12 +25,17 @@ export class InventoriesPage implements OnInit {
 
   ngOnInit(): void {
     // this.facade.getCategories();
+    this.facadeInventories.getInventories();
   }
 
   getInventories(event: any, type: string) {
     if (type === 'checkbox') {
       this.selectedIsAmortization = event.detail.checked;
     }
-    this.facadeInventories.getInventories('1', this.selectedIsAmortization);
+    this.facadeInventories.getInventories('123', this.selectedIsAmortization);
+  }
+
+  searchInventiry(event: CustomEvent): void {
+    this.facadeInventories.searchInventories(event.detail.value);
   }
 }

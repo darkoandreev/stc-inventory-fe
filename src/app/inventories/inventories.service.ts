@@ -11,8 +11,18 @@ export class InventoriesService {
     constructor(private http: HttpClient) {}
 
     getInventories(categoryId: string, isAmortization: boolean): Observable<IInventory[]>{
-        const params = new HttpParams().set('categoryId', categoryId)
-                                        .set('isAmortization', `${isAmortization}`)
+        let params = new HttpParams();
+        if (categoryId) {
+            params = params.set('categoryId', categoryId)
+                .set('isAmortization', `${isAmortization}`)
+        }
         return this.http.get<IInventory[]>(`${environment.API_URL}inventory`, {params});
+    }
+
+    searchInventories(searchTerm: string): Observable<IInventory[]> {
+        const params = {
+            params: new HttpParams().set('searchTerm', searchTerm)
+        };
+        return this.http.get<IInventory[]>(`${environment.API_URL}inventory/search`, params);
     }
 }   
