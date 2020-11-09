@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
+  inventoryIcon: string;
+  addInventoryIcon: string;
 
-  constructor() {}
-
+  changeTab({ tab }): void {
+    this.inventoryIcon = tab === 'inventories' ? 'list-sharp' : 'list-outline';
+    this.addInventoryIcon = tab === 'add-inventory' ? 'add-circle-sharp' : 'add-circle-outline'
+  }
 }

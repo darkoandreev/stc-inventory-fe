@@ -24,7 +24,7 @@ export class InventoriesPage implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.facade.getCategories();
+    this.facade.getCategories();
     this.facadeInventories.getInventories();
   }
 

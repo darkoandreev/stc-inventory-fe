@@ -13,6 +13,7 @@ import { CreateEditInventoryService } from './create-edit-inventory.service';
 import { CreateEditInventoryFacade } from './store/facade/create-edit-inventory.facade';
 import { createEditInventoryReducer } from './store/reducers/create-edit-inventory.reducers';
 import { CreateEditInventoryEffects } from './store/effects/create-edit-inventory.effects';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   imports: [
@@ -27,6 +28,6 @@ import { CreateEditInventoryEffects } from './store/effects/create-edit-inventor
     EffectsModule.forFeature([CreateEditInventoryEffects]),
   ],
   declarations: [CreateEditInventoryPage, InventoryFormComponent],
-  providers: [CreateEditInventoryService, CreateEditInventoryFacade]
+  providers: [CreateEditInventoryService, CreateEditInventoryFacade, Camera]
 })
 export class CreateEditInventoryModule {}

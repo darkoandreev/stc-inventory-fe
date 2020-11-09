@@ -12,12 +12,8 @@ const routes: Routes = [
         loadChildren: () => import('../inventories/inventories.module').then(m => m.InventoriesModule)
       },
       {
-        path: 'tab2',
+        path: 'add-inventory',
         loadChildren: () => import('../tab2/create-edit-inventory.module').then(m => m.CreateEditInventoryModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
         path: '',

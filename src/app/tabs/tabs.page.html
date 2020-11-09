@@ -1,20 +1,13 @@
-<ion-tabs>
-
+<ion-tabs (ionTabsDidChange)="changeTab($event)">
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="inventories">
-      <ion-icon name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
+    <ion-tab-button tab="inventories" mode="ios">
+      <ion-icon [name]="inventoryIcon"></ion-icon>
+      <ion-label>Inventar</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2">
-      <ion-icon name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+    <ion-tab-button tab="add-inventory" mode="ios">
+      <ion-icon [name]="addInventoryIcon"></ion-icon>
+      <ion-label>Dodaj</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
-
 </ion-tabs>

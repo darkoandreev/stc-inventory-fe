@@ -12,7 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { inventoriesReducer } from './store/reducers/inventories.reducers';
 import { InventoriesEffects } from './store/effects/inventories.effects';
 import { InventoriesFacade } from './store/facade/inventories.facade';
-import { CreateEditInventoryFacade } from '../tab2/store/facade/create-edit-inventory.facade';
+import { CreateEditInventoryModule } from '../tab2/create-edit-inventory.module';
 
 @NgModule({
   imports: [
@@ -24,8 +24,9 @@ import { CreateEditInventoryFacade } from '../tab2/store/facade/create-edit-inve
     InventoriesPageRoutingModule,
     StoreModule.forFeature('inventories', inventoriesReducer),
     EffectsModule.forFeature([InventoriesEffects]),
+    CreateEditInventoryModule
   ],
   declarations: [InventoriesPage, InventoryListComponent],
-  providers: [InventoriesService, InventoriesFacade, CreateEditInventoryFacade]
+  providers: [InventoriesService, InventoriesFacade]
 })
 export class InventoriesModule {}

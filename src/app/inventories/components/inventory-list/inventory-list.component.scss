@@ -1,13 +1,7 @@
 ion-card {
     margin-bottom: 0;
-}
 
-.view-more {
-    font-size: 70%;
-    background-color: #FDF5E6;
-    width: 90%;
-    height: 17px;
-    margin: 0 auto;
-    border-radius: 4px;
-    text-align: center;
+    ion-thumbnail {
+        height: 5rem;
+    }
 }
