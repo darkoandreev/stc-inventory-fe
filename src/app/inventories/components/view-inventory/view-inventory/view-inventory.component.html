@@ -86,8 +86,8 @@
           <ion-label>Stopa(%)</ion-label>
         </ion-row>
         <ion-row>
-          <ion-col size="10"><ion-progress-bar color="warning" value="0.75" style="margin-top: 9px;"></ion-progress-bar></ion-col>
-          <ion-col size="2">75%</ion-col>
+          <ion-col size="10"><ion-progress-bar color="warning" [value]="inventory.growth / 100" style="margin-top: 9px;"></ion-progress-bar></ion-col>
+          <ion-col size="2">{{inventory.growth}}</ion-col>
         </ion-row>
       </ion-col>
     </ion-row>

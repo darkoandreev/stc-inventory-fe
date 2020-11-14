@@ -12,7 +12,7 @@ import { InventoriesFacade } from './store/facade/inventories.facade';
 export class InventoriesPage implements OnInit {
   inventoriesForm: FormGroup;
   selectedCategory: ICategory;
-  selectedIsAmortization: boolean;
+  selectedIsAmortization = false;
 
   constructor(private formBuilder: FormBuilder,
               public facadeInventories: InventoriesFacade,
@@ -32,7 +32,7 @@ export class InventoriesPage implements OnInit {
     if (type === 'checkbox') {
       this.selectedIsAmortization = event.detail.checked;
     }
-    this.facadeInventories.getInventories('123', this.selectedIsAmortization);
+    this.facadeInventories.getInventories(this.inventoriesForm.get('categoryId').value, this.selectedIsAmortization);
   }
 
   searchInventory(event: CustomEvent): void {
