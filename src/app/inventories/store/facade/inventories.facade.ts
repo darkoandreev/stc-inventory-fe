@@ -15,7 +15,7 @@ export class InventoriesFacade {
         this.store.dispatch(fromAction.getInventories({categoryId, isAmortization}));
     }
 
-    searchInventories(searchTerm: string): void {
-        this.store.dispatch(fromAction.searchInventories({searchTerm}));
+    searchInventories(searchTerm: string, categoryId: string, isAmortization?: boolean): void {
+        this.store.dispatch(fromAction.searchInventories({ searchTerm, categoryId, isAmortization }));
     }
 }

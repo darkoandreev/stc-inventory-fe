@@ -31,7 +31,7 @@ export class InventoriesEffects {
     this.actions$.pipe(
         ofType(fromActions.searchInventories),
         switchMap((action) =>
-            this.service.searchInventories(action.searchTerm).pipe(
+            this.service.searchInventories(action.searchTerm, action.categoryId, action.isAmortization).pipe(
                 map((inventories: IInventory[]) => fromActions.getInventoriesSuccess({inventories})),
                 catchError(() => of(new EffectError()))
             ))

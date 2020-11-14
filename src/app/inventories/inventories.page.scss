@@ -1,11 +1,6 @@
-ion-header {
-    background: rgba(52, 73, 94, 1);
-    color: white;
-}
-
 form {
   background: var(--ion-toolbar-background);
-  color: var(--ion-toolbar-color);
+  color: var(--ion-text-color);
 
   ion-searchbar {
     --background: linear-gradient(

@@ -8,46 +8,43 @@
         mode="ios"
         debounce="500"
         [animated]="true"
-        (ionChange)="searchInventiry($event)"
+        (ionChange)="searchInventory($event)"
       ></ion-searchbar>
     </ion-row>
     <ion-row
       class="ion-align-items-center ion-justify-content-center inventory-filters"
     >
       <ion-col size="7">
-        <ion-select interface="action-sheet" placeholder="Kategorija">
-          <ion-select-option value="f">Female</ion-select-option>
-          <ion-select-option value="m">Male</ion-select-option>
+        <ion-select
+          interface="action-sheet"
+          placeholder="Kategorija"
+          formControlName="categoryId"
+        >
+          <ng-container
+            *ngIf="(facade.categories$ | async)?.length > 0 else emptyCategories;"
+          >
+            <ion-select-option
+              *ngFor="let category of facade.categories$ | async"
+              [value]="category.id"
+              (ionChange)="getInventories()"
+            >
+              {{category.name}}
+            </ion-select-option>
+          </ng-container>
+          <ng-template #emptyCategories>
+            <ion-select-option disabled>Няма категории</ion-select-option>
+          </ng-template>
         </ion-select>
       </ion-col>
       <ion-col class="amortization" size="5">
         <ion-label>Amortizacija</ion-label>
-        <ion-checkbox color="warning"></ion-checkbox>
+        <ion-checkbox
+          color="warning"
+          formControlName="isAmortization"
+          (ionChange)="getInventories($event, 'checkbox')"
+        ></ion-checkbox>
       </ion-col>
     </ion-row>
-    <!-- <ion-row>
-          <ion-col size="7">
-            <ion-item>
-              <ion-label position="floating">Kategorija</ion-label>
-              <ion-select interface="popover" formControlName="categoryId">
-                <ng-container *ngIf="(facade.categories$ | async)?.length > 0 else emptyCategories;">
-                  <ion-select-option *ngFor="let category of facade.categories$ | async" [value]="selectedCategory" (ionChange)="getInventories()">
-                    {{category.name}}
-                  </ion-select-option>
-                </ng-container>
-                <ng-template #emptyCategories>
-                  <ion-select-option disabled>Няма категории</ion-select-option>
-                </ng-template>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col size="5">
-            <ion-item>
-              <ion-label>Amortizacija</ion-label>
-              <ion-checkbox color="secondary" formControlName="isAmortization" (ionChange)="getInventories($event, 'checkbox')"></ion-checkbox>
-            </ion-item>
-          </ion-col>
-        </ion-row> -->
   </form>
 </ion-header>
 

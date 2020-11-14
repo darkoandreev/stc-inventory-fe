@@ -35,7 +35,7 @@ export class InventoriesPage implements OnInit {
     this.facadeInventories.getInventories('123', this.selectedIsAmortization);
   }
 
-  searchInventiry(event: CustomEvent): void {
-    this.facadeInventories.searchInventories(event.detail.value);
+  searchInventory(event: CustomEvent): void {
+    this.facadeInventories.searchInventories(event.detail.value, this.inventoriesForm.get('categoryId').value, this.inventoriesForm.get('isAmortization').value);
   }
 }
