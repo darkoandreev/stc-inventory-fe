@@ -1,6 +1,6 @@
 <ion-list>
     <ion-card *ngFor="let inventory of inventories">
-      <ion-card-content>
+      <ion-card-content (click)="presentPopover(inventory)">
         <ion-row class="ion-align-items-center">
           <ion-col size="3">
             <ion-thumbnail>
