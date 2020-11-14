@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title> Наличен инвентар </ion-title>
   </ion-toolbar>
-  <form [formGroup]="inventoriesForm">
+  <div class="filter-container">
     <ion-row class="ion-align-items-center">
       <ion-searchbar
         mode="ios"
@@ -15,37 +15,35 @@
       class="ion-align-items-center ion-justify-content-center inventory-filters"
     >
       <ion-col size="7">
-        <ion-select
-          interface="popover"
-          placeholder="Kategorija"
-          formControlName="categoryId"
-          (ionChange)="getInventories()"
-        >
-          <ng-container
-            *ngIf="(facade.categories$ | async)?.length > 0 else emptyCategories;"
+        <ng-container *ngIf="(facade.categories$ | async) as categories">
+          <ion-select
+            interface="popover"
+            value="1"
+            (ionChange)="getInventories($event, 'select')"
           >
             <ion-select-option
-              *ngFor="let category of facade.categories$ | async"
+              *ngFor="let category of categories"
               [value]="category.id"
             >
               {{category.name}}
             </ion-select-option>
-          </ng-container>
-          <ng-template #emptyCategories>
-            <ion-select-option disabled>Няма категории</ion-select-option>
-          </ng-template>
-        </ion-select>
+            <ion-select-option
+              *ngIf="categories?.length === 0 || !categories"
+              disabled
+              >Няма категории</ion-select-option
+            >
+          </ion-select>
+        </ng-container>
       </ion-col>
       <ion-col class="amortization" size="5">
         <ion-label>Amortizacija</ion-label>
         <ion-checkbox
           color="warning"
-          formControlName="isAmortization"
           (ionChange)="getInventories($event, 'checkbox')"
         ></ion-checkbox>
       </ion-col>
     </ion-row>
-  </form>
+  </div>
 </ion-header>
 
 <ion-content [fullscreen]="true">
