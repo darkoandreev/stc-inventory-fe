@@ -14,11 +14,11 @@ export class InventoryListComponent {
   
   constructor(public modalController: ModalController){}
 
-  async presentPopover(inventory: IInventory) {
-    const popover = await this.modalController.create({
+  async presentModal(inventory: IInventory) {
+    const modal = await this.modalController.create({
       component: ViewInventoryComponent,
       componentProps: {inventory: inventory}
     });
-    return await popover.present();
+    return await modal.present();
   }
 }

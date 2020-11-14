@@ -2,24 +2,20 @@
     <ion-row>
       <ion-col size="6" *ngFor="let inventory of inventories">
         <ion-card>
-          <ion-card-content (click)="presentPopover(inventory)">
+          <ion-card-content>
             <ion-row class="ion-align-items-center ion-justify-content-center">
               <ion-thumbnail>
                 <img src="https://images-na.ssl-images-amazon.com/images/I/81hkSG4FdPL._SL1080_.jpg" />
               </ion-thumbnail>
             </ion-row>
-
             <ion-row class="ion-align-items-center ion-justify-content-center"> 
-              <ion-label>{{ inventory.name }}</ion-label>
+              <ion-label>{{ inventory.name }} {{ inventory.inventoryNumber }}</ion-label>
             </ion-row>
             <ion-row class="ion-align-items-center ion-justify-content-center">
-              <ion-label>{{ inventory.inventoryNumber }}</ion-label>
+              <ion-label class="font-size">{{ inventory.location }}</ion-label>
             </ion-row>
             <ion-row class="ion-align-items-center ion-justify-content-center">
-              <ion-label>{{ inventory.location }}</ion-label>
-            </ion-row>
-            <ion-row class="ion-align-items-center ion-justify-content-center">
-              <ion-button size="small">Pregledaj</ion-button>
+              <ion-button size="small" (click)="presentModal(inventory)">Pregledaj</ion-button>
             </ion-row>
           </ion-card-content>
         </ion-card>

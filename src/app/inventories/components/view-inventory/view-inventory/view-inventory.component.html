@@ -10,101 +10,92 @@
         </ion-row>
       </ion-col>
     </ion-row>
+
     <ion-row>
       <ion-col size="12">
         <ion-row>
-          <ion-col>
-            <p>Категория</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.categoryId}}</p>
-          </ion-col>
+          <ion-label style="font-weight: bold;">Описание</ion-label>
+        </ion-row>
+        <ion-row>Test</ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-row style="font-weight: bold;">
+          <ion-label>Информация</ion-label>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <p>Цена(RSD)</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.amount}}</p>
-          </ion-col>
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">{{inventory.categoryId}}</ion-col>
+          <ion-col size="6">Категория</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <p>Брой</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.quantity}}</p>
-          </ion-col>
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">{{inventory.amount}}</ion-col>
+          <ion-col size="6">Цена(RSD)</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <p>Период</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.buyedAt}}</p>
-          </ion-col>
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">{{inventory.quantity}}</ion-col>
+          <ion-col size="6">Брой</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <p>Местоположение</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.location}}</p>
-          </ion-col>
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">{{inventory.buyedAt}}</ion-col>
+          <ion-col size="6">Период</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <p>Отговорно лице</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.responsiblePerson}}</p>
-          </ion-col>
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">{{inventory.location}}</ion-col>
+          <ion-col size="6">Местоположение</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <p>Отпис</p>
-          </ion-col>
-          <ion-col style="text-align: end;">
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">{{inventory.responsiblePerson}}</ion-col>
+          <ion-col size="6">Отговорно лице</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">
             <ion-checkbox
-            color="warning"
-            [checked]="inventory.isValid"
-            disabled>
-          </ion-checkbox>
+              color="warning"
+              [checked]="inventory.isValid"
+              disabled>
+            </ion-checkbox>
           </ion-col>
+          <ion-col size="6">Отпис</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <p>Amortization</p>
-          </ion-col>
-          <ion-col style="text-align: end;">
+          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="5">
             <ion-checkbox
-            color="warning"
-            [checked]="inventory.isAmortization"
-            disabled>
-        </ion-checkbox>
+              color="warning"
+              [checked]="inventory.isAmortization"
+              disabled>
+            </ion-checkbox>
           </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <p>Stopa(%)</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.growth}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <p>Описание</p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold; text-align: end;">{{inventory.description}}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row style="justify-content: space-around;">
-          <ion-button size="small" shape="round" color="warning"><ion-icon name="create-outline"></ion-icon></ion-button>
-          <ion-button size="small" shape="round" color="warning"><ion-icon name="trash-outline"></ion-icon></ion-button>
+          <ion-col size="6">Amortization</ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-row style="font-weight: bold;">
+          <ion-label>Stopa(%)</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10"><ion-progress-bar color="warning" value="0.75" style="margin-top: 9px;"></ion-progress-bar></ion-col>
+          <ion-col size="2">75%</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="justify-content: space-around;">
+      <ion-button size="small" shape="round" color="warning"><ion-icon name="create-outline"></ion-icon></ion-button>
+      <ion-button size="small" shape="round" color="warning"><ion-icon name="trash-outline"></ion-icon></ion-button>
+    </ion-row>
+  
   </ion-grid>
 </ion-content>
