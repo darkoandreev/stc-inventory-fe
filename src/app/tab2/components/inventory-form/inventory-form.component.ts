@@ -24,7 +24,7 @@ export class InventoryFormComponent implements OnInit {
   }
 
   @Output() submitInventory = new EventEmitter<IInventory>();
-  
+
   inventoryForm: FormGroup;
   
   constructor(private formbuilder: FormBuilder,
@@ -62,6 +62,7 @@ export class InventoryFormComponent implements OnInit {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.CAMERA
     };
     this.camera.getPicture(options).then((x) => alert(x));
   }
