@@ -1,10 +1,8 @@
 ion-header {
-  clip-path: ellipse(304px 169px at 50% 10%);
-  width: 100%;
-  height: 35%;
-  float: top;
-  background-color: var(--ion-toolbar-background);
+    background: rgba(52, 73, 94, 1);
+    color: white;
 }
+
 form {
   background: var(--ion-toolbar-background);
   color: var(--ion-toolbar-color);

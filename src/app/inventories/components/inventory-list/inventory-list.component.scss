@@ -1,12 +1,18 @@
-ion-card {
-    height: 90%;
+ion-list {
+    background: var(--ion-toolbar-background);
 
-    ion-thumbnail {
-        height: 5rem;
-    }
-
-    ion-button {
-        --background: var(--ion-toolbar-background);
-        --color: #ffaf00;
+    ion-card {
+        height: 90%;
+        background: rgba(52, 73, 94, 0.4);
+        color: white;
+    
+        ion-thumbnail {
+            height: 5rem;
+        }
+    
+        ion-button {
+            --background: var(--ion-toolbar-background);
+            --color: #ffaf00;
+        }
     }
 }
