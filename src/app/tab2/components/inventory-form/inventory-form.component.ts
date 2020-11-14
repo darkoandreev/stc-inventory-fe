@@ -35,16 +35,16 @@ export class InventoryFormComponent implements OnInit {
     this.inventoryForm = this.formbuilder.group({
       categoryId: ['', Validators.required],
       name: ['', Validators.required],
-      descriptiton: [''],
       amount: ['', Validators.required],
-      quantity: [''],
-      inventoryNumber: [''],
-      buyedAt: [''],
+      inventoryNumber: ['', Validators.required],
       location: ['', Validators.required],
       responsiblePerson: ['', Validators.required],
-      isValid: [true],
-      isAmortization: [false],
-      growth: [''],
+      quantity: null,
+      descriptiton: null,
+      buyDate: new Date(),
+      isValid: true,
+      isAmortization: false,
+      growth: null,
       imageUrl: ['https://www.link.com/']
     });
    }
