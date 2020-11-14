@@ -40,7 +40,7 @@ export class InventoryFormComponent implements OnInit {
       location: ['', Validators.required],
       responsiblePerson: ['', Validators.required],
       quantity: null,
-      descriptiton: null,
+      description: null,
       buyDate: new Date(),
       isValid: true,
       isAmortization: false,

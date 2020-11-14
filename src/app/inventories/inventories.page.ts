@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateEditInventoryFacade } from '../tab2/store/facade/create-edit-inventory.facade';
 import { ICategory } from '../tab2/store/models/category.model';
@@ -9,7 +9,7 @@ import { InventoriesFacade } from './store/facade/inventories.facade';
   templateUrl: 'inventories.page.html',
   styleUrls: ['inventories.page.scss']
 })
-export class InventoriesPage implements OnInit {
+export class InventoriesPage {
   inventoriesForm: FormGroup;
   selectedCategory: ICategory;
   selectedIsAmortization = false;
@@ -23,7 +23,7 @@ export class InventoriesPage implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ionViewWillEnter(): void {
     this.facade.getCategories();
     this.facadeInventories.getInventories();
   }
