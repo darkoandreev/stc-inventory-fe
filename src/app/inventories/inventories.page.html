@@ -16,9 +16,10 @@
     >
       <ion-col size="7">
         <ion-select
-          interface="action-sheet"
+          interface="popover"
           placeholder="Kategorija"
           formControlName="categoryId"
+          (ionChange)="getInventories()"
         >
           <ng-container
             *ngIf="(facade.categories$ | async)?.length > 0 else emptyCategories;"
@@ -26,7 +27,6 @@
             <ion-select-option
               *ngFor="let category of facade.categories$ | async"
               [value]="category.id"
-              (ionChange)="getInventories()"
             >
               {{category.name}}
             </ion-select-option>
