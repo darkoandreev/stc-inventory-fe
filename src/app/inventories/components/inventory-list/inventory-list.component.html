@@ -1,24 +1,28 @@
 <ion-list>
-    <ion-card *ngFor="let inventory of inventories">
-      <ion-card-content (click)="presentPopover(inventory)">
-        <ion-row class="ion-align-items-center">
-          <ion-col size="3">
-            <ion-thumbnail>
-              <img src="https://www.ikea.com/ca/en/images/products/stefan-chair-brown-black__0727320_PE735593_S5.JPG" />
-            </ion-thumbnail>
-          </ion-col>
-          <ion-col size="9">
-            <ion-row> 
-              <ion-label>Име: {{ inventory.name }}</ion-label>
+    <ion-row>
+      <ion-col size="6" *ngFor="let inventory of inventories">
+        <ion-card>
+          <ion-card-content (click)="presentPopover(inventory)">
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+              <ion-thumbnail>
+                <img src="https://images-na.ssl-images-amazon.com/images/I/81hkSG4FdPL._SL1080_.jpg" />
+              </ion-thumbnail>
             </ion-row>
-            <ion-row>
-              <ion-label>Номер: {{ inventory.inventoryNumber }}</ion-label>
+
+            <ion-row class="ion-align-items-center ion-justify-content-center"> 
+              <ion-label>{{ inventory.name }}</ion-label>
             </ion-row>
-            <ion-row>
-              <ion-label>Местоположение: {{ inventory.location }}</ion-label>
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+              <ion-label>{{ inventory.inventoryNumber }}</ion-label>
             </ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+              <ion-label>{{ inventory.location }}</ion-label>
+            </ion-row>
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+              <ion-button size="small">Pregledaj</ion-button>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 </ion-list>

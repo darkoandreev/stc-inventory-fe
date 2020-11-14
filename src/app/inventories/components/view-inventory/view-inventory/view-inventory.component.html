@@ -1,14 +1,12 @@
 <ion-content>
   <ion-grid>
+    <ion-thumbnail>
+      <img style="border-radius: 50%;" src="https://images-na.ssl-images-amazon.com/images/I/81hkSG4FdPL._SL1080_.jpg" />
+    </ion-thumbnail>
     <ion-row>
       <ion-col size="12" class="element">
-        <ion-row>
-          <ion-label class="margin-style" style="color: white;">{{inventory.name}} {{inventory.inventoryNumber}}</ion-label>
-        </ion-row>
-        <ion-row>
-          <ion-thumbnail style="margin: 10% auto 0% auto;">
-            <img style="border-radius: 50%;" src="https://www.ikea.com/ca/en/images/products/stefan-chair-brown-black__0727320_PE735593_S5.JPG" />
-          </ion-thumbnail>
+        <ion-row class="ion-justify-content-center ion-padding-top">
+          <ion-label style="color: white;">{{inventory.name}} {{inventory.inventoryNumber}}</ion-label>
         </ion-row>
       </ion-col>
     </ion-row>

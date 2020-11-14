@@ -1,3 +1,39 @@
+ion-header {
+  clip-path: ellipse(304px 169px at 50% 10%);
+  width: 100%;
+  height: 35%;
+  float: top;
+  background-color: var(--ion-toolbar-background);
+}
 form {
-    background: white;
+  background: var(--ion-toolbar-background);
+  color: var(--ion-toolbar-color);
+
+  ion-searchbar {
+    --background: linear-gradient(
+      41deg,
+      rgba(218, 218, 218, 1) 0%,
+      rgba(157, 157, 157, 1) 100%
+    );
+  }
+
+  .inventory-filters {
+    padding-left: 7px;
+    padding-right: 7px;
+
+    .amortization {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    ion-select {
+      background: var(--ion-toolbar-background);
+      --placeholder-color: var(--ion-toolbar-color);
+      --placeholder-opacity: 1;
+    }
+
+    ion-checkbox {
+      --background: rgb(218, 218, 218);
+    }
+  }
 }

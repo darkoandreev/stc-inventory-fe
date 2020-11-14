@@ -1,7 +1,12 @@
 ion-card {
-    margin-bottom: 0;
+    height: 90%;
 
     ion-thumbnail {
         height: 5rem;
+    }
+
+    ion-button {
+        --background: var(--ion-toolbar-background);
+        --color: #ffaf00;
     }
 }
