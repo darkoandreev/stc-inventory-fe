@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { CreateEditInventoryFacade } from '../tab2/store/facade/create-edit-inventory.facade';
 import { ICategory } from '../tab2/store/models/category.model';
+import { IInventory } from '../tab2/store/models/inventory.model';
+import { ViewInventoryComponent } from './components/view-inventory/view-inventory/view-inventory.component';
 import { InventoriesFacade } from './store/facade/inventories.facade';
 
 @Component({
@@ -14,6 +17,7 @@ export class InventoriesPage {
   categoryId: string = '1';
 
   constructor(public facadeInventories: InventoriesFacade,
+              private modalController: ModalController,
               public facade: CreateEditInventoryFacade) {}
 
   ionViewWillEnter(): void {
@@ -34,5 +38,15 @@ export class InventoriesPage {
 
   searchInventory(event: CustomEvent): void {
     this.facadeInventories.searchInventories(event.detail.value, this.categoryId, this.selectedIsAmortization);
+  }
+
+  async presentModal(inventory: IInventory) {
+    const modal = await this.modalController.create({
+      component: ViewInventoryComponent,
+      componentProps: {inventory}
+    });
+    await modal.present();
+    const { data } = (await modal.onDidDismiss());
+    this.facadeInventories.deleteInventory(data);
   }
 }

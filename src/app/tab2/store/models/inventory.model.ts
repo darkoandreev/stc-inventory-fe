@@ -1,4 +1,5 @@
 export interface IInventory {
+    id?: string;
     categoryId: string;
     inventoryNumber: number;
     name: string;
@@ -11,5 +12,5 @@ export interface IInventory {
     description: string;
     quantity: number;
     isValid: boolean;
-    isAmortization: boolean
+    isAmortization: boolean;
 }

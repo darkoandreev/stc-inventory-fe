@@ -12,7 +12,10 @@ export class CreateEditInventoryPage {
   constructor(private facade: CreateEditInventoryFacade) {}
 
   submitInventory(inventory: IInventory) {
+    if (inventory.id) {
+      this.facade.editInventory(inventory);
+      return;
+    }
     this.facade.createNewItem(inventory);
   }
-
 }

@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Platform } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { CreateEditInventoryFacade } from '../../store/facade/create-edit-inventory.facade';
 import { IInventory } from '../../store/models/inventory.model';
 
@@ -12,25 +14,16 @@ import { IInventory } from '../../store/models/inventory.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryFormComponent implements OnInit {
-  #inventory: IInventory;
-
-  @Input()
-  get inventory(): IInventory {
-    return this.#inventory;
-  }
-  set inventory(inventory: IInventory) {
-    this.#inventory = inventory;
-    this.inventoryForm.patchValue(inventory);
-  }
-
   @Output() submitInventory = new EventEmitter<IInventory>();
-
+  inventory$: Observable<IInventory>;
+  id: string;
   inventoryForm: FormGroup;
   
   constructor(private formbuilder: FormBuilder,
               public facade: CreateEditInventoryFacade,
               private platform: Platform,
-              private camera: Camera) {
+              private camera: Camera,
+              private route: ActivatedRoute) {
                 
     this.inventoryForm = this.formbuilder.group({
       categoryId: ['', Validators.required],
@@ -47,9 +40,15 @@ export class InventoryFormComponent implements OnInit {
       growth: null,
       imageUrl: ['https://www.link.com/']
     });
+
+    this.inventory$ = this.facade.inventory$;
    }
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.facade.getInventory(this.id);
+    }
     this.facade.getCategories();
   }
 
@@ -65,5 +64,13 @@ export class InventoryFormComponent implements OnInit {
       sourceType: this.camera.PictureSourceType.CAMERA
     };
     this.camera.getPicture(options).then((x) => alert(x));
+  }
+
+  submit(): void {
+    const inventory: IInventory = {
+      ...this.inventoryForm.value,
+      id: this.id
+   }
+    this.submitInventory.emit(inventory);
   }
 }

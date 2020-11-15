@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { CreateEditInventoryService } from '../../create-edit-inventory.service';
 import { ICategory } from '../models/category.model';
 import { IInventory } from '../models/inventory.model';
+import { IResponse } from 'src/app/inventories/store/models/response.model';
 
 class EffectError implements Action {
     readonly type = '[Error] Effect Error Create Edit Inventory';
@@ -34,6 +35,28 @@ export class CreateEditInventoryEffects {
         switchMap(() =>
             this.service.getCategories().pipe(
                 map((categories: ICategory[]) => fromActions.getCategorySuccess({categories})),
+                catchError(() => of(new EffectError()))
+            ))
+        )
+    );
+
+    editInventory$ = createEffect (() => 
+    this.actions$.pipe(
+        ofType(fromActions.editInventory),
+        switchMap((action) =>
+            this.service.editInventory(action.inventory).pipe(
+                map((editInventoryResponse: IResponse) => fromActions.editInventorySuccess({editInventoryResponse})),
+                catchError(() => of(new EffectError()))
+            ))
+        )
+    );
+
+    getInventory$ = createEffect (() => 
+    this.actions$.pipe(
+        ofType(fromActions.getInventory),
+        switchMap((action) =>
+            this.service.getInventory(action.id).pipe(
+                map((inventory: IInventory) => fromActions.getInventorySuccess({inventory})),
                 catchError(() => of(new EffectError()))
             ))
         )

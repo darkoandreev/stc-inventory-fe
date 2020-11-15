@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, NavParams } from '@ionic/angular';
+import { AlertController, ModalController, NavParams } from '@ionic/angular';
 import { IInventory } from 'src/app/tab2/store/models/inventory.model';
 
 @Component({
@@ -9,22 +9,39 @@ import { IInventory } from 'src/app/tab2/store/models/inventory.model';
   styleUrls: ['./view-inventory.component.scss'],
 })
 export class ViewInventoryComponent implements OnInit {
-  inventory: IInventory;
+  @Input() inventory: IInventory;
   @Output() closeModal = new EventEmitter<any>();
 
   constructor(public navParams: NavParams,
               public modalController: ModalController,
-              private router: Router) { 
-    this.inventory = this.navParams.get('inventory') 
-  }
+              private alertController: AlertController,
+              private router: Router) {}
 
   ngOnInit() {}
 
-  deleteInventory() {}
-
   editInventory() {
     this.modalController.dismiss();
-    this.router.navigateByUrl('/tabs/add-inventory');
+    this.router.navigateByUrl(`/tabs/add-inventory/${this.inventory.id}`);
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Message <strong>text</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.modalController.dismiss(this.inventory.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

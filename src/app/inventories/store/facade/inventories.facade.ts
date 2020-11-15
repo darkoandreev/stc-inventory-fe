@@ -21,7 +21,7 @@ export class InventoriesFacade {
         this.store.dispatch(fromAction.searchInventories({ searchTerm, categoryId, isAmortization }));
     }
 
-    deleteInventory(inventory_id: string): void {
-        this.store.dispatch(fromAction.deleteInventory({ inventory_id }));
+    deleteInventory(id: string): void {
+        this.store.dispatch(fromAction.deleteInventory({ id }));
     }
 }

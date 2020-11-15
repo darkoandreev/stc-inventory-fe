@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateEditInventoryPage } from './create-edit-inventory.page';
+import { CreateEditInventoryEffects } from './store/effects/create-edit-inventory.effects';
 
 const routes: Routes = [
   {
     path: '',
-    component: CreateEditInventoryPage,
+    component: CreateEditInventoryPage
+  },
+  {
+    path: ':id',
+    component: CreateEditInventoryPage
   }
 ];
 

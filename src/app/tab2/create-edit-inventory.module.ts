@@ -14,6 +14,7 @@ import { CreateEditInventoryFacade } from './store/facade/create-edit-inventory.
 import { createEditInventoryReducer } from './store/reducers/create-edit-inventory.reducers';
 import { CreateEditInventoryEffects } from './store/effects/create-edit-inventory.effects';
 import { Camera } from '@ionic-native/camera/ngx';
+import { ConnectInventoryFormDirective } from './directives/connect-inventory-form.directive';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { Camera } from '@ionic-native/camera/ngx';
     StoreModule.forFeature('createEditInventory', createEditInventoryReducer),
     EffectsModule.forFeature([CreateEditInventoryEffects]),
   ],
-  declarations: [CreateEditInventoryPage, InventoryFormComponent],
+  declarations: [CreateEditInventoryPage, InventoryFormComponent, ConnectInventoryFormDirective],
   providers: [CreateEditInventoryService, CreateEditInventoryFacade, Camera]
 })
 export class CreateEditInventoryModule {}

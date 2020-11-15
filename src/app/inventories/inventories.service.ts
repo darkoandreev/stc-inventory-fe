@@ -27,10 +27,10 @@ export class InventoriesService {
         return this.http.get<IInventory[]>(`${environment.API_URL}inventory/search`, params);
     }
 
-    deleteInventory(inventory_id: string): Observable<IResponse> {
+    deleteInventory(id: string): Observable<IResponse> {
         const params = {
-            params: new HttpParams().set('inventory_id', inventory_id)
+            params: new HttpParams().set('id', id)
         };
-        return this.http.delete<IResponse>(`${environment.API_URL}inventory/delete`, params);
+        return this.http.delete<IResponse>(`${environment.API_URL}inventory`, params);
     }
 }   

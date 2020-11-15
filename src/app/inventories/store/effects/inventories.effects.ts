@@ -45,7 +45,7 @@ export class InventoriesEffects {
     this.actions$.pipe(
         ofType(fromActions.deleteInventory),
         switchMap((action) =>
-            this.service.deleteInventory(action.inventory_id).pipe(
+            this.service.deleteInventory(action.id).pipe(
                 map((response: IResponse) => fromActions.deleteInventorySuccess({response})),
                 catchError(() => of(new EffectError()))
             ))

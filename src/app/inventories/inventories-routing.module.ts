@@ -5,7 +5,7 @@ import { InventoriesPage } from './inventories.page';
 const routes: Routes = [
   {
     path: '',
-    component: InventoriesPage,
+    component: InventoriesPage
   }
 ];
 

@@ -15,7 +15,7 @@
               <ion-label class="font-size">{{ inventory.location }}</ion-label>
             </ion-row>
             <ion-row class="ion-align-items-center ion-justify-content-center">
-              <ion-button size="small" (click)="presentModal(inventory)">Pregledaj</ion-button>
+              <ion-button size="small" (click)="viewInventory.emit(inventory)">Pregledaj</ion-button>
             </ion-row>
           </ion-card-content>
         </ion-card>
