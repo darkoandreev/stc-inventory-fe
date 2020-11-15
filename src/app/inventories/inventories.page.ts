@@ -13,10 +13,8 @@ export class InventoriesPage {
   selectedIsAmortization = false;
   categoryId: string = '1';
 
-  constructor(
-              public facadeInventories: InventoriesFacade,
-              public facade: CreateEditInventoryFacade) {
-  }
+  constructor(public facadeInventories: InventoriesFacade,
+              public facade: CreateEditInventoryFacade) {}
 
   ionViewWillEnter(): void {
     this.facade.getCategories();

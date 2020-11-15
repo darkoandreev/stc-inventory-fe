@@ -89,8 +89,20 @@
     </ion-row>
 
     <ion-row style="justify-content: space-around;">
-      <ion-button size="small" shape="round" color="warning"><ion-icon name="create-outline"></ion-icon></ion-button>
-      <ion-button size="small" shape="round" color="warning"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      <ion-button 
+        size="small" 
+        shape="round" 
+        color="warning"
+        (click)="editInventory()"
+        ><ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button 
+        size="small" 
+        shape="round" 
+        color="warning"
+        (click)="deleteInventory()"
+        ><ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
     </ion-row>
   
   </ion-grid>
