@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { CreateEditInventoryFacade } from '../../store/facade/create-edit-inventory.facade';
-import { IInventory } from '../../store/models/inventory.model';
+import { InventoriesFacade } from 'src/app/inventories/store/facade/inventories.facade';
+import { IInventory } from 'src/app/inventories/store/models/inventory.model';
 
 @Component({
   selector: 'app-inventory-form',
@@ -20,7 +20,7 @@ export class InventoryFormComponent implements OnInit {
   inventoryForm: FormGroup;
   
   constructor(private formbuilder: FormBuilder,
-              public facade: CreateEditInventoryFacade,
+              public facade: InventoriesFacade,
               private platform: Platform,
               private camera: Camera,
               private route: ActivatedRoute) {
@@ -70,7 +70,10 @@ export class InventoryFormComponent implements OnInit {
     const inventory: IInventory = {
       ...this.inventoryForm.value,
       id: this.id
-   }
+    }
+    if (!this.id) {
+      delete inventory.id;
+    }
     this.submitInventory.emit(inventory);
   }
 }

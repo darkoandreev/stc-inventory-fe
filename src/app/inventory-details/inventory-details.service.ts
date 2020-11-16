@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ICategory } from './store/models/category.model';
-import { IInventory } from './store/models/inventory.model';
 import { IResponse } from '../inventories/store/models/response.model';
+import { IInventory } from '../inventories/store/models/inventory.model';
+import { ICategory } from '../inventories/store/models/category.model';
 
 @Injectable({
     providedIn: 'root'

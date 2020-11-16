@@ -1,4 +1,4 @@
-import { IInventory } from 'src/app/tab2/store/models/inventory.model';
+import { IInventory } from './inventory.model';
 
 export interface IResponse {
     message: string;

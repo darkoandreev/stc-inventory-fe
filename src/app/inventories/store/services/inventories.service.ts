@@ -1,9 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { IInventory } from '../tab2/store/models/inventory.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IResponse } from './store/models/response.model';
+import { IResponse } from '../models/response.model';
+import { ICategory } from '../models/category.model';
+import { IInventory } from '../models/inventory.model';
 
 @Injectable({
     providedIn: 'root'
@@ -32,5 +33,21 @@ export class InventoriesService {
             params: new HttpParams().set('id', id)
         };
         return this.http.delete<IResponse>(`${environment.API_URL}inventory`, params);
+    }
+
+    createNewItem(inventory: IInventory): Observable<IInventory>{
+        return this.http.post<IInventory>(`${environment.API_URL}inventory`, inventory);
+    }
+
+    getCategories(): Observable<ICategory[]>{
+        return this.http.get<ICategory[]>(`${environment.API_URL}category`);
+    }
+
+    editInventory(inventory: IInventory): Observable<IResponse>{
+        return this.http.put<IResponse>(`${environment.API_URL}inventory`, inventory);
+    }
+
+    getInventory(id: string): Observable<IInventory>{
+        return this.http.get<IInventory>(`${environment.API_URL}inventory/${id}`);
     }
 }   

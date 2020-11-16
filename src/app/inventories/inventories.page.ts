@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { CreateEditInventoryFacade } from '../tab2/store/facade/create-edit-inventory.facade';
-import { ICategory } from '../tab2/store/models/category.model';
-import { IInventory } from '../tab2/store/models/inventory.model';
 import { ViewInventoryComponent } from './components/view-inventory/view-inventory/view-inventory.component';
 import { InventoriesFacade } from './store/facade/inventories.facade';
+import { ICategory } from './store/models/category.model';
+import { IInventory } from './store/models/inventory.model';
 
 @Component({
-  selector: 'app-inventories',
+  selector: 'stc-inventories',
   templateUrl: 'inventories.page.html',
   styleUrls: ['inventories.page.scss']
 })
@@ -16,13 +15,12 @@ export class InventoriesPage {
   selectedIsAmortization = false;
   categoryId: string = '1';
 
-  constructor(public facadeInventories: InventoriesFacade,
-              private modalController: ModalController,
-              public facade: CreateEditInventoryFacade) {}
+  constructor(private modalController: ModalController,
+              public facade: InventoriesFacade) {}
 
   ionViewWillEnter(): void {
     this.facade.getCategories();
-    this.facadeInventories.getInventories(this.categoryId, this.selectedIsAmortization);
+    this.facade.getInventories(this.categoryId, this.selectedIsAmortization);
   }
 
   getInventories(event: CustomEvent, type: string) {
@@ -33,11 +31,11 @@ export class InventoriesPage {
     if (type === 'select') {
       this.categoryId = event.detail.value;
     }
-    this.facadeInventories.getInventories(this.categoryId, this.selectedIsAmortization);
+    this.facade.getInventories(this.categoryId, this.selectedIsAmortization);
   }
 
   searchInventory(event: CustomEvent): void {
-    this.facadeInventories.searchInventories(event.detail.value, this.categoryId, this.selectedIsAmortization);
+    this.facade.searchInventories(event.detail.value, this.categoryId, this.selectedIsAmortization);
   }
 
   async presentModal(inventory: IInventory) {
@@ -47,6 +45,9 @@ export class InventoriesPage {
     });
     await modal.present();
     const { data } = (await modal.onDidDismiss());
-    this.facadeInventories.deleteInventory(data);
+    if (!data) {
+      return;
+    }
+    this.facade.deleteInventory(data);
   }
 }

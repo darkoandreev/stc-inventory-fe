@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
-import { IInventory } from 'src/app/tab2/store/models/inventory.model';
-import { ViewInventoryComponent } from '../view-inventory/view-inventory/view-inventory.component';
+import { ModalController } from '@ionic/angular';
+import { IInventory } from '../../store/models/inventory.model';
 
 @Component({
   selector: 'app-inventory-list',

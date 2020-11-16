@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController, NavParams } from '@ionic/angular';
-import { IInventory } from 'src/app/tab2/store/models/inventory.model';
+import { IInventory } from 'src/app/inventories/store/models/inventory.model';
 
 @Component({
   selector: 'app-view-inventory',
@@ -43,5 +43,4 @@ export class ViewInventoryComponent implements OnInit {
 
     await alert.present();
   }
-
 }

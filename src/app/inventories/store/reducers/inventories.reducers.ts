@@ -1,44 +1,37 @@
-import { Action, createReducer, on, createFeatureSelector, createSelector } from '@ngrx/store';
-import { IInventory } from 'src/app/tab2/store/models/inventory.model';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 import * as fromActions from '../actions/inventories.actions';
-import { IResponse } from '../models/response.model';
+import { ICategory } from '../models/category.model';
+import { IInventory } from '../models/inventory.model';
 
-export interface InventoriesState {
-    inventories: IInventory[];
-    response: IResponse;
+export interface InventoriesState extends EntityState<IInventory> {
+    categories: ICategory[];
+    selectedInventory: IInventory;
 }
 
-export const initialState: InventoriesState = {
-    inventories: null,
-    response: null
-}
+export const adapter: EntityAdapter<IInventory> = createEntityAdapter<IInventory>();
 
-const featureReducer = createReducer (
+const initialState: InventoriesState = adapter.getInitialState({
+    categories: [],
+    selectedInventory: null
+});
+
+const featureReducer = createReducer(
     initialState,
-    on (fromActions.getInventories, state => ({
-        ...state
-    })),
-    on (fromActions.getInventoriesSuccess, (state, {inventories} )=> ({
+    on(fromActions.getInventoriesSuccess, (state, { inventories }) => adapter.setAll(inventories, state)),
+    on(fromActions.deleteInventorySuccess, (state, { response }) => adapter.removeOne(response.data.id, state)),
+    on(fromActions.createItemSuccess, (state, { inventory }) => adapter.addOne(inventory, state)),
+    on(fromActions.editInventorySuccess, (state, { editInventoryResponse } ) => adapter.updateOne({ id: editInventoryResponse.data.id, changes: editInventoryResponse.data }, state)),
+    on(fromActions.getInventorySuccess, (state, { inventory }) => ({
         ...state,
-        inventories: inventories
+        selectedInventory: inventory
     })),
-    on (fromActions.deleteInventory, state => ({
-        ...state
-    })),
-    on (fromActions.deleteInventorySuccess, (state, {response} )=> ({
+    on(fromActions.getCategorySuccess, (state, { categories })=> ({
         ...state,
-        response: response
+        categories
     }))
 );
 
-export interface State {
-    inventories: InventoriesState
-}
-
-export const inventories = createFeatureSelector<InventoriesState>('inventories');
-export const getInventories = createSelector(inventories,(state: InventoriesState) => state.inventories);
-export const deleteInventory = createSelector(inventories,(state: InventoriesState) => state.response);
-
-export function inventoriesReducer (state: InventoriesState | undefined, action: Action) {
+export function inventoriesReducer(state: InventoriesState | undefined, action: Action) {
     return featureReducer(state, action);
 }

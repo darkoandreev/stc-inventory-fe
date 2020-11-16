@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path: 'add-inventory',
-        loadChildren: () => import('../tab2/create-edit-inventory.module').then(m => m.CreateEditInventoryModule)
+        loadChildren: () => import('../inventory-details/inventory-details.module').then(m => m.InventoryDetailsModule)
       },
       {
         path: '',

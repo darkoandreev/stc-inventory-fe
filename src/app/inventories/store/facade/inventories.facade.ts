@@ -1,20 +1,23 @@
 import { Injectable } from "@angular/core";
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { IInventory } from 'src/app/tab2/store/models/inventory.model';
+import { EMPTY, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import * as fromAction from '../actions/inventories.actions';
-import { IResponse } from '../models/response.model';
-import * as fromReducer from '../reducers/inventories.reducers';
-
-@Injectable()
+import { ICategory } from '../models/category.model';
+import { IInventory } from '../models/inventory.model';
+import { State } from '../reducers';
+import { getAllInventories, getAllCategories, getInventory } from '../selectors';
+@Injectable({ providedIn: 'root' })
 export class InventoriesFacade {
-    inventories$: Observable<IInventory[]> = this.store.pipe(select(fromReducer.getInventories));
-    response$: Observable<IResponse> = this.store.pipe(select(fromReducer.deleteInventory));
+    inventories$: Observable<IInventory[]> = this.store.pipe(select(getAllInventories));
+    categories$: Observable<ICategory[]> = this.store.pipe(select(getAllCategories), filter(x => !!x && x.length > 0));
+    inventory$: Observable<IInventory> = this.store.pipe(select(getInventory));
     
-    constructor(private store: Store<fromReducer.InventoriesState>){}
+    constructor(private store: Store<State>) {
+    }
 
-    getInventories(categoryId?: string, isAmortization?: boolean) {
-        this.store.dispatch(fromAction.getInventories({categoryId, isAmortization}));
+    getInventories(categoryId: string, isAmortization: boolean) {
+        this.store.dispatch(fromAction.getInventories({ categoryId, isAmortization }));
     }
 
     searchInventories(searchTerm: string, categoryId: string, isAmortization?: boolean): void {
@@ -23,5 +26,21 @@ export class InventoriesFacade {
 
     deleteInventory(id: string): void {
         this.store.dispatch(fromAction.deleteInventory({ id }));
+    }
+    
+    createNewItem(inventory: IInventory) {
+        this.store.dispatch(fromAction.createItem({inventory}));
+    }
+
+    getCategories(): void {
+        this.store.dispatch(fromAction.getCategory());
+    }
+
+    editInventory(inventory: IInventory): void {
+        this.store.dispatch(fromAction.editInventory({ inventory }));
+    }
+
+    getInventory(id: string): void {
+        this.store.dispatch(fromAction.getInventory({ id }));
     }
 }

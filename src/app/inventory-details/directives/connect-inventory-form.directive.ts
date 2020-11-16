@@ -1,6 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
-import { IInventory } from '../store/models/inventory.model';
+import { IInventory } from 'src/app/inventories/store/models/inventory.model';
 
 @Directive({ selector: '[connectInventoryForm]' })
 export class ConnectInventoryFormDirective {

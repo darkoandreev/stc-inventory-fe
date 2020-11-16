@@ -48,7 +48,7 @@
 
 <ion-content [fullscreen]="true">
   <app-inventory-list
-    [inventories]="facadeInventories.inventories$ | async"
+    [inventories]="facade.inventories$ | async"
     (viewInventory)="presentModal($event)"
   ></app-inventory-list>
 </ion-content>
