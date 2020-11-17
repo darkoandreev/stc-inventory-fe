@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Създай нов инвентар
+      Nov proizvod
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-inventory-form (submitInventory)="submitInventory($event)"></app-inventory-form>
+  <app-inventory-form (submitInventory)="submitInventory($event)" [inventoryId]="inventoryId" [inventory]="inventory$  | async" [categories]="categories$ | async"></app-inventory-form>
 </ion-content>

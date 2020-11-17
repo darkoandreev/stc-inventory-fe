@@ -7,10 +7,6 @@ const routes: Routes = [
     path: '',
     component: InventoryDetailsPage
   },
-  {
-    path: ':id',
-    component: InventoryDetailsPage
-  }
 ];
 
 @NgModule({

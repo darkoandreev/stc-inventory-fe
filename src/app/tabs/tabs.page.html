@@ -5,7 +5,7 @@
       <ion-label>Inventar</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="add-inventory" mode="ios">
+    <ion-tab-button (click)="goToInventoryDetails()" tab="add-inventory" mode="ios">
       <ion-icon [name]="addInventoryIcon"></ion-icon>
       <ion-label>Dodaj</ion-label>
     </ion-tab-button>

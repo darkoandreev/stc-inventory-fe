@@ -17,7 +17,6 @@ import { InventoryDetailsPage } from './inventory-details.page';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    IonicModule,
     InventoryDetailsRoutingModule,
     InventoriesStoreModule
   ],

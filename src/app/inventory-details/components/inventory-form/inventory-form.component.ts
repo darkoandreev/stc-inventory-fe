@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -6,6 +6,7 @@ import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { InventoriesFacade } from 'src/app/inventories/store/facade/inventories.facade';
 import { IInventory } from 'src/app/inventories/store/models/inventory.model';
+import { ICategory } from '../../../inventories/store/models/category.model';
 
 @Component({
   selector: 'app-inventory-form',
@@ -13,47 +14,36 @@ import { IInventory } from 'src/app/inventories/store/models/inventory.model';
   styleUrls: ['./inventory-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InventoryFormComponent implements OnInit {
-  @Output() submitInventory = new EventEmitter<IInventory>();
-  inventory$: Observable<IInventory>;
-  id: string;
+export class InventoryFormComponent {
+  _inventory: IInventory;
+
   inventoryForm: FormGroup;
-  
-  constructor(private formbuilder: FormBuilder,
-              public facade: InventoriesFacade,
-              private platform: Platform,
-              private camera: Camera,
-              private route: ActivatedRoute) {
-                
-    this.inventoryForm = this.formbuilder.group({
-      categoryId: ['', Validators.required],
-      name: ['', Validators.required],
-      amount: ['', Validators.required],
-      inventoryNumber: ['', Validators.required],
-      location: ['', Validators.required],
-      responsiblePerson: ['', Validators.required],
-      quantity: null,
-      description: null,
-      buyDate: new Date(),
-      isValid: true,
-      isAmortization: false,
-      growth: null,
-      imageUrl: ['https://www.link.com/']
-    });
 
-    this.inventory$ = this.facade.inventory$;
-   }
-
-  ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) {
-      this.facade.getInventory(this.id);
+  @Input()
+  get inventory(): IInventory {
+    return this._inventory;
+  }
+  set inventory(value: IInventory) {
+    if (value) {
+      this.inventoryForm.patchValue(value);
+      this._inventory = value;
     }
-    this.facade.getCategories();
   }
 
+  @Input() categories: ICategory[];
+  @Input() inventoryId: string;
+
+  @Output() submitInventory = new EventEmitter<IInventory>();
+
+
+  constructor(private formbuilder: FormBuilder,
+              private platform: Platform,
+              private camera: Camera) {
+    this.initForm();
+   }
+
   captureInventory(): void {
-    if(!this.platform.is('cordova')) {
+    if (!this.platform.is('cordova')) {
       return;
     }
     const options: CameraOptions = {
@@ -69,11 +59,30 @@ export class InventoryFormComponent implements OnInit {
   submit(): void {
     const inventory: IInventory = {
       ...this.inventoryForm.value,
-      id: this.id
-    }
-    if (!this.id) {
+      id: this.inventoryId
+    };
+
+    if (!this.inventoryId) {
       delete inventory.id;
     }
     this.submitInventory.emit(inventory);
+  }
+
+  initForm(): void {
+    this.inventoryForm = this.formbuilder.group({
+      categoryId: ['', Validators.required],
+      name: ['', Validators.required],
+      amount: ['', Validators.required],
+      inventoryNumber: ['', Validators.required],
+      location: ['', Validators.required],
+      responsiblePerson: ['', Validators.required],
+      quantity: null,
+      description: null,
+      buyDate: new Date(),
+      isValid: true,
+      isAmortization: false,
+      growth: null,
+      imageUrl: ['https://www.link.com/']
+    });
   }
 }

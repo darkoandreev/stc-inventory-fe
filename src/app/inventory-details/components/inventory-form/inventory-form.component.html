@@ -1,30 +1,29 @@
 <ion-content>
   <form
     [formGroup]="inventoryForm"
-    [connectInventoryForm]="inventory$ | async"
     (ngSubmit)="submit()"
   >
     <ion-grid>
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Категория*</ion-label>
+            <ion-label position="floating">Kategorija*</ion-label>
             <ion-select interface="popover" formControlName="categoryId">
               <ng-container
                 *ngIf="
-                  (facade.categories$ | async)?.length > 0;
+                  categories?.length > 0;
                   else emptyCategories
                 "
               >
                 <ion-select-option
-                  *ngFor="let category of facade.categories$ | async"
+                  *ngFor="let category of categories"
                   [value]="category.id"
                 >
                   {{ category.name }}
                 </ion-select-option>
               </ng-container>
               <ng-template #emptyCategories>
-                <ion-select-option disabled>Няма категории</ion-select-option>
+                <ion-select-option disabled>Nema kategorija</ion-select-option>
               </ng-template>
             </ion-select>
           </ion-item>
@@ -34,7 +33,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Име на продукта*</ion-label>
+            <ion-label position="floating">Ime prozivoda*</ion-label>
             <ion-input type="text" formControlName="name"></ion-input>
           </ion-item>
         </ion-col>
@@ -43,13 +42,13 @@
       <ion-row>
         <ion-col size="6">
           <ion-item>
-            <ion-label position="floating">Цена(RSD)*</ion-label>
+            <ion-label position="floating">Vrednost (RSD)*</ion-label>
             <ion-input type="number" formControlName="amount"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
-            <ion-label position="floating">Брой</ion-label>
+            <ion-label position="floating">Količina</ion-label>
             <ion-input type="number" formControlName="quantity"></ion-input>
           </ion-item>
         </ion-col>
@@ -58,7 +57,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Номер*</ion-label>
+            <ion-label position="floating">Broj proizvoda*</ion-label>
             <ion-input
               type="text"
               formControlName="inventoryNumber"
@@ -67,7 +66,7 @@
         </ion-col>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Период</ion-label>
+            <ion-label position="floating">Datum kupovine</ion-label>
             <ion-datetime formControlName="buyDate"></ion-datetime>
           </ion-item>
         </ion-col>
@@ -76,7 +75,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Местоположение*</ion-label>
+            <ion-label position="floating">Lokacija*</ion-label>
             <ion-input type="text" formControlName="location"></ion-input>
           </ion-item>
         </ion-col>
@@ -85,7 +84,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Отговорно лице*</ion-label>
+            <ion-label position="floating">Lice za zaduženje*</ion-label>
             <ion-input
               type="text"
               formControlName="responsiblePerson"
@@ -106,7 +105,7 @@
         </ion-col>
         <ion-col size="6" class="ion-align-self-end">
           <ion-item class="ion-no-padding">
-            <ion-label class="ion-label-padding">Amortization</ion-label>
+            <ion-label class="ion-label-padding">Amortizacija</ion-label>
             <ion-checkbox
               color="secondary"
               formControlName="isAmortization"
@@ -118,7 +117,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Stopa(%)</ion-label>
+            <ion-label position="floating">Stopa (%)</ion-label>
             <ion-input type="number" formControlName="growth"></ion-input>
           </ion-item>
         </ion-col>
@@ -127,12 +126,12 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="stacked">Описание</ion-label>
+            <ion-label position="stacked">Opis</ion-label>
             <ion-textarea
               formControlName="description"
               rows="4"
               cols="20"
-              placeholder="Въведете повече информация тук..."
+              placeholder="Opis proizvoda..."
             ></ion-textarea>
           </ion-item>
         </ion-col>

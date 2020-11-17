@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Наличен инвентар </ion-title>
+    <ion-title>Proizvodi</ion-title>
   </ion-toolbar>
   <div class="filter-container">
     <ion-row class="ion-align-items-center">
@@ -9,6 +9,7 @@
         debounce="500"
         [animated]="true"
         (ionChange)="searchInventory($event)"
+        placeholder="Traži"
       ></ion-searchbar>
     </ion-row>
     <ion-row
@@ -30,7 +31,7 @@
             <ion-select-option
               *ngIf="categories?.length === 0 || !categories"
               disabled
-              >Няма категории</ion-select-option
+              >Nema proizvoda</ion-select-option
             >
           </ion-select>
         </ng-container>

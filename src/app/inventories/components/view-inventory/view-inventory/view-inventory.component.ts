@@ -1,44 +1,46 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController, NavParams } from '@ionic/angular';
 import { IInventory } from 'src/app/inventories/store/models/inventory.model';
 
 @Component({
-  selector: 'app-view-inventory',
+  selector: 'stc-view-inventory',
   templateUrl: './view-inventory.component.html',
   styleUrls: ['./view-inventory.component.scss'],
 })
-export class ViewInventoryComponent implements OnInit {
+export class ViewInventoryComponent {
   @Input() inventory: IInventory;
   @Output() closeModal = new EventEmitter<any>();
 
-  constructor(public navParams: NavParams,
-              public modalController: ModalController,
-              private alertController: AlertController,
-              private router: Router) {}
-
-  ngOnInit() {}
+  constructor(
+    private modalController: ModalController,
+    private alertController: AlertController,
+    private router: Router
+  ) {}
 
   editInventory() {
     this.modalController.dismiss();
-    this.router.navigateByUrl(`/tabs/add-inventory/${this.inventory.id}`);
+    this.router.navigate(['tabs', 'add-inventory'], {
+      queryParams: { id: this.inventory.id },
+    });
   }
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
+      header: 'Brisanje proizvoda',
+      message: 'Da li ste sigurni da želite <strong>obrisati</strong> ovaj proizvod?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Ne',
           role: 'cancel',
-        }, {
-          text: 'Okay',
+        },
+        {
+          text: 'Da',
           handler: () => {
             this.modalController.dismiss(this.inventory.id);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
