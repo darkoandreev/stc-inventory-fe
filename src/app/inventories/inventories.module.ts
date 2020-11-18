@@ -9,6 +9,13 @@ import { InventoryListComponent } from './components/inventory-list/inventory-li
 import { InventoriesFacade } from './store/facade/inventories.facade';
 import { ViewInventoryComponent } from './components/view-inventory/view-inventory/view-inventory.component';
 import { InventoriesStoreModule } from './store/inventories-store.module';
+import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   imports: [
@@ -17,7 +24,15 @@ import { InventoriesStoreModule } from './store/inventories-store.module';
     FormsModule,
     ReactiveFormsModule,
     InventoriesPageRoutingModule,
-    InventoriesStoreModule
+    InventoriesStoreModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      },
+      isolate: true
+  })
   ],
   declarations: [InventoriesPage, InventoryListComponent, ViewInventoryComponent],
   providers: [InventoriesService, InventoriesFacade]
