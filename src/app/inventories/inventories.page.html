@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Proizvodi</ion-title>
+    <ion-title>{{ 'INVENTORIES.TITLE' | translate }}</ion-title>
   </ion-toolbar>
   <div class="filter-container">
     <ion-row class="ion-align-items-center">
@@ -48,8 +48,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-inventory-list
-    [inventories]="facade.inventories$ | async"
-    (viewInventory)="presentModal($event)"
-  ></app-inventory-list>
+  <ng-container *ngIf="(facade.inventories$ | async)?.length > 0; else noProducts">
+    <stc-inventory-list
+      [inventories]="facade.inventories$ | async"
+      (viewInventory)="presentModal($event)"
+  ></stc-inventory-list>
+  </ng-container>
+  <ng-template #noProducts>
+    <img src="assets/images/no-products.png" />
+  </ng-template>
 </ion-content>

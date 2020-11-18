@@ -7,5 +7,5 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-inventory-form (submitInventory)="submitInventory($event)" [inventoryId]="inventoryId" [inventory]="inventory$  | async" [categories]="categories$ | async"></app-inventory-form>
+  <stc-inventory-form (submitInventory)="submitInventory($event)" [inventoryId]="inventoryId" [inventory]="inventory$  | async" [categories]="categories$ | async"></stc-inventory-form>
 </ion-content>

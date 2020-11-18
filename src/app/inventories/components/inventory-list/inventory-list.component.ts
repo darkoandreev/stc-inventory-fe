@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { IInventory } from '../../store/models/inventory.model';
 
 @Component({
-  selector: 'app-inventory-list',
+  selector: 'stc-inventory-list',
   templateUrl: './inventory-list.component.html',
   styleUrls: ['./inventory-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -11,6 +11,6 @@ import { IInventory } from '../../store/models/inventory.model';
 export class InventoryListComponent {
   @Input() inventories: IInventory[];
   @Output() viewInventory = new EventEmitter<IInventory>();
-  
+
   constructor(public modalController: ModalController){}
 }

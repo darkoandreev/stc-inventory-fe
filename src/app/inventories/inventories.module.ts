@@ -7,15 +7,9 @@ import { InventoriesPageRoutingModule } from './inventories-routing.module';
 import { InventoriesService } from './store/services/inventories.service';
 import { InventoryListComponent } from './components/inventory-list/inventory-list.component';
 import { InventoriesFacade } from './store/facade/inventories.facade';
-import { ViewInventoryComponent } from './components/view-inventory/view-inventory/view-inventory.component';
+import { ViewInventoryComponent } from './components/view-inventory/view-inventory.component';
 import { InventoriesStoreModule } from './store/inventories-store.module';
-import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -25,16 +19,10 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     InventoriesPageRoutingModule,
     InventoriesStoreModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      },
-      isolate: true
-  })
+    TranslateModule
   ],
   declarations: [InventoriesPage, InventoryListComponent, ViewInventoryComponent],
-  providers: [InventoriesService, InventoriesFacade]
+  providers: [InventoriesService, InventoriesFacade],
+  exports: [TranslateModule]
 })
 export class InventoriesModule {}

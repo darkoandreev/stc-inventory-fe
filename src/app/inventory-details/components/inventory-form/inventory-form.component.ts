@@ -1,21 +1,18 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Platform } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { InventoriesFacade } from 'src/app/inventories/store/facade/inventories.facade';
 import { IInventory } from 'src/app/inventories/store/models/inventory.model';
 import { ICategory } from '../../../inventories/store/models/category.model';
 
 @Component({
-  selector: 'app-inventory-form',
+  selector: 'stc-inventory-form',
   templateUrl: './inventory-form.component.html',
   styleUrls: ['./inventory-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InventoryFormComponent {
-  _inventory: IInventory;
+  private _inventory: IInventory;
 
   inventoryForm: FormGroup;
 

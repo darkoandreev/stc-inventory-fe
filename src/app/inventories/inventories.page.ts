@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ViewInventoryComponent } from './components/view-inventory/view-inventory/view-inventory.component';
+import { ViewInventoryComponent } from './components/view-inventory/view-inventory.component';
 import { InventoriesFacade } from './store/facade/inventories.facade';
 import { ICategory } from './store/models/category.model';
 import { IInventory } from './store/models/inventory.model';
@@ -8,15 +8,17 @@ import { IInventory } from './store/models/inventory.model';
 @Component({
   selector: 'stc-inventories',
   templateUrl: 'inventories.page.html',
-  styleUrls: ['inventories.page.scss']
+  styleUrls: ['inventories.page.scss'],
 })
 export class InventoriesPage {
   selectedCategory: ICategory;
   selectedIsAmortization = false;
-  categoryId: string = '1';
+  categoryId = '1';
 
-  constructor(private modalController: ModalController,
-              public facade: InventoriesFacade) {}
+  constructor(
+    private modalController: ModalController,
+    public facade: InventoriesFacade
+  ) {}
 
   ionViewWillEnter(): void {
     this.facade.getCategories();
@@ -35,16 +37,22 @@ export class InventoriesPage {
   }
 
   searchInventory(event: CustomEvent): void {
-    this.facade.searchInventories(event.detail.value, this.categoryId, this.selectedIsAmortization);
+    this.facade.searchInventories(
+      event.detail.value,
+      this.categoryId,
+      this.selectedIsAmortization
+    );
   }
+
+  change(): void {}
 
   async presentModal(inventory: IInventory) {
     const modal = await this.modalController.create({
       component: ViewInventoryComponent,
-      componentProps: {inventory}
+      componentProps: { inventory },
     });
     await modal.present();
-    const { data } = (await modal.onDidDismiss());
+    const { data } = await modal.onDidDismiss();
     if (!data) {
       return;
     }
