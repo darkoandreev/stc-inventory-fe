@@ -1,8 +1,5 @@
 <ion-content>
-  <form
-    [formGroup]="inventoryForm"
-    (ngSubmit)="submit()"
-  >
+  <form [formGroup]="inventoryForm" (ngSubmit)="submit()">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
@@ -10,10 +7,7 @@
             <ion-label position="floating">Kategorija*</ion-label>
             <ion-select interface="popover" formControlName="categoryId">
               <ng-container
-                *ngIf="
-                  categories?.length > 0;
-                  else emptyCategories
-                "
+                *ngIf="categories?.length > 0; else emptyCategories"
               >
                 <ion-select-option
                   *ngFor="let category of categories"
@@ -138,15 +132,14 @@
       </ion-row>
 
       <ion-row class="ion-justify-content-center">
-        <ion-button
-        type="button"
-        shape="round"
-        (click)="openCameraOptions()"
-      >Slikaj
-      <ion-icon name="camera"></ion-icon>
-      </ion-button
-    >
-      <ion-img *ngIf="inventoryForm.get('imageName').value" [src]="inventoryForm.get('imageName').value"></ion-img>
+        <ion-button type="button" shape="round" (click)="openCameraOptions()"
+          >Slikaj
+          <ion-icon name="camera"></ion-icon>
+        </ion-button>
+        <ion-img
+          *ngIf="inventoryForm.get('imageName').value"
+          [src]="inventoryForm.get('imageName').value"
+        ></ion-img>
       </ion-row>
 
       <ion-button

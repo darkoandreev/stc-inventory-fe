@@ -10,11 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Platform, ActionSheetController } from '@ionic/angular';
 import { IInventory } from 'src/app/inventories/store/models/inventory.model';
 import { ICategory } from '../../../inventories/store/models/category.model';
-import {
-  Plugins,
-  CameraResultType,
-  CameraSource,
-} from '@capacitor/core';
+import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 const { Camera } = Plugins;
 
 @Component({
@@ -44,7 +40,12 @@ export class InventoryFormComponent {
 
   @Output() submitInventory = new EventEmitter<IInventory>();
 
-  constructor(private formbuilder: FormBuilder, private platform: Platform, private cdr: ChangeDetectorRef, private actionSheetController: ActionSheetController) {
+  constructor(
+    private formbuilder: FormBuilder,
+    private platform: Platform,
+    private cdr: ChangeDetectorRef,
+    private actionSheetController: ActionSheetController
+  ) {
     this.initForm();
   }
 
@@ -59,24 +60,27 @@ export class InventoryFormComponent {
     }
     this.submitInventory.emit(inventory);
   }
-  
+
   async openCameraOptions() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opcije',
-      buttons: [{
-        text: 'Album',
-        icon: 'image',
-        handler: async () => await this.captureInventory(CameraSource.Photos)
-      }, {
-        text: 'Kamera',
-        icon: 'camera',
-        handler: async () => await this.captureInventory(CameraSource.Camera)
-      }, 
-      {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel'
-      }]
+      buttons: [
+        {
+          text: 'Album',
+          icon: 'image',
+          handler: async () => await this.captureInventory(CameraSource.Photos),
+        },
+        {
+          text: 'Kamera',
+          icon: 'camera',
+          handler: async () => await this.captureInventory(CameraSource.Camera),
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+        },
+      ],
     });
     await actionSheet.present();
   }
