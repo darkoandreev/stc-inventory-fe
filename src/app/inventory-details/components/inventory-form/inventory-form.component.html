@@ -137,13 +137,17 @@
         </ion-col>
       </ion-row>
 
-      <ion-button
-        expand="block"
+      <ion-row class="ion-justify-content-center">
+        <ion-button
         type="button"
         shape="round"
-        (click)="captureInventory()"
-      >Slikaj</ion-button
+        (click)="openCameraOptions()"
+      >Slikaj
+      <ion-icon name="camera"></ion-icon>
+      </ion-button
     >
+      <ion-img *ngIf="inventoryForm.get('imageName').value" [src]="inventoryForm.get('imageName').value"></ion-img>
+      </ion-row>
 
       <ion-button
         expand="block"

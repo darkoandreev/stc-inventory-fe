@@ -5,7 +5,7 @@ export interface IInventory {
     name: string;
     amount: number;
     location: string;
-    imageUrl: string;
+    imageName: string;
     responsiblePerson: string;
     growth: number;
     buyedAt: string

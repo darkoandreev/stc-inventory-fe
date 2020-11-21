@@ -36,6 +36,6 @@ export class InventoryDetailsPage {
   }
 
   ionViewDidLeave(): void {
-    this.inventoryFormComponent.initForm();
+    this.inventoryFormComponent.inventoryForm.reset();
   }
 }

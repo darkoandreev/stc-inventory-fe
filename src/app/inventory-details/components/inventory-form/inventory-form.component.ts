@@ -1,15 +1,27 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { Platform } from '@ionic/angular';
+import { Platform, ActionSheetController } from '@ionic/angular';
 import { IInventory } from 'src/app/inventories/store/models/inventory.model';
 import { ICategory } from '../../../inventories/store/models/category.model';
+import {
+  Plugins,
+  CameraResultType,
+  CameraSource,
+} from '@capacitor/core';
+const { Camera } = Plugins;
 
 @Component({
   selector: 'stc-inventory-form',
   templateUrl: './inventory-form.component.html',
   styleUrls: ['./inventory-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryFormComponent {
   private _inventory: IInventory;
@@ -32,31 +44,14 @@ export class InventoryFormComponent {
 
   @Output() submitInventory = new EventEmitter<IInventory>();
 
-
-  constructor(private formbuilder: FormBuilder,
-              private platform: Platform,
-              private camera: Camera) {
+  constructor(private formbuilder: FormBuilder, private platform: Platform, private cdr: ChangeDetectorRef, private actionSheetController: ActionSheetController) {
     this.initForm();
-   }
-
-  captureInventory(): void {
-    if (!this.platform.is('cordova')) {
-      return;
-    }
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.CAMERA
-    };
-    this.camera.getPicture(options).then((x) => alert(x));
   }
 
   submit(): void {
     const inventory: IInventory = {
       ...this.inventoryForm.value,
-      id: this.inventoryId
+      id: this.inventoryId,
     };
 
     if (!this.inventoryId) {
@@ -64,8 +59,44 @@ export class InventoryFormComponent {
     }
     this.submitInventory.emit(inventory);
   }
+  
+  async openCameraOptions() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opcije',
+      buttons: [{
+        text: 'Album',
+        icon: 'image',
+        handler: async () => await this.captureInventory(CameraSource.Photos)
+      }, {
+        text: 'Kamera',
+        icon: 'camera',
+        handler: async () => await this.captureInventory(CameraSource.Camera)
+      }, 
+      {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel'
+      }]
+    });
+    await actionSheet.present();
+  }
 
-  initForm(): void {
+  private async captureInventory(source: CameraSource) {
+    if (!this.platform.is('cordova')) {
+      return;
+    }
+    // Take a photo
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source,
+      quality: 100,
+    });
+
+    this.inventoryForm.get('imageName').setValue(capturedPhoto.webPath);
+    this.cdr.markForCheck();
+  }
+
+  private initForm(): void {
     this.inventoryForm = this.formbuilder.group({
       categoryId: ['', Validators.required],
       name: ['', Validators.required],
@@ -73,13 +104,13 @@ export class InventoryFormComponent {
       inventoryNumber: ['', Validators.required],
       location: ['', Validators.required],
       responsiblePerson: ['', Validators.required],
+      imageName: ['', Validators.required],
       quantity: null,
       description: null,
       buyDate: new Date(),
       isValid: true,
       isAmortization: false,
       growth: null,
-      imageUrl: ['https://www.link.com/']
     });
   }
 }
