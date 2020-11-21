@@ -3,23 +3,20 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as fromActions from "../actions/inventories.actions";
 import { switchMap, map, catchError, tap } from "rxjs/operators";
-import { of } from "rxjs";
 import { InventoriesService } from "../services/inventories.service";
 import { Router } from "@angular/router";
 import { IInventory } from "../models/inventory.model";
 import { ICategory } from '../models/category.model';
 import { IResponse } from '../models/response.model';
-
-class EffectError implements Action {
-  readonly type = "[Error] Effect Error Inventories";
-}
+import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
 
 @Injectable()
 export class InventoriesEffects {
   constructor(
     private actions$: Actions,
     private service: InventoriesService,
-    private router: Router
+    private router: Router,
+    private toast: ToasterService
   ) {}
 
   createNewItem$ = createEffect(() =>
@@ -30,7 +27,7 @@ export class InventoriesEffects {
           map((inventory: IInventory) =>
             fromActions.createItemSuccess({ inventory })
           ),
-          catchError(() => of(new EffectError()))
+          catchError((error: Error) => [fromActions.createItemsError(error)])
         )
       )
     )
@@ -38,13 +35,13 @@ export class InventoriesEffects {
 
   categories$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromActions.getCategory),
+      ofType(fromActions.getCategories),
       switchMap(() =>
         this.service.getCategories().pipe(
           map((categories: ICategory[]) =>
-            fromActions.getCategorySuccess({ categories })
+            fromActions.getCategoriesSuccess({ categories })
           ),
-          catchError(() => of(new EffectError()))
+          catchError((error: Error) => [fromActions.getCategoriesError(error)])
         )
       )
     )
@@ -58,7 +55,7 @@ export class InventoriesEffects {
           map((editInventoryResponse: IResponse) =>
             fromActions.editInventorySuccess({ editInventoryResponse })
           ),
-          catchError(() => of(new EffectError()))
+          catchError((error: Error) => [fromActions.editInventoryError(error)])
         )
       )
     )
@@ -72,7 +69,7 @@ export class InventoriesEffects {
           map((inventory: IInventory) =>
             fromActions.getInventorySuccess({ inventory })
           ),
-          catchError(() => of(new EffectError()))
+          catchError((error: Error) => [fromActions.getInventoryError(error)])
         )
       )
     )
@@ -88,7 +85,7 @@ export class InventoriesEffects {
             map((inventories: IInventory[]) =>
               fromActions.getInventoriesSuccess({ inventories, reset: action.reset })
             ),
-            catchError(() => of(new EffectError()))
+            catchError((error: Error) => [fromActions.getInventoriesError(error)])
           )
       )
     )
@@ -108,7 +105,7 @@ export class InventoriesEffects {
             map((inventories: IInventory[]) =>
               fromActions.searchInventoriesSuccess({ inventories })
             ),
-            catchError(() => of(new EffectError()))
+            catchError((error: Error) => [fromActions.searchInventoriesError(error)])
           )
       )
     )
@@ -122,7 +119,7 @@ export class InventoriesEffects {
           map((response: IResponse) =>
             fromActions.deleteInventorySuccess({ response })
           ),
-          catchError(() => of(new EffectError()))
+          catchError((error: Error) => [fromActions.deleteInventoryError(error)])
         )
       )
     )
@@ -132,7 +129,21 @@ export class InventoriesEffects {
     () =>
       this.actions$.pipe(
         ofType(fromActions.deleteInventorySuccess),
-        tap(() => this.router.navigateByUrl("/tabs/inventories"))
+        tap(({response}) => {
+          this.router.navigateByUrl("/tabs/inventories");
+          this.toast.showToaster(response.message, 'success')
+        })
+      ),
+    { dispatch: false }
+  );
+
+  createInventorySuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromActions.createItemSuccess),
+        tap(() => {
+          this.toast.showToaster('Produkt je uspešno dodat', 'success')
+        })
       ),
     { dispatch: false }
   );

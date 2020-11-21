@@ -33,7 +33,7 @@ export class InventoriesFacade {
     }
 
     getCategories(): void {
-        this.store.dispatch(fromAction.getCategory());
+        this.store.dispatch(fromAction.getCategories());
     }
 
     editInventory(inventory: IInventory): void {

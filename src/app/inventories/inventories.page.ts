@@ -23,6 +23,7 @@ export class InventoriesPage {
   ) {}
 
   ionViewWillEnter(): void {
+    this.skip = 0;
     this.facade.getCategories();
     this.facade.getInventories(this.categoryId, this.selectedIsAmortization, this.skip, this.take);
   }
@@ -40,9 +41,13 @@ export class InventoriesPage {
   }
 
   infiniteScroll(event: any): void {
-    this.skip += 8;
-    this.facade.getInventories(this.categoryId, this.selectedIsAmortization, this.skip, this.take, false);
-    event.target?.complete();
+    if (event.inventories.length % 8 === 0) {
+      this.skip += 8;
+      this.facade.getInventories(this.categoryId, this.selectedIsAmortization, this.skip, this.take, false);
+      event.event.target?.complete();
+    } else {
+      event.event.target?.complete();
+    }
   }
 
   searchInventory(event: CustomEvent): void {

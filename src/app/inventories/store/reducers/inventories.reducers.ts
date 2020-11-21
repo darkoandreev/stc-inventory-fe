@@ -27,7 +27,7 @@ const featureReducer = createReducer(
         ...state,
         selectedInventory: inventory
     })),
-    on(fromActions.getCategorySuccess, (state, { categories })=> ({
+    on(fromActions.getCategoriesSuccess, (state, { categories })=> ({
         ...state,
         categories
     }))
