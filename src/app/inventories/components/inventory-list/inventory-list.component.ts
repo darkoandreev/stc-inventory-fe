@@ -11,6 +11,7 @@ import { IInventory } from '../../store/models/inventory.model';
 export class InventoryListComponent {
   @Input() inventories: IInventory[];
   @Output() viewInventory = new EventEmitter<IInventory>();
+  @Output() infiniteScroll = new EventEmitter<any>();
 
-  constructor(public modalController: ModalController){}
+  constructor(public modalController: ModalController) {}
 }

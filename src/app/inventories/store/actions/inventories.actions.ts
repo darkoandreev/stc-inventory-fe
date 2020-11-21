@@ -15,10 +15,11 @@ export const editInventorySuccess = createAction('[Create Edit Inventory Page] E
 export const getInventory = createAction('[Create Edit Inventory Page] Get Inventory', props<{ id: string }>());
 export const getInventorySuccess = createAction('[Create Edit Inventory Page] Get Inventory Success', props<{ inventory: IInventory }>());
 
-export const getInventories = createAction('[Inventories Page] Get Inventories', props<{ categoryId?: string, isAmortization?: boolean }>());
-export const getInventoriesSuccess = createAction('[Inventories Page] Get Inventories Success', props<{ inventories: IInventory[] }>());
+export const getInventories = createAction('[Inventories Page] Get Inventories', props<{ categoryId: string, isAmortization: boolean, skip: number, take: number, reset: boolean }>());
+export const getInventoriesSuccess = createAction('[Inventories Page] Get Inventories Success', props<{ inventories: IInventory[], reset: boolean }>());
 
 export const searchInventories = createAction('[Inventories Page] Search Inventories', props<{ searchTerm: string, categoryId: string, isAmortization: boolean }>());
+export const searchInventoriesSuccess = createAction('[Inventories Page] Search Inventories success', props<{ inventories: IInventory[] }>());
 
 export const deleteInventory = createAction('[Inventories Page] Delete Inventory', props<{ id: string }>());
 export const deleteInventorySuccess = createAction('[Inventories Page] Delete Inventory Success', props<{ response: IResponse }>());

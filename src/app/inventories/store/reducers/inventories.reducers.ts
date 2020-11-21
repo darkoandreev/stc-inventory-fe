@@ -18,10 +18,11 @@ const initialState: InventoriesState = adapter.getInitialState({
 
 const featureReducer = createReducer(
     initialState,
-    on(fromActions.getInventoriesSuccess, (state, { inventories }) => adapter.setAll(inventories, state)),
+    on(fromActions.getInventoriesSuccess, (state, { inventories, reset }) => reset ? adapter.setAll(inventories, state) : adapter.addMany(inventories, state)),
     on(fromActions.deleteInventorySuccess, (state, { response }) => adapter.removeOne(response.data.id, state)),
     on(fromActions.createItemSuccess, (state, { inventory }) => adapter.addOne(inventory, state)),
     on(fromActions.editInventorySuccess, (state, { editInventoryResponse } ) => adapter.updateOne({ id: editInventoryResponse.data.id, changes: editInventoryResponse.data }, state)),
+    on(fromActions.searchInventoriesSuccess, (state, { inventories }) => adapter.setAll(inventories, state)),
     on(fromActions.getInventorySuccess, (state, { inventory }) => ({
         ...state,
         selectedInventory: inventory

@@ -64,6 +64,7 @@ export class InventoryFormComponent {
   async openCameraOptions() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opcije',
+      cssClass: 'stc-action-sheet',
       buttons: [
         {
           text: 'Album',
@@ -108,7 +109,7 @@ export class InventoryFormComponent {
       inventoryNumber: ['', Validators.required],
       location: ['', Validators.required],
       responsiblePerson: ['', Validators.required],
-      imageName: ['', Validators.required],
+      imageName: ['test', Validators.required],
       quantity: null,
       description: null,
       buyDate: new Date(),

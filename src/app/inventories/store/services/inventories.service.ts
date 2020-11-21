@@ -12,11 +12,13 @@ import { IInventory } from '../models/inventory.model';
 export class InventoriesService {
     constructor(private http: HttpClient) {}
 
-    getInventories(categoryId: string, isAmortization: boolean): Observable<IInventory[]>{
+    getInventories(categoryId: string, isAmortization: boolean, skip: number, take: number): Observable<IInventory[]>{
         let params = new HttpParams();
         if (categoryId) {
             params = params.set('categoryId', categoryId)
                 .set('isAmortization', `${isAmortization}`)
+                .set('skip', skip.toString())
+                .set('take', take.toString())
         }
         return this.http.get<IInventory[]>(`${environment.API_URL}inventory`, {params});
     }

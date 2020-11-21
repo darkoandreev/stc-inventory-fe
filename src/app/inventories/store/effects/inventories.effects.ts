@@ -83,10 +83,10 @@ export class InventoriesEffects {
       ofType(fromActions.getInventories),
       switchMap((action) =>
         this.service
-          .getInventories(action.categoryId, action.isAmortization)
+          .getInventories(action.categoryId, action.isAmortization, action.skip, action.take)
           .pipe(
             map((inventories: IInventory[]) =>
-              fromActions.getInventoriesSuccess({ inventories })
+              fromActions.getInventoriesSuccess({ inventories, reset: action.reset })
             ),
             catchError(() => of(new EffectError()))
           )
@@ -106,7 +106,7 @@ export class InventoriesEffects {
           )
           .pipe(
             map((inventories: IInventory[]) =>
-              fromActions.getInventoriesSuccess({ inventories })
+              fromActions.searchInventoriesSuccess({ inventories })
             ),
             catchError(() => of(new EffectError()))
           )

@@ -52,6 +52,7 @@
     <stc-inventory-list
       [inventories]="facade.inventories$ | async"
       (viewInventory)="presentModal($event)"
+      (infiniteScroll)="infiniteScroll($event)"
   ></stc-inventory-list>
   </ng-container>
   <ng-template #noProducts>

@@ -16,11 +16,11 @@ export class InventoriesFacade {
     constructor(private store: Store<State>) {
     }
 
-    getInventories(categoryId: string, isAmortization: boolean) {
-        this.store.dispatch(fromAction.getInventories({ categoryId, isAmortization }));
+    getInventories(categoryId: string, isAmortization: boolean, skip: number, take: number, reset: boolean = true) {
+        this.store.dispatch(fromAction.getInventories({ categoryId, isAmortization, skip, take, reset }));
     }
 
-    searchInventories(searchTerm: string, categoryId: string, isAmortization?: boolean): void {
+    searchInventories(searchTerm: string, categoryId: string, isAmortization: boolean): void {
         this.store.dispatch(fromAction.searchInventories({ searchTerm, categoryId, isAmortization }));
     }
 

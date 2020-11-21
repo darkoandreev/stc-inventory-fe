@@ -6,6 +6,7 @@
   /** general **/
   --ion-background-color: rgb(10,31,48);
   --ion-text-color: #6a7c8a;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -241,4 +242,9 @@ body { margin: 0; }
 
 * {
   font-family: 'Open Sans', sans-serif;
+}
+
+.stc-action-sheet {
+  --color: var(--ion-color-primary);
+  --button-color: var(--ion-text-color);
 }
