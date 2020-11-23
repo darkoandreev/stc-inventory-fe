@@ -2,22 +2,17 @@ ion-grid {
   padding: 0;
 
   ion-thumbnail {
-    height: 100px;
-    width: 100px;
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    right: 0;
+    height: 130px;
+    width: 130px;
     margin: 0 auto;
-    top: 12%;
+
+    img {
+      border-radius: 50%;
+    }
   }
 
-  .element {
-    clip-path: ellipse(304px 100px at 50% 10%);    
-    height: 180px;
-    width: 100%;
-    background-color: var(--ion-toolbar-background);
-    font-size: 1.3rem;
+  ion-label {
+    font-weight: bold;
   }
 
   p {
@@ -26,6 +21,6 @@ ion-grid {
   }
 
   .i-color {
-    color: #9ACD32;
+    color: #9acd32;
   }
 }

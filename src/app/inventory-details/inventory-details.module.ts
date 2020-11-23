@@ -9,6 +9,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { InventoriesStoreModule } from '../inventories/store/inventories-store.module';
 import { InventoryDetailsRoutingModule } from './inventory-details-routing.module';
 import { InventoryDetailsPage } from './inventory-details.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -17,9 +18,10 @@ import { InventoryDetailsPage } from './inventory-details.page';
     FormsModule,
     ReactiveFormsModule,
     InventoryDetailsRoutingModule,
-    InventoriesStoreModule
+    InventoriesStoreModule,
+    TranslateModule,
   ],
   declarations: [InventoryDetailsPage, InventoryFormComponent],
-  providers: [CreateEditInventoryService, Camera]
+  providers: [CreateEditInventoryService, Camera],
 })
 export class InventoryDetailsModule {}

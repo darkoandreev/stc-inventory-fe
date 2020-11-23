@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "stc-inventory-fe",
+  "appId": "stc-inventory",
+  "appName": "STC Inventory",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

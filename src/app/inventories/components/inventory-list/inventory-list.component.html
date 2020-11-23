@@ -1,28 +1,41 @@
 <ion-list>
-    <ion-row>
-      <ion-col size="6" *ngFor="let inventory of inventories">
-        <ion-card>
-          <ion-card-content>
-            <ion-row class="ion-align-items-center ion-justify-content-center">
-              <ion-thumbnail>
-                <img src="https://images-na.ssl-images-amazon.com/images/I/81hkSG4FdPL._SL1080_.jpg" />
-              </ion-thumbnail>
-            </ion-row>
-            <ion-row class="ion-align-items-center ion-justify-content-center"> 
-              <ion-label>{{ inventory.name }} {{ inventory.inventoryNumber }}</ion-label>
-            </ion-row>
-            <ion-row class="ion-align-items-center ion-justify-content-center">
-              <ion-label class="font-size">{{ inventory.location }}</ion-label>
-            </ion-row>
-            <ion-row class="ion-align-items-center ion-justify-content-center">
-              <ion-button size="small" (click)="viewInventory.emit(inventory)">Pregledaj</ion-button>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+  <ion-row>
+    <ion-col size="6" *ngFor="let inventory of inventories">
+      <ion-card>
+        <ion-card-content>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-thumbnail>
+              <img
+                src="https://images-na.ssl-images-amazon.com/images/I/81hkSG4FdPL._SL1080_.jpg"
+              />
+            </ion-thumbnail>
+          </ion-row>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-label
+              >{{ inventory.name }} {{ inventory.inventoryNumber }}</ion-label
+            >
+          </ion-row>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-label class="font-size">{{ inventory.location }}</ion-label>
+          </ion-row>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-button size="small" (click)="viewInventory.emit(inventory)">{{
+              'INVENTORIES.LABELS.VIEW_PRODUCT' | translate
+            }}</ion-button>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-list>
-<ion-infinite-scroll (ionInfinite)="infiniteScroll.emit({event: $event, inventories: this.inventories})">
-  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+<ion-infinite-scroll
+  (ionInfinite)="
+    infiniteScroll.emit({ event: $event, inventories: this.inventories })
+  "
+>
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data..."
+  >
   </ion-infinite-scroll-content>
 </ion-infinite-scroll>

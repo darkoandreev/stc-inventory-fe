@@ -1,20 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="modalController.dismiss()">
+        {{ 'SHARED.CLOSE' | translate }}
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ inventory.name }} {{ inventory.inventoryNumber }}</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-grid>
-    <ion-thumbnail>
-      <img style="border-radius: 50%;" src="https://images-na.ssl-images-amazon.com/images/I/81hkSG4FdPL._SL1080_.jpg" />
-    </ion-thumbnail>
     <ion-row>
-      <ion-col size="12" class="element">
-        <ion-row class="ion-justify-content-center ion-padding-top">
-          <ion-label style="color: white;">{{inventory.name}} {{inventory.inventoryNumber}}</ion-label>
-        </ion-row>
-      </ion-col>
+      <ion-thumbnail>
+        <img
+          src="https://images-na.ssl-images-amazon.com/images/I/81hkSG4FdPL._SL1080_.jpg"
+        />
+      </ion-thumbnail>
     </ion-row>
-
     <ion-row>
       <ion-col size="12">
         <ion-row>
-          <ion-label style="font-weight: bold;">Opis</ion-label>
+          <ion-label>{{
+            'INVENTORIES.LABELS.DESCRIPTION' | translate
+          }}</ion-label>
         </ion-row>
         <ion-row>{{ inventory.description }}</ion-row>
       </ion-col>
@@ -22,83 +30,118 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-row style="font-weight: bold;">
-          <ion-label>Informacija</ion-label>
+        <ion-row>
+          <ion-label>{{
+            'INVENTORIES.LABELS.INFORMATION' | translate
+          }}</ion-label>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
-          <ion-col size="5">{{inventory.categoryId}}</ion-col>
-          <ion-col size="6">Kategorija</ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{ inventory.categoryId }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.CATEGORY' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
-          <ion-col size="5">{{inventory.amount}}</ion-col>
-          <ion-col size="6">Vrednost (RSD)</ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{ inventory.amount }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.VALUE' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
-          <ion-col size="5">{{inventory.quantity}}</ion-col>
-          <ion-col size="6">Količina</ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{ inventory.quantity }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.QUANTITY' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
-          <ion-col size="5">{{inventory.buyedAt}}</ion-col>
-          <ion-col size="6">Datum kupovine</ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{
+            inventory.buyDate | date: 'mediumDate'
+          }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.DATE_OF_PURCHAES' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
-          <ion-col size="5">{{inventory.location}}</ion-col>
-          <ion-col size="6">Lokacija</ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{ inventory.location }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.LOCATION' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
-          <ion-col size="5">{{inventory.responsiblePerson}}</ion-col>
-          <ion-col size="6">Lice za zaduženje</ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{ inventory.responsiblePerson }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.RESPONSIBLE_PERSON' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
           <ion-col size="5">
             <ion-checkbox
               color="warning"
               [checked]="inventory.isValid"
-              disabled>
+              disabled
+            >
             </ion-checkbox>
           </ion-col>
-          <ion-col size="6">Otpis</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.IS_VALID' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"><ion-icon name="ellipse-sharp" class="i-color"></ion-icon></ion-col>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
           <ion-col size="5">
             <ion-checkbox
               color="warning"
               [checked]="inventory.isAmortization"
-              disabled>
+              disabled
+            >
             </ion-checkbox>
           </ion-col>
-          <ion-col size="6">Amortizacija</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.AMORTIZATION' | translate
+          }}</ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row style="font-weight: bold;">
-      <ion-label>Stopa (%)</ion-label>
-    </ion-row>
-    <ion-row>
-      <ion-col size="10"><ion-progress-bar color="warning" [value]="inventory.growth / 100" style="margin-top: 9px;"></ion-progress-bar></ion-col>
+    <ion-row *ngIf="inventory.growth">
+      <ion-label>{{ 'INVENTORIES.LABELS.GROWTH' | translate }}</ion-label>
+      <ion-col size="10"
+        ><ion-progress-bar
+          color="warning"
+          [value]="inventory.growth / 100"
+        ></ion-progress-bar
+      ></ion-col>
       <ion-col size="2">{{ inventory.growth }} %</ion-col>
     </ion-row>
 
-    <ion-row style="justify-content: space-around;">
-      <ion-button 
-        shape="round" 
-        color="warning"
-        (click)="editInventory()"
+    <ion-row style="justify-content: space-around">
+      <ion-button shape="round" color="warning" (click)="editInventory()"
         ><ion-icon name="create-outline"></ion-icon>
       </ion-button>
-      <ion-button 
-        shape="round" 
-        color="warning"
-        (click)="presentAlertConfirm()"
+      <ion-button shape="round" color="warning" (click)="presentAlertConfirm()"
         ><ion-icon name="trash-outline"></ion-icon>
       </ion-button>
     </ion-row>

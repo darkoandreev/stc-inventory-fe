@@ -5,9 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
-  selector: 'app-root',
+  selector: 'stc-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
   constructor(
@@ -18,10 +18,15 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  async initializeApp(): Promise<void> {
+    try {
+      const ready = await this.platform.ready();
+      if (ready) {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

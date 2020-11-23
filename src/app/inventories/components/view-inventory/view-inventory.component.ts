@@ -13,7 +13,7 @@ export class ViewInventoryComponent {
   @Output() closeModal = new EventEmitter<any>();
 
   constructor(
-    private modalController: ModalController,
+    public modalController: ModalController,
     private alertController: AlertController,
     private router: Router
   ) {}
@@ -28,7 +28,8 @@ export class ViewInventoryComponent {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Brisanje proizvoda',
-      message: 'Da li ste sigurni da želite <strong>obrisati</strong> ovaj proizvod?',
+      message:
+        'Da li ste sigurni da želite <strong>obrisati</strong> ovaj proizvod?',
       buttons: [
         {
           text: 'Ne',

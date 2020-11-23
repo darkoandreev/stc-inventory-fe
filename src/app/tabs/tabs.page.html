@@ -2,12 +2,16 @@
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="inventories" mode="ios">
       <ion-icon [name]="inventoryIcon"></ion-icon>
-      <ion-label>Inventar</ion-label>
+      <ion-label>{{ 'TABS.PRODUCTS' | translate }}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button (click)="goToInventoryDetails()" tab="add-inventory" mode="ios">
+    <ion-tab-button
+      (click)="goToInventoryDetails()"
+      tab="add-inventory"
+      mode="ios"
+    >
       <ion-icon [name]="addInventoryIcon"></ion-icon>
-      <ion-label>Dodaj</ion-label>
+      <ion-label>{{ 'TABS.ADD_PRODUCT' | translate }}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

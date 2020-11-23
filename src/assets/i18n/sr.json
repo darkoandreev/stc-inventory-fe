@@ -1,5 +1,40 @@
 {
-    "INVENTORIES": {
-        "TITLE": "Proizvodi"
+  "INVENTORIES": {
+    "TITLE": "Proizvodi",
+    "NO_PRODUCTS": "Nema proizvoda",
+    "LABELS": {
+      "DESCRIPTION": "Opis",
+      "INFORMATION": "Informacija",
+      "CATEGORY": "Kategorija",
+      "VALUE": "Vrednost (RSD)",
+      "QUANTITY": "Količina",
+      "DATE_OF_PURCHAES": "Datum kupovine",
+      "LOCATION": "Lokacija",
+      "RESPONSIBLE_PERSON": "Lice za zaduženje",
+      "IS_VALID": "Validan",
+      "AMORTIZATION": "Amortizacija",
+      "GROWTH": "Stopa (%)",
+      "SEARCH": "Traži",
+      "PRODUCT_NAME": "Ime proizvoda",
+      "PRODUCT_NUMBER": "Broj proizvoda",
+      "VIEW_PRODUCT": "Pregledaj"
     }
+  },
+  "INVENTORY_DETAILS": {
+    "TITLE": "Nov proizvod",
+    "FORM": {
+      "NO_CATEGORY": "Nema kategorija",
+      "CAPTURE_IMAGE": "Slikaj",
+      "ADD": "Dodaj",
+      "EDIT": "Redaktiraj",
+      "DESCRIPTION_PLACEHOLDER": "Opis proizvoda..."
+    }
+  },
+  "TABS": {
+    "PRODUCTS": "Proizvodi",
+    "ADD_PRODUCT": "Dodaj"
+  },
+  "SHARED": {
+    "CLOSE": "Zatvori"
+  }
 }

@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonTabs } from '@ionic/angular';
 
 @Component({
-  selector: 'app-tabs',
+  selector: 'stc-tabs',
   templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  styleUrls: ['tabs.page.scss'],
 })
 export class TabsPage {
   inventoryIcon: string;
@@ -15,7 +14,8 @@ export class TabsPage {
 
   changeTab({ tab }): void {
     this.inventoryIcon = tab === 'inventories' ? 'list-sharp' : 'list-outline';
-    this.addInventoryIcon = tab === 'add-inventory' ? 'add-circle-sharp' : 'add-circle-outline';
+    this.addInventoryIcon =
+      tab === 'add-inventory' ? 'add-circle-sharp' : 'add-circle-outline';
   }
 
   goToInventoryDetails(): void {

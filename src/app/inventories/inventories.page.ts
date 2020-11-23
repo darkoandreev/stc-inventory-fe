@@ -14,8 +14,8 @@ export class InventoriesPage {
   selectedCategory: ICategory;
   selectedIsAmortization = false;
   categoryId = '1';
-  skip: number = 0;
-  take: number = 8;
+  skip = 0;
+  take = 8;
 
   constructor(
     private modalController: ModalController,
@@ -25,7 +25,12 @@ export class InventoriesPage {
   ionViewWillEnter(): void {
     this.skip = 0;
     this.facade.getCategories();
-    this.facade.getInventories(this.categoryId, this.selectedIsAmortization, this.skip, this.take);
+    this.facade.getInventories(
+      this.categoryId,
+      this.selectedIsAmortization,
+      this.skip,
+      this.take
+    );
   }
 
   getInventories(event: CustomEvent, type: string) {
@@ -37,13 +42,24 @@ export class InventoriesPage {
     if (type === 'select') {
       this.categoryId = event.detail.value;
     }
-    this.facade.getInventories(this.categoryId, this.selectedIsAmortization, this.skip, this.take);
+    this.facade.getInventories(
+      this.categoryId,
+      this.selectedIsAmortization,
+      this.skip,
+      this.take
+    );
   }
 
   infiniteScroll(event: any): void {
     if (event.inventories.length % 8 === 0) {
       this.skip += 8;
-      this.facade.getInventories(this.categoryId, this.selectedIsAmortization, this.skip, this.take, false);
+      this.facade.getInventories(
+        this.categoryId,
+        this.selectedIsAmortization,
+        this.skip,
+        this.take,
+        false
+      );
       event.event.target?.complete();
     } else {
       event.event.target?.complete();
@@ -52,7 +68,12 @@ export class InventoriesPage {
 
   searchInventory(event: CustomEvent): void {
     if (!event.detail.value) {
-      this.facade.getInventories(this.categoryId, this.selectedIsAmortization, this.skip, this.take);
+      this.facade.getInventories(
+        this.categoryId,
+        this.selectedIsAmortization,
+        this.skip,
+        this.take
+      );
       return;
     }
     this.facade.searchInventories(

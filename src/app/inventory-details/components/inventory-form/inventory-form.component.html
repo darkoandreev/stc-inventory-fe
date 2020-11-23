@@ -4,7 +4,9 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Kategorija*</ion-label>
+            <ion-label position="floating"
+              >{{ 'INVENTORIES.LABELS.CATEGORY' | translate }}*</ion-label
+            >
             <ion-select interface="popover" formControlName="categoryId">
               <ng-container
                 *ngIf="categories?.length > 0; else emptyCategories"
@@ -17,7 +19,9 @@
                 </ion-select-option>
               </ng-container>
               <ng-template #emptyCategories>
-                <ion-select-option disabled>Nema kategorija</ion-select-option>
+                <ion-select-option disabled>{{
+                  'INVENTORY_DETAILS.FORM.NO_CATEGORY' | translate
+                }}</ion-select-option>
               </ng-template>
             </ion-select>
           </ion-item>
@@ -27,7 +31,9 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Ime prozivoda*</ion-label>
+            <ion-label position="floating"
+              >{{ 'INVENTORIES.LABELS.PRODUCT_NAME' | translate }}*</ion-label
+            >
             <ion-input type="text" formControlName="name"></ion-input>
           </ion-item>
         </ion-col>
@@ -36,13 +42,17 @@
       <ion-row>
         <ion-col size="6">
           <ion-item>
-            <ion-label position="floating">Vrednost (RSD)*</ion-label>
+            <ion-label position="floating"
+              >{{ 'INVENTORIES.LABELS.VALUE' | translate }}*</ion-label
+            >
             <ion-input type="number" formControlName="amount"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
-            <ion-label position="floating">Količina</ion-label>
+            <ion-label position="floating">{{
+              'INVENTORIES.LABELS.QUANTITY' | translate
+            }}</ion-label>
             <ion-input type="number" formControlName="quantity"></ion-input>
           </ion-item>
         </ion-col>
@@ -51,7 +61,9 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Broj proizvoda*</ion-label>
+            <ion-label position="floating"
+              >{{ 'INVENTORIES.LABELS.PRODUCT_NUMBER' | translate }}*</ion-label
+            >
             <ion-input
               type="text"
               formControlName="inventoryNumber"
@@ -60,7 +72,9 @@
         </ion-col>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Datum kupovine</ion-label>
+            <ion-label position="floating">{{
+              'INVENTORIES.LABELS.DATE_OF_PURCHAES' | translate
+            }}</ion-label>
             <ion-datetime formControlName="buyDate"></ion-datetime>
           </ion-item>
         </ion-col>
@@ -69,7 +83,9 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Lokacija*</ion-label>
+            <ion-label position="floating"
+              >{{ 'INVENTORIES.LABELS.LOCATION' | translate }}*</ion-label
+            >
             <ion-input type="text" formControlName="location"></ion-input>
           </ion-item>
         </ion-col>
@@ -78,7 +94,11 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Lice za zaduženje*</ion-label>
+            <ion-label position="floating"
+              >{{
+                'INVENTORIES.LABELS.RESPONSIBLE_PERSON' | translate
+              }}*</ion-label
+            >
             <ion-input
               type="text"
               formControlName="responsiblePerson"
@@ -90,7 +110,9 @@
       <ion-row>
         <ion-col size="6" class="ion-align-self-start">
           <ion-item class="ion-no-padding">
-            <ion-label class="ion-label-padding">Validan</ion-label>
+            <ion-label class="ion-label-padding">{{
+              'INVENTORIES.LABELS.IS_VALID' | translate
+            }}</ion-label>
             <ion-checkbox
               color="secondary"
               formControlName="isValid"
@@ -99,7 +121,9 @@
         </ion-col>
         <ion-col size="6" class="ion-align-self-end">
           <ion-item class="ion-no-padding">
-            <ion-label class="ion-label-padding">Amortizacija</ion-label>
+            <ion-label class="ion-label-padding">{{
+              'INVENTORIES.LABELS.AMORTIZATION' | translate
+            }}</ion-label>
             <ion-checkbox
               color="secondary"
               formControlName="isAmortization"
@@ -111,7 +135,9 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating">Stopa (%)</ion-label>
+            <ion-label position="floating">{{
+              'INVENTORIES.LABELS.GROWTH' | translate
+            }}</ion-label>
             <ion-input type="number" formControlName="growth"></ion-input>
           </ion-item>
         </ion-col>
@@ -120,12 +146,16 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="stacked">Opis</ion-label>
+            <ion-label position="stacked">{{
+              'INVENTORIES.LABELS.DESCRIPTION' | translate
+            }}</ion-label>
             <ion-textarea
               formControlName="description"
               rows="4"
               cols="20"
-              placeholder="Opis proizvoda..."
+              [placeholder]="
+                'INVENTORY_DETAILS.FORM.DESCRIPTION_PLACEHOLDER' | translate
+              "
             ></ion-textarea>
           </ion-item>
         </ion-col>
@@ -133,7 +163,7 @@
 
       <ion-row class="ion-justify-content-center">
         <ion-button type="button" shape="round" (click)="openCameraOptions()"
-          >Slikaj
+          >{{ 'INVENTORY_DETAILS.FORM.CAPTURE_IMAGE' | translate }}
           <ion-icon name="camera"></ion-icon>
         </ion-button>
         <ion-img
@@ -147,7 +177,12 @@
         type="submit"
         shape="round"
         [disabled]="inventoryForm.invalid"
-        >Dodaj</ion-button
+        >{{
+          (inventory
+            ? 'INVENTORY_DETAILS.FORM.EDIT'
+            : 'INVENTORY_DETAILS.FORM.ADD'
+          ) | translate
+        }}</ion-button
       >
     </ion-grid>
   </form>

@@ -1,5 +1,40 @@
 {
-    "INVENTORIES": {
-        "TITLE": "Products"
+  "INVENTORIES": {
+    "TITLE": "Products",
+    "NO_PRODUCTS": "No products",
+    "LABELS": {
+      "DESCRIPTION": "Description",
+      "INFORMATION": "Information",
+      "CATEGORY": "Category",
+      "VALUE": "Value (RSD)",
+      "QUANTITY": "Quantity",
+      "DATE_OF_PURCHAES": "Date of purchase",
+      "LOCATION": "Location",
+      "RESPONSIBLE_PERSON": "Responsible person",
+      "IS_VALID": "Is valid",
+      "AMORTIZATION": "Amortization",
+      "GROWTH": "Growth (%)",
+      "SEARCH": "Search",
+      "PRODUCT_NAME": "Product name",
+      "PRODUCT_NUMBER": "Product number",
+      "VIEW_PRODUCT": "View"
     }
+  },
+  "INVENTORY_DETAILS": {
+    "TITLE": "New product",
+    "FORM": {
+      "NO_CATEGORY": "No categories",
+      "CAPTURE_IMAGE": "Take a photo",
+      "ADD": "Create",
+      "EDIT": "Update",
+      "DESCRIPTION_PLACEHOLDER": "Description of the product..."
+    }
+  },
+  "TABS": {
+    "PRODUCTS": "Products",
+    "ADD_PRODUCT": "Add"
+  },
+  "SHARED": {
+    "CLOSE": "Close"
+  }
 }

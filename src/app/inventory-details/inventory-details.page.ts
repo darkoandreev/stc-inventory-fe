@@ -9,15 +9,19 @@ import { InventoryFormComponent } from './components/inventory-form/inventory-fo
 @Component({
   selector: 'stc-inventory-details',
   templateUrl: 'inventory-details.page.html',
-  styleUrls: ['inventory-details.page.scss']
+  styleUrls: ['inventory-details.page.scss'],
 })
 export class InventoryDetailsPage {
-  @ViewChild(InventoryFormComponent) inventoryFormComponent: InventoryFormComponent;
+  @ViewChild(InventoryFormComponent)
+  inventoryFormComponent: InventoryFormComponent;
   inventory$: Observable<IInventory> = this.facade.inventory$;
   categories$: Observable<ICategory[]> = this.facade.categories$;
   inventoryId: string;
 
-  constructor(private facade: InventoriesFacade, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private facade: InventoriesFacade,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ionViewWillEnter() {
     this.inventoryId = this.activatedRoute.snapshot.queryParams?.id;
@@ -36,6 +40,10 @@ export class InventoryDetailsPage {
   }
 
   ionViewDidLeave(): void {
-    this.inventoryFormComponent.inventoryForm.reset();
+    this.inventoryFormComponent.inventoryForm.reset({
+      isAmortization: false,
+      isValid: true,
+      imageName: 'test',
+    });
   }
 }

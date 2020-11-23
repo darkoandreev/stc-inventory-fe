@@ -1,11 +1,11 @@
-import { Action } from "@ngrx/store";
-import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import * as fromActions from "../actions/inventories.actions";
-import { switchMap, map, catchError, tap } from "rxjs/operators";
-import { InventoriesService } from "../services/inventories.service";
-import { Router } from "@angular/router";
-import { IInventory } from "../models/inventory.model";
+import { Action } from '@ngrx/store';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import * as fromActions from '../actions/inventories.actions';
+import { switchMap, map, catchError, tap } from 'rxjs/operators';
+import { InventoriesService } from '../services/inventories.service';
+import { Router } from '@angular/router';
+import { IInventory } from '../models/inventory.model';
 import { ICategory } from '../models/category.model';
 import { IResponse } from '../models/response.model';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
@@ -80,12 +80,22 @@ export class InventoriesEffects {
       ofType(fromActions.getInventories),
       switchMap((action) =>
         this.service
-          .getInventories(action.categoryId, action.isAmortization, action.skip, action.take)
+          .getInventories(
+            action.categoryId,
+            action.isAmortization,
+            action.skip,
+            action.take
+          )
           .pipe(
             map((inventories: IInventory[]) =>
-              fromActions.getInventoriesSuccess({ inventories, reset: action.reset })
+              fromActions.getInventoriesSuccess({
+                inventories,
+                reset: action.reset,
+              })
             ),
-            catchError((error: Error) => [fromActions.getInventoriesError(error)])
+            catchError((error: Error) => [
+              fromActions.getInventoriesError(error),
+            ])
           )
       )
     )
@@ -105,7 +115,9 @@ export class InventoriesEffects {
             map((inventories: IInventory[]) =>
               fromActions.searchInventoriesSuccess({ inventories })
             ),
-            catchError((error: Error) => [fromActions.searchInventoriesError(error)])
+            catchError((error: Error) => [
+              fromActions.searchInventoriesError(error),
+            ])
           )
       )
     )
@@ -119,7 +131,9 @@ export class InventoriesEffects {
           map((response: IResponse) =>
             fromActions.deleteInventorySuccess({ response })
           ),
-          catchError((error: Error) => [fromActions.deleteInventoryError(error)])
+          catchError((error: Error) => [
+            fromActions.deleteInventoryError(error),
+          ])
         )
       )
     )
@@ -129,20 +143,20 @@ export class InventoriesEffects {
     () =>
       this.actions$.pipe(
         ofType(fromActions.deleteInventorySuccess),
-        tap(({response}) => {
-          this.router.navigateByUrl("/tabs/inventories");
-          this.toast.showToaster(response.message, 'success')
+        tap(({ response }) => {
+          this.router.navigateByUrl('/tabs/inventories');
+          this.toast.showToaster(response.message, 'success');
         })
       ),
     { dispatch: false }
   );
 
-  createInventorySuccess$ = createEffect(
+  createEditInventorySuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(fromActions.createItemSuccess),
+        ofType(fromActions.createItemSuccess, fromActions.editInventorySuccess),
         tap(() => {
-          this.toast.showToaster('Produkt je uspešno dodat', 'success')
+          this.toast.showToaster('Produkt je uspešno dodat', 'success');
         })
       ),
     { dispatch: false }

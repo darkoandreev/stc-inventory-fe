@@ -9,7 +9,7 @@
         debounce="500"
         [animated]="true"
         (ionChange)="searchInventory($event)"
-        placeholder="Traži"
+        [placeholder]="'INVENTORIES.LABELS.SEARCH' | translate"
       ></ion-searchbar>
     </ion-row>
     <ion-row
@@ -31,13 +31,15 @@
             <ion-select-option
               *ngIf="categories?.length === 0 || !categories"
               disabled
-              >Nema proizvoda</ion-select-option
+              >{{ 'INVENTORIES.NO_PRODUCTS' | translate }}</ion-select-option
             >
           </ion-select>
         </ng-container>
       </ion-col>
       <ion-col class="amortization" size="5">
-        <ion-label>Amortizacija</ion-label>
+        <ion-label
+          >{{ 'INVENTORIES.LABELS.AMORTIZATION' | translate }}</ion-label
+        >
         <ion-checkbox
           color="warning"
           (ionChange)="getInventories($event, 'checkbox')"
@@ -48,12 +50,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container *ngIf="(facade.inventories$ | async)?.length > 0; else noProducts">
+  <ng-container
+    *ngIf="(facade.inventories$ | async)?.length > 0; else noProducts"
+  >
     <stc-inventory-list
       [inventories]="facade.inventories$ | async"
       (viewInventory)="presentModal($event)"
       (infiniteScroll)="infiniteScroll($event)"
-  ></stc-inventory-list>
+    ></stc-inventory-list>
   </ng-container>
   <ng-template #noProducts>
     <img src="assets/images/no-products.png" />
