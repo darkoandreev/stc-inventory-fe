@@ -12,6 +12,7 @@ import {
   getInventory,
   getTotalAmount,
 } from '../selectors';
+
 @Injectable({ providedIn: 'root' })
 export class InventoriesFacade {
   inventories$: Observable<IInventory[]> = this.store.pipe(
@@ -32,7 +33,7 @@ export class InventoriesFacade {
     skip: number,
     take: number,
     reset: boolean = true
-  ) {
+  ): void {
     this.store.dispatch(
       fromAction.getInventories({
         categoryId,
@@ -58,7 +59,7 @@ export class InventoriesFacade {
     this.store.dispatch(fromAction.deleteInventory({ id }));
   }
 
-  createNewItem(inventory: IInventory) {
+  createNewItem(inventory: IInventory): void {
     this.store.dispatch(fromAction.createItem({ inventory }));
   }
 

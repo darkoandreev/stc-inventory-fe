@@ -50,6 +50,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="barcodeScan()">
+      <ion-icon name="barcode-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ng-container *ngrxLet="facade.inventories$; let inventories">
     <stc-inventory-list
       *ngIf="inventories?.length > 0; else noProducts"

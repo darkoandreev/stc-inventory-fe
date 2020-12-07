@@ -4,6 +4,7 @@ import { ViewInventoryComponent } from './components/view-inventory/view-invento
 import { InventoriesFacade } from './store/facade/inventories.facade';
 import { ICategory } from './store/models/category.model';
 import { IInventory } from './store/models/inventory.model';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'stc-inventories',
@@ -19,6 +20,7 @@ export class InventoriesPage {
 
   constructor(
     private modalController: ModalController,
+    private barcodeScanner: BarcodeScanner,
     public facade: InventoriesFacade
   ) {}
 
@@ -81,6 +83,17 @@ export class InventoriesPage {
       this.categoryId,
       this.selectedIsAmortization
     );
+  }
+
+  async barcodeScan(): Promise<void> {
+    const barcodeResult = await this.barcodeScanner.scan();
+
+    if (!barcodeResult) {
+      return;
+    }
+
+    const inventory: IInventory = JSON.parse(barcodeResult.text);
+    this.facade.createNewItem(inventory);
   }
 
   async presentModal(inventory: IInventory): Promise<void> {

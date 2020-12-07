@@ -11,6 +11,7 @@ import { ViewInventoryComponent } from './components/view-inventory/view-invento
 import { InventoriesStoreModule } from './store/inventories-store.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 @NgModule({
   imports: [
     IonicModule,
@@ -27,7 +28,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
     InventoryListComponent,
     ViewInventoryComponent,
   ],
-  providers: [InventoriesService, InventoriesFacade],
+  providers: [InventoriesService, InventoriesFacade, BarcodeScanner],
   exports: [TranslateModule],
 })
 export class InventoriesModule {}
