@@ -17,7 +17,8 @@
       "SEARCH": "Search",
       "PRODUCT_NAME": "Product name",
       "PRODUCT_NUMBER": "Product number",
-      "VIEW_PRODUCT": "View"
+      "VIEW_PRODUCT": "View",
+      "TOTAL_AMOUNT": "Total amount:"
     }
   },
   "INVENTORY_DETAILS": {
@@ -44,6 +45,12 @@
     "SETTINGS": "Settings"
   },
   "SHARED": {
-    "CLOSE": "Close"
+    "CLOSE": "Close",
+    "DELETE_CONFIRM_DIALOG": {
+      "HEADER": "Delete product",
+      "MESSAGE": "Are you sure you want to <strong>delete</strong> this product?",
+      "NO_BUTTON_TEXT": "No",
+      "YES_BUTTON_TEXT": "Yes"
+    }
   }
 }

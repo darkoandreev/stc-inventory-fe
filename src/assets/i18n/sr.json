@@ -17,7 +17,8 @@
       "SEARCH": "Traži",
       "PRODUCT_NAME": "Ime proizvoda",
       "PRODUCT_NUMBER": "Broj proizvoda",
-      "VIEW_PRODUCT": "Pregledaj"
+      "VIEW_PRODUCT": "Pregledaj",
+      "TOTAL_AMOUNT": "Ukupna vrednost:"
     }
   },
   "INVENTORY_DETAILS": {
@@ -44,6 +45,12 @@
     "SETTINGS": "Podešavanja"
   },
   "SHARED": {
-    "CLOSE": "Zatvori"
+    "CLOSE": "Zatvori",
+    "DELETE_CONFIRM_DIALOG": {
+      "HEADER": "Obriši proizvod",
+      "MESSAGE": "Da li ste sigurni da želite <strong>obrisati</strong> ovaj proizvod?",
+      "NO_BUTTON_TEXT": "Ne",
+      "YES_BUTTON_TEXT": "Da"
+    }
   }
 }

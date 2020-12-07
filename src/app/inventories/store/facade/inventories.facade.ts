@@ -10,6 +10,7 @@ import {
   getAllInventories,
   getAllCategories,
   getInventory,
+  getTotalAmount,
 } from '../selectors';
 @Injectable({ providedIn: 'root' })
 export class InventoriesFacade {
@@ -21,6 +22,7 @@ export class InventoriesFacade {
     filter((x) => !!x && x.length > 0)
   );
   inventory$: Observable<IInventory> = this.store.pipe(select(getInventory));
+  totalAmount$: Observable<number> = this.store.pipe(select(getTotalAmount));
 
   constructor(private store: Store<State>) {}
 

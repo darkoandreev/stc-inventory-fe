@@ -35,7 +35,17 @@ const selectCurrentInventory = createSelector(
   (state) => state.selectedInventory
 );
 
+const selectTotalAmount = createSelector(
+  selectInventoriesState,
+  (state) => state.total
+);
+
 export const getInventory = createSelector(
   selectInventoriesState,
   selectCurrentInventory
+);
+
+export const getTotalAmount = createSelector(
+  selectInventoriesState,
+  selectTotalAmount
 );

@@ -1,6 +1,9 @@
 <ion-list>
   <ion-row>
-    <ion-col size="6" *ngFor="let inventory of inventories">
+    <ion-col
+      size="6"
+      *ngFor="let inventory of inventories; let i = index; trackBy: i"
+    >
       <ion-card>
         <ion-card-content>
           <ion-row class="ion-align-items-center ion-justify-content-center">
@@ -11,7 +14,7 @@
             </ion-thumbnail>
           </ion-row>
           <ion-row class="ion-align-items-center ion-justify-content-center">
-            <ion-label
+            <ion-label class="ion-text-center"
               >{{ inventory.name }} {{ inventory.inventoryNumber }}</ion-label
             >
           </ion-row>

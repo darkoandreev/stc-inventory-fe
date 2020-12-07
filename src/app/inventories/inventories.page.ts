@@ -33,7 +33,7 @@ export class InventoriesPage {
     );
   }
 
-  getInventories(event: CustomEvent, type: string) {
+  getInventories(event: CustomEvent, type: string): void {
     this.skip = 0;
     if (type === 'checkbox') {
       this.selectedIsAmortization = event.detail.checked;
@@ -83,9 +83,7 @@ export class InventoriesPage {
     );
   }
 
-  change(): void {}
-
-  async presentModal(inventory: IInventory) {
+  async presentModal(inventory: IInventory): Promise<void> {
     const modal = await this.modalController.create({
       component: ViewInventoryComponent,
       componentProps: { inventory },

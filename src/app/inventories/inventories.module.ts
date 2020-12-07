@@ -10,7 +10,7 @@ import { InventoriesFacade } from './store/facade/inventories.facade';
 import { ViewInventoryComponent } from './components/view-inventory/view-inventory.component';
 import { InventoriesStoreModule } from './store/inventories-store.module';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { ReactiveComponentModule } from '@ngrx/component';
 @NgModule({
   imports: [
     IonicModule,
@@ -19,10 +19,15 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     InventoriesPageRoutingModule,
     InventoriesStoreModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveComponentModule,
   ],
-  declarations: [InventoriesPage, InventoryListComponent, ViewInventoryComponent],
+  declarations: [
+    InventoriesPage,
+    InventoryListComponent,
+    ViewInventoryComponent,
+  ],
   providers: [InventoriesService, InventoriesFacade],
-  exports: [TranslateModule]
+  exports: [TranslateModule],
 })
 export class InventoriesModule {}

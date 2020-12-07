@@ -27,7 +27,7 @@ export class SettingsPage implements OnInit {
     private storageService: StorageService<ILanguage>
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const currentLanguage = this.languages.find(
       (lang) => lang.code === this.storageService.getItem('language')?.code
     );

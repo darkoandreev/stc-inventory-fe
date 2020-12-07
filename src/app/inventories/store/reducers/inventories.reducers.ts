@@ -7,6 +7,7 @@ import { IInventory } from '../models/inventory.model';
 export interface InventoriesState extends EntityState<IInventory> {
   categories: ICategory[];
   selectedInventory: IInventory;
+  total?: number;
 }
 
 export const adapter: EntityAdapter<IInventory> = createEntityAdapter<IInventory>();
@@ -23,6 +24,10 @@ const featureReducer = createReducer(
       ? adapter.setAll(inventories, state)
       : adapter.addMany(inventories, state)
   ),
+  on(fromActions.getInventoriesSuccess, (state, { total }) => ({
+    ...state,
+    total,
+  })),
   on(fromActions.deleteInventorySuccess, (state, { response }) =>
     adapter.removeOne(response.data.id, state)
   ),

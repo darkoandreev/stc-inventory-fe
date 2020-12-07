@@ -16,7 +16,7 @@
       class="ion-align-items-center ion-justify-content-center inventory-filters"
     >
       <ion-col size="7">
-        <ng-container *ngIf="(facade.categories$ | async) as categories">
+        <ng-container *ngrxLet="facade.categories$; let categories">
           <ion-select
             interface="popover"
             value="1"
@@ -50,11 +50,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container
-    *ngIf="(facade.inventories$ | async)?.length > 0; else noProducts"
-  >
+  <ng-container *ngrxLet="facade.inventories$; let inventories">
     <stc-inventory-list
-      [inventories]="facade.inventories$ | async"
+      *ngIf="inventories?.length > 0; else noProducts"
+      [inventories]="inventories"
       (viewInventory)="presentModal($event)"
       (infiniteScroll)="infiniteScroll($event)"
     ></stc-inventory-list>
@@ -64,8 +63,13 @@
   </ng-template>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Total amount: 1555.00 RSD</ion-title>
-  </ion-toolbar>
-</ion-footer>
+<ng-container *ngrxLet="facade.totalAmount$; let totalAmount">
+  <ion-footer *ngIf="totalAmount > 0">
+    <ion-toolbar>
+      <ion-title class="ion-text-center"
+        >{{ 'INVENTORIES.LABELS.TOTAL_AMOUNT' | translate }} {{ totalAmount |
+        number: '1.2' }} RSD</ion-title
+      >
+    </ion-toolbar>
+  </ion-footer>
+</ng-container>
