@@ -30,9 +30,18 @@
       "DESCRIPTION_PLACEHOLDER": "Opis proizvoda..."
     }
   },
+  "SETTINGS": {
+    "TITLE": "Podešavanja",
+    "LANGUAGES": {
+      "LABEL": "Izaberi jezik",
+      "SERBIAN": "Srpski",
+      "ENGLISH": "Engleski"
+    }
+  },
   "TABS": {
     "PRODUCTS": "Proizvodi",
-    "ADD_PRODUCT": "Dodaj"
+    "ADD_PRODUCT": "Dodaj",
+    "SETTINGS": "Podešavanja"
   },
   "SHARED": {
     "CLOSE": "Zatvori"

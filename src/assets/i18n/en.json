@@ -30,9 +30,18 @@
       "DESCRIPTION_PLACEHOLDER": "Description of the product..."
     }
   },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "LANGUAGES": {
+      "LABEL": "Language settings",
+      "SERBIAN": "Serbian",
+      "ENGLISH": "English"
+    }
+  },
   "TABS": {
     "PRODUCTS": "Products",
-    "ADD_PRODUCT": "Add"
+    "ADD_PRODUCT": "Add",
+    "SETTINGS": "Settings"
   },
   "SHARED": {
     "CLOSE": "Close"

@@ -64,7 +64,7 @@ export const getInventories = createAction(
 );
 export const getInventoriesSuccess = createAction(
   '[Inventories Page] Get Inventories Success',
-  props<{ inventories: IInventory[]; reset: boolean }>()
+  props<{ inventories: IInventory[]; reset: boolean; total: number }>()
 );
 export const getInventoriesError = createAction(
   '[Inventories Page] Get Inventories Error',

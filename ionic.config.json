@@ -1,5 +1,5 @@
 {
-  "name": "stc-inventory-fe",
+  "name": "STC Inventory",
   "integrations": {
     "capacitor": {}
   },

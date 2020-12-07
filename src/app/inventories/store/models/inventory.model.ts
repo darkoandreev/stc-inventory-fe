@@ -14,3 +14,8 @@ export interface IInventory {
   isValid: boolean;
   isAmortization: boolean;
 }
+
+export interface IInventoriesResponse {
+  result: IInventory[];
+  total: number;
+}

@@ -9,28 +9,41 @@ const routes: Routes = [
     children: [
       {
         path: 'inventories',
-        loadChildren: () => import('../inventories/inventories.module').then(m => m.InventoriesModule)
+        loadChildren: () =>
+          import('../inventories/inventories.module').then(
+            (m) => m.InventoriesModule
+          ),
       },
       {
         path: 'add-inventory',
-        loadChildren: () => import('../inventory-details/inventory-details.module').then(m => m.InventoryDetailsModule)
+        loadChildren: () =>
+          import('../inventory-details/inventory-details.module').then(
+            (m) => m.InventoryDetailsModule
+          ),
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('../settings/settings.module').then(
+            (m) => m.SettingsPageModule
+          ),
       },
       {
         path: '',
         redirectTo: '/tabs/inventories',
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '',
     redirectTo: '/tabs/inventories',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TabsPageRoutingModule {}

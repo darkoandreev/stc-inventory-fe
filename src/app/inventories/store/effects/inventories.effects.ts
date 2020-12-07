@@ -5,7 +5,7 @@ import * as fromActions from '../actions/inventories.actions';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { InventoriesService } from '../services/inventories.service';
 import { Router } from '@angular/router';
-import { IInventory } from '../models/inventory.model';
+import { IInventoriesResponse, IInventory } from '../models/inventory.model';
 import { ICategory } from '../models/category.model';
 import { IResponse } from '../models/response.model';
 import { ToasterService } from 'src/app/core/services/toaster/toaster.service';
@@ -87,10 +87,11 @@ export class InventoriesEffects {
             action.take
           )
           .pipe(
-            map((inventories: IInventory[]) =>
+            map((inventories: IInventoriesResponse) =>
               fromActions.getInventoriesSuccess({
-                inventories,
+                inventories: inventories.result,
                 reset: action.reset,
+                total: inventories.total,
               })
             ),
             catchError((error: Error) => [

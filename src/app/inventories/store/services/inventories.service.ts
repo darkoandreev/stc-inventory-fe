@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IResponse } from '../models/response.model';
 import { ICategory } from '../models/category.model';
-import { IInventory } from '../models/inventory.model';
+import { IInventoriesResponse, IInventory } from '../models/inventory.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class InventoriesService {
     isAmortization: boolean,
     skip: number,
     take: number
-  ): Observable<IInventory[]> {
+  ): Observable<IInventoriesResponse> {
     let params = new HttpParams();
     if (categoryId) {
       params = params
@@ -26,9 +26,12 @@ export class InventoriesService {
         .set('skip', skip.toString())
         .set('take', take.toString());
     }
-    return this.http.get<IInventory[]>(`${environment.API_URL}inventory`, {
-      params,
-    });
+    return this.http.get<IInventoriesResponse>(
+      `${environment.API_URL}inventory`,
+      {
+        params,
+      }
+    );
   }
 
   searchInventories(

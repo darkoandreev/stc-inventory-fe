@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class TabsPage {
   inventoryIcon: string;
   addInventoryIcon: string;
+  settingsIcon: string;
 
   constructor(private router: Router) {}
 
@@ -16,6 +17,7 @@ export class TabsPage {
     this.inventoryIcon = tab === 'inventories' ? 'list-sharp' : 'list-outline';
     this.addInventoryIcon =
       tab === 'add-inventory' ? 'add-circle-sharp' : 'add-circle-outline';
+    this.settingsIcon = tab === 'settings' ? 'settings' : 'settings-outline';
   }
 
   goToInventoryDetails(): void {
