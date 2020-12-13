@@ -23,6 +23,7 @@ export class InventoryFormComponent {
   private _inventory: IInventory;
 
   inventoryForm: FormGroup;
+  inventoryImageUrl: string;
 
   @Input()
   get inventory(): IInventory {
@@ -39,6 +40,10 @@ export class InventoryFormComponent {
   @Input() inventoryId: string;
 
   @Output() submitInventory = new EventEmitter<IInventory>();
+  @Output() imageChange = new EventEmitter<{
+    imageBlob: Blob;
+    imageName: string;
+  }>();
 
   constructor(
     private formbuilder: FormBuilder,
@@ -86,19 +91,30 @@ export class InventoryFormComponent {
     await actionSheet.present();
   }
 
-  private async captureInventory(source: CameraSource) {
+  private async captureInventory(source: CameraSource): Promise<void> {
     if (!this.platform.is('cordova')) {
       return;
     }
     // Take a photo
     const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64,
       source,
       quality: 100,
     });
 
-    this.inventoryForm.get('imageName').setValue(capturedPhoto.webPath);
+    const imageBlob = b64toBlob(
+      capturedPhoto.base64String,
+      `image/${capturedPhoto.format}`
+    );
+
+    this.inventoryImageUrl = `data:image/jpeg;base64, ${capturedPhoto.base64String}`;
+    const imageName = `${new Date().getTime()}_inventory_image.${
+      capturedPhoto.format
+    }`;
+    this.inventoryForm.get('imageName').setValue(imageName);
     this.cdr.markForCheck();
+
+    this.imageChange.emit({ imageBlob, imageName });
   }
 
   private initForm(): void {
@@ -119,3 +135,23 @@ export class InventoryFormComponent {
     });
   }
 }
+
+const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+  const byteCharacters = atob(b64Data);
+  const byteArrays = [];
+
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  const blob = new Blob(byteArrays, { type: contentType });
+  return blob;
+};

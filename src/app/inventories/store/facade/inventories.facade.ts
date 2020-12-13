@@ -4,6 +4,7 @@ import { EMPTY, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import * as fromAction from '../actions/inventories.actions';
 import { ICategory } from '../models/category.model';
+import { IGetInventoriesParams } from '../models/get-inventories.param';
 import { IInventory } from '../models/inventory.model';
 import { State } from '../reducers';
 import {
@@ -27,19 +28,10 @@ export class InventoriesFacade {
 
   constructor(private store: Store<State>) {}
 
-  getInventories(
-    categoryId: string,
-    isAmortization: boolean,
-    skip: number,
-    take: number,
-    reset: boolean = true
-  ): void {
+  getInventories(params: IGetInventoriesParams, reset: boolean = true): void {
     this.store.dispatch(
       fromAction.getInventories({
-        categoryId,
-        isAmortization,
-        skip,
-        take,
+        params,
         reset,
       })
     );
@@ -73,5 +65,11 @@ export class InventoriesFacade {
 
   getInventory(id: string): void {
     this.store.dispatch(fromAction.getInventory({ id }));
+  }
+
+  uploadImage(imageBlob: Blob, imageName: string): void {
+    this.store.dispatch(
+      fromAction.uploadInventoryImage({ imageBlob, imageName })
+    );
   }
 }

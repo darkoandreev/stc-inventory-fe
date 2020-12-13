@@ -79,25 +79,16 @@ export class InventoriesEffects {
     this.actions$.pipe(
       ofType(fromActions.getInventories),
       switchMap((action) =>
-        this.service
-          .getInventories(
-            action.categoryId,
-            action.isAmortization,
-            action.skip,
-            action.take
-          )
-          .pipe(
-            map((inventories: IInventoriesResponse) =>
-              fromActions.getInventoriesSuccess({
-                inventories: inventories.result,
-                reset: action.reset,
-                total: inventories.total,
-              })
-            ),
-            catchError((error: Error) => [
-              fromActions.getInventoriesError(error),
-            ])
-          )
+        this.service.getInventories(action.params).pipe(
+          map((inventories: IInventoriesResponse) =>
+            fromActions.getInventoriesSuccess({
+              inventories: inventories.result,
+              reset: action.reset,
+              total: inventories.total,
+            })
+          ),
+          catchError((error: Error) => [fromActions.getInventoriesError(error)])
+        )
       )
     )
   );
@@ -140,6 +131,23 @@ export class InventoriesEffects {
     )
   );
 
+  uploadInventoryImage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.uploadInventoryImage),
+      switchMap(({ imageBlob, imageName }) =>
+        this.service.uploadInventoryImage(imageBlob, imageName).pipe(
+          map((response) => {
+            console.log(response);
+            return fromActions.uploadInventoryImageSuccess(response);
+          }),
+          catchError((error: Error) => [
+            fromActions.uploadInventoryImageFailed(error),
+          ])
+        )
+      )
+    )
+  );
+
   deleteInventorySuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -158,6 +166,17 @@ export class InventoriesEffects {
         ofType(fromActions.createItemSuccess, fromActions.editInventorySuccess),
         tap(() => {
           this.toast.showToaster('Produkt je uspešno dodat', 'success');
+        })
+      ),
+    { dispatch: false }
+  );
+
+  uploadInventoryImageSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromActions.uploadInventoryImageSuccess),
+        tap(() => {
+          this.toast.showToaster('Slika je uploadovana uspešno', 'success');
         })
       ),
     { dispatch: false }

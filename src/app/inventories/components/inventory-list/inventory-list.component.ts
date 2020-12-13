@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IInventory } from '../../store/models/inventory.model';
 
@@ -6,7 +12,7 @@ import { IInventory } from '../../store/models/inventory.model';
   selector: 'stc-inventory-list',
   templateUrl: './inventory-list.component.html',
   styleUrls: ['./inventory-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryListComponent {
   @Input() inventories: IInventory[];
@@ -14,4 +20,8 @@ export class InventoryListComponent {
   @Output() infiniteScroll = new EventEmitter<any>();
 
   constructor(public modalController: ModalController) {}
+
+  trackBy(_: number, item: IInventory): string {
+    return item.id;
+  }
 }

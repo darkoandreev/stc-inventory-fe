@@ -7,6 +7,7 @@
 <ion-content [fullscreen]="true">
   <stc-inventory-form
     (submitInventory)="submitInventory($event)"
+    (imageChange)="imageChange($event)"
     [inventoryId]="inventoryId"
     [inventory]="inventory$  | async"
     [categories]="categories$ | async"

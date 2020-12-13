@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ICategory } from '../models/category.model';
+import { IGetInventoriesParams } from '../models/get-inventories.param';
 import { IInventory } from '../models/inventory.model';
 import { IResponse } from '../models/response.model';
 
@@ -55,10 +56,7 @@ export const getInventoryError = createAction(
 export const getInventories = createAction(
   '[Inventories Page] Get Inventories',
   props<{
-    categoryId: string;
-    isAmortization: boolean;
-    skip: number;
-    take: number;
+    params: IGetInventoriesParams;
     reset: boolean;
   }>()
 );
@@ -94,5 +92,18 @@ export const deleteInventorySuccess = createAction(
 );
 export const deleteInventoryError = createAction(
   '[Inventories Page] Delete Inventory Error',
+  (error: Error) => error
+);
+
+export const uploadInventoryImage = createAction(
+  '[Create inventory] Upload inventory image',
+  props<{ imageBlob: Blob; imageName: string }>()
+);
+export const uploadInventoryImageSuccess = createAction(
+  '[Create inventory] Upload inventory image success',
+  props<{ response: any }>()
+);
+export const uploadInventoryImageFailed = createAction(
+  '[Create inventory] Upload inventory image failed',
   (error: Error) => error
 );

@@ -31,19 +31,23 @@ export class InventoryDetailsPage {
     this.facade.getCategories();
   }
 
-  submitInventory(inventory: IInventory) {
-    if (inventory.id) {
-      this.facade.editInventory(inventory);
-      return;
-    }
-    this.facade.createNewItem(inventory);
-  }
-
   ionViewDidLeave(): void {
     this.inventoryFormComponent.inventoryForm.reset({
       isAmortization: false,
       isValid: true,
       imageName: 'test',
     });
+  }
+
+  imageChange({ imageBlob, imageName }): void {
+    this.facade.uploadImage(imageBlob, imageName);
+  }
+
+  submitInventory(inventory: IInventory) {
+    if (inventory.id) {
+      this.facade.editInventory(inventory);
+      return;
+    }
+    this.facade.createNewItem(inventory);
   }
 }

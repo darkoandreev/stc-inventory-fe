@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { ViewInventoryComponent } from './components/view-inventory/view-inventory.component';
 import { InventoriesFacade } from './store/facade/inventories.facade';
 import { ICategory } from './store/models/category.model';
 import { IInventory } from './store/models/inventory.model';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ModalService } from '../core/services/modal/modal.service';
+import { IGetInventoriesParams } from './store/models/get-inventories.param';
 
 @Component({
   selector: 'stc-inventories',
@@ -14,25 +16,22 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 export class InventoriesPage {
   selectedCategory: ICategory;
   selectedIsAmortization = false;
-  categoryId = '1';
-  skip = 0;
-  take = 8;
+  categoryId: string;
+
+  private skip = 0;
+  private take = 8;
 
   constructor(
-    private modalController: ModalController,
     private barcodeScanner: BarcodeScanner,
+    private modalService: ModalService,
+    public platform: Platform,
     public facade: InventoriesFacade
   ) {}
 
   ionViewWillEnter(): void {
     this.skip = 0;
     this.facade.getCategories();
-    this.facade.getInventories(
-      this.categoryId,
-      this.selectedIsAmortization,
-      this.skip,
-      this.take
-    );
+    this.facade.getInventories(this.inventoriesParams);
   }
 
   getInventories(event: CustomEvent, type: string): void {
@@ -42,40 +41,28 @@ export class InventoriesPage {
     }
 
     if (type === 'select') {
-      this.categoryId = event.detail.value;
+      const category: ICategory = event.detail.value;
+
+      this.categoryId = category.id;
+      if (category.name === 'Sve') {
+        this.categoryId = null;
+      }
     }
-    this.facade.getInventories(
-      this.categoryId,
-      this.selectedIsAmortization,
-      this.skip,
-      this.take
-    );
+    this.facade.getInventories(this.inventoriesParams);
   }
 
   infiniteScroll(event: any): void {
-    if (event.inventories.length % 8 === 0) {
+    const { inventories } = event;
+    if (inventories?.length % 8 === 0) {
       this.skip += 8;
-      this.facade.getInventories(
-        this.categoryId,
-        this.selectedIsAmortization,
-        this.skip,
-        this.take,
-        false
-      );
-      event.event.target?.complete();
-    } else {
-      event.event.target?.complete();
+      this.facade.getInventories(this.inventoriesParams, false);
     }
+    event.event.target?.complete();
   }
 
   searchInventory(event: CustomEvent): void {
     if (!event.detail.value) {
-      this.facade.getInventories(
-        this.categoryId,
-        this.selectedIsAmortization,
-        this.skip,
-        this.take
-      );
+      this.facade.getInventories(this.inventoriesParams);
       return;
     }
     this.facade.searchInventories(
@@ -88,7 +75,7 @@ export class InventoriesPage {
   async barcodeScan(): Promise<void> {
     const barcodeResult = await this.barcodeScanner.scan();
 
-    if (!barcodeResult) {
+    if (!barcodeResult?.text) {
       return;
     }
 
@@ -96,16 +83,23 @@ export class InventoriesPage {
     this.facade.createNewItem(inventory);
   }
 
-  async presentModal(inventory: IInventory): Promise<void> {
-    const modal = await this.modalController.create({
-      component: ViewInventoryComponent,
-      componentProps: { inventory },
-    });
-    await modal.present();
-    const { data } = await modal.onDidDismiss();
+  async viewInventoryModal(inventory: IInventory): Promise<void> {
+    const { data } = await this.modalService.presentModal(
+      { inventory },
+      ViewInventoryComponent
+    );
     if (!data) {
       return;
     }
     this.facade.deleteInventory(data);
+  }
+
+  private get inventoriesParams(): IGetInventoriesParams {
+    return {
+      skip: this.skip,
+      take: this.take,
+      categoryId: this.categoryId,
+      isAmortization: this.selectedIsAmortization,
+    };
   }
 }

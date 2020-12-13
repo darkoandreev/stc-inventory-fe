@@ -19,12 +19,12 @@
         <ng-container *ngrxLet="facade.categories$; let categories">
           <ion-select
             interface="popover"
-            value="1"
+            placeholder="Izaberi kategoriju"
             (ionChange)="getInventories($event, 'select')"
           >
             <ion-select-option
               *ngFor="let category of categories"
-              [value]="category.id"
+              [value]="category"
             >
               {{category.name}}
             </ion-select-option>
@@ -50,7 +50,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab
+    *ngIf="platform.is('cordova')"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
     <ion-fab-button (click)="barcodeScan()">
       <ion-icon name="barcode-outline"></ion-icon>
     </ion-fab-button>
@@ -59,7 +64,7 @@
     <stc-inventory-list
       *ngIf="inventories?.length > 0; else noProducts"
       [inventories]="inventories"
-      (viewInventory)="presentModal($event)"
+      (viewInventory)="viewInventoryModal($event)"
       (infiniteScroll)="infiniteScroll($event)"
     ></stc-inventory-list>
   </ng-container>
@@ -72,8 +77,8 @@
   <ion-footer *ngIf="totalAmount > 0">
     <ion-toolbar>
       <ion-title class="ion-text-center"
-        >{{ 'INVENTORIES.LABELS.TOTAL_AMOUNT' | translate }} {{ totalAmount |
-        number: '1.2' }} RSD</ion-title
+        >{{ 'INVENTORIES.LABELS.TOTAL_AMOUNT' | translate }}
+        <span>{{ totalAmount | number: '1.2' }} RSD</span></ion-title
       >
     </ion-toolbar>
   </ion-footer>
