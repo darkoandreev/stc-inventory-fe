@@ -3,6 +3,7 @@ import { ICategory } from '../models/category.model';
 import { IGetInventoriesParams } from '../models/get-inventories.param';
 import { IInventory } from '../models/inventory.model';
 import { IResponse } from '../models/response.model';
+import { ISearchInventoriesParams } from '../models/search-inventories.params';
 
 export const createItem = createAction(
   '[Inventories Page] Create new inventory',
@@ -52,6 +53,9 @@ export const getInventoryError = createAction(
   '[Inventories Page] Get Inventory Error',
   (error: Error) => error
 );
+export const resetInventory = createAction(
+  '[Inventories Page] Reset inventory form'
+);
 
 export const getInventories = createAction(
   '[Inventories Page] Get Inventories',
@@ -71,7 +75,7 @@ export const getInventoriesError = createAction(
 
 export const searchInventories = createAction(
   '[Inventories Page] Search Inventories',
-  props<{ searchTerm: string; categoryId: string; isAmortization: boolean }>()
+  props<{ params: ISearchInventoriesParams }>()
 );
 export const searchInventoriesSuccess = createAction(
   '[Inventories Page] Search Inventories success',

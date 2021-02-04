@@ -99,7 +99,7 @@ export class InventoryFormComponent {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Base64,
       source,
-      quality: 100,
+      quality: 50,
     });
 
     const imageBlob = b64toBlob(

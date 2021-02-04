@@ -96,21 +96,15 @@ export class InventoriesEffects {
   searchInventories$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.searchInventories),
-      switchMap((action) =>
-        this.service
-          .searchInventories(
-            action.searchTerm,
-            action.categoryId,
-            action.isAmortization
-          )
-          .pipe(
-            map((inventories: IInventory[]) =>
-              fromActions.searchInventoriesSuccess({ inventories })
-            ),
-            catchError((error: Error) => [
-              fromActions.searchInventoriesError(error),
-            ])
-          )
+      switchMap(({ params }) =>
+        this.service.searchInventories(params).pipe(
+          map((inventories: IInventory[]) =>
+            fromActions.searchInventoriesSuccess({ inventories })
+          ),
+          catchError((error: Error) => [
+            fromActions.searchInventoriesError(error),
+          ])
+        )
       )
     )
   );

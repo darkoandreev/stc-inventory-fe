@@ -1,22 +1,74 @@
 ion-list {
-    background: var(--ion-toolbar-background);
+  background: var(--ion-toolbar-background);
 
-    ion-card {
-        height: 90%;
-        background: rgba(52, 73, 94, 0.4);
-        color: white;
-    
-        ion-thumbnail {
-            height: 5rem;
-        }
-    
-        ion-button {
-            --background: var(--ion-toolbar-background);
-            --color: #ffaf00;
-        }
+  ion-card {
+    height: 100%;
+    background: rgba(52, 73, 94, 0.4);
+    color: white;
+    display: flex;
+    align-items: center;
+
+    ion-card-content {
+      padding: 0;
+      width: 100%;
     }
+
+    ion-thumbnail {
+      height: 5rem;
+    }
+
+    ion-button {
+      --background: var(--ion-toolbar-background);
+      --color: #ffaf00;
+    }
+  }
+
+  @media all and (min-width: 679px) {
+    ion-card {
+      ion-card-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        ion-row {
+          width: 100%;
+        }
+
+        ion-label {
+          font-size: 2vw;
+          padding-bottom: 0.4rem;
+          padding-left: 0.2rem;
+        }
+      }
+
+      ion-thumbnail {
+        height: 11rem;
+        width: 8rem;
+      }
+    }
+  }
+
+  @media all and (min-width: 576px) and (max-width: 679px) {
+    ion-card {
+      ion-thumbnail {
+        width: 6rem;
+        height: 8rem;
+      }
+    }
+  }
+
+  @media all and (max-width: 576px) {
+    ion-card {
+      ion-col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+    }
+  }
 }
 
 .font-size {
-    font-size: 85%;
+  font-size: 85%;
 }

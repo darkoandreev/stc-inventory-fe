@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'stc-tabs',
@@ -11,7 +11,7 @@ export class TabsPage {
   addInventoryIcon: string;
   settingsIcon: string;
 
-  constructor(private router: Router) {}
+  constructor(private navCtrl: NavController) {}
 
   changeTab({ tab }): void {
     this.inventoryIcon = tab === 'inventories' ? 'list-sharp' : 'list-outline';
@@ -21,6 +21,6 @@ export class TabsPage {
   }
 
   goToInventoryDetails(): void {
-    this.router.navigate(['tabs', 'add-inventory']);
+    this.navCtrl.navigateRoot(['tabs', 'add-inventory']);
   }
 }

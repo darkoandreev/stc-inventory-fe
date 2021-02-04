@@ -5,12 +5,16 @@ import { InventoryDetailsPage } from './inventory-details.page';
 const routes: Routes = [
   {
     path: '',
-    component: InventoryDetailsPage
+    component: InventoryDetailsPage,
+  },
+  {
+    path: ':id',
+    component: InventoryDetailsPage,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class InventoryDetailsRoutingModule {}

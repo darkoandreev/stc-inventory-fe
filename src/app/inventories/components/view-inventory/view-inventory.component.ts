@@ -22,9 +22,7 @@ export class ViewInventoryComponent {
 
   editInventory(): void {
     this.modalController.dismiss();
-    this.router.navigate(['tabs', 'add-inventory'], {
-      queryParams: { id: this.inventory.id },
-    });
+    this.router.navigate(['tabs', 'add-inventory', this.inventory.id]);
   }
 
   async presentAlertConfirm(): Promise<void> {

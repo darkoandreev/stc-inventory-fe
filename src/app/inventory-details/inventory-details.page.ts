@@ -14,8 +14,9 @@ import { InventoryFormComponent } from './components/inventory-form/inventory-fo
 export class InventoryDetailsPage {
   @ViewChild(InventoryFormComponent)
   inventoryFormComponent: InventoryFormComponent;
-  inventory$: Observable<IInventory> = this.facade.inventory$;
-  categories$: Observable<ICategory[]> = this.facade.categories$;
+
+  inventory$: Observable<IInventory>;
+  categories$: Observable<ICategory[]>;
   inventoryId: string;
 
   constructor(
@@ -24,19 +25,22 @@ export class InventoryDetailsPage {
   ) {}
 
   ionViewWillEnter() {
-    this.inventoryId = this.activatedRoute.snapshot.queryParams?.id;
+    this.inventoryId = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.inventoryId) {
       this.facade.getInventory(this.inventoryId);
     }
     this.facade.getCategories();
+
+    this.inventory$ = this.facade.inventory$;
+    this.categories$ = this.facade.categories$;
   }
 
   ionViewDidLeave(): void {
     this.inventoryFormComponent.inventoryForm.reset({
       isAmortization: false,
       isValid: true,
-      imageName: 'test',
     });
+    this.facade.resetInventory();
   }
 
   imageChange({ imageBlob, imageName }): void {

@@ -6,6 +6,7 @@ import * as fromAction from '../actions/inventories.actions';
 import { ICategory } from '../models/category.model';
 import { IGetInventoriesParams } from '../models/get-inventories.param';
 import { IInventory } from '../models/inventory.model';
+import { ISearchInventoriesParams } from '../models/search-inventories.params';
 import { State } from '../reducers';
 import {
   getAllInventories,
@@ -37,14 +38,12 @@ export class InventoriesFacade {
     );
   }
 
-  searchInventories(
-    searchTerm: string,
-    categoryId: string,
-    isAmortization: boolean
-  ): void {
-    this.store.dispatch(
-      fromAction.searchInventories({ searchTerm, categoryId, isAmortization })
-    );
+  searchInventories(params: ISearchInventoriesParams): void {
+    this.store.dispatch(fromAction.searchInventories({ params }));
+  }
+
+  resetInventory(): void {
+    this.store.dispatch(fromAction.resetInventory());
   }
 
   deleteInventory(id: string): void {

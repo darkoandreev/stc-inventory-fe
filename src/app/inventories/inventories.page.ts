@@ -65,11 +65,11 @@ export class InventoriesPage {
       this.facade.getInventories(this.inventoriesParams);
       return;
     }
-    this.facade.searchInventories(
-      event.detail.value,
-      this.categoryId,
-      this.selectedIsAmortization
-    );
+    this.facade.searchInventories({
+      searchTerm: event.detail.value,
+      categoryId: this.categoryId,
+      isAmortization: this.selectedIsAmortization,
+    });
   }
 
   async barcodeScan(): Promise<void> {

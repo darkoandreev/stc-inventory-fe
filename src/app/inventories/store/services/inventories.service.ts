@@ -6,6 +6,7 @@ import { IResponse } from '../models/response.model';
 import { ICategory } from '../models/category.model';
 import { IInventoriesResponse, IInventory } from '../models/inventory.model';
 import { IGetInventoriesParams } from '../models/get-inventories.param';
+import { ISearchInventoriesParams } from '../models/search-inventories.params';
 
 @Injectable({
   providedIn: 'root',
@@ -16,35 +17,22 @@ export class InventoriesService {
   getInventories(
     params: IGetInventoriesParams
   ): Observable<IInventoriesResponse> {
-    let httpParams = new HttpParams();
-    Object.keys(params).forEach((key) => {
-      if (params[key] === null || params[key] === undefined) {
-        return;
-      }
-      httpParams = httpParams.append(key, params[key]);
-    });
     return this.http.get<IInventoriesResponse>(
       `${environment.API_URL}inventory`,
       {
-        params: httpParams,
+        params: this.generateParams(params),
       }
     );
   }
 
   searchInventories(
-    searchTerm: string,
-    categoryId: string,
-    isAmortization = false
+    params: ISearchInventoriesParams
   ): Observable<IInventory[]> {
-    const params = {
-      params: new HttpParams()
-        .set('searchTerm', searchTerm)
-        .set('categoryId', categoryId)
-        .set('isAmortization', String(isAmortization)),
-    };
     return this.http.get<IInventory[]>(
       `${environment.API_URL}inventory/search`,
-      params
+      {
+        params: this.generateParams(params),
+      }
     );
   }
 
@@ -87,5 +75,17 @@ export class InventoriesService {
       `${environment.API_URL}inventory/uploadFile`,
       form
     );
+  }
+
+  private generateParams(params: any): HttpParams {
+    let httpParams = new HttpParams();
+    Object.keys(params).forEach((key) => {
+      if (params[key] === null || params[key] === undefined) {
+        return;
+      }
+      httpParams = httpParams.append(key, params[key]);
+    });
+
+    return httpParams;
   }
 }

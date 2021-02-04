@@ -53,6 +53,10 @@ const featureReducer = createReducer(
   on(fromActions.getCategoriesSuccess, (state, { categories }) => ({
     ...state,
     categories,
+  })),
+  on(fromActions.resetInventory, (state) => ({
+    ...state,
+    selectedInventory: null,
   }))
 );
 

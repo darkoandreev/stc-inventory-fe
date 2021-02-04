@@ -1,6 +1,7 @@
+import { ICategory } from './category.model';
+
 export interface IInventory {
   id?: string;
-  categoryId: string;
   inventoryNumber: number;
   name: string;
   amount: number;
@@ -13,6 +14,7 @@ export interface IInventory {
   quantity: number;
   isValid: boolean;
   isAmortization: boolean;
+  category: ICategory;
 }
 
 export interface IInventoriesResponse {
