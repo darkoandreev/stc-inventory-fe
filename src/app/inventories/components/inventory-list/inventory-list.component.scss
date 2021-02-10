@@ -7,14 +7,27 @@ ion-list {
     color: white;
     display: flex;
     align-items: center;
+    margin: 0;
 
     ion-card-content {
       padding: 0;
       width: 100%;
+
+      ion-icon {
+        font-size: 1.5rem;
+        padding-right: 0.5rem;
+        color: #ffaf00;
+      }
+
+      ion-label:first-child {
+        font-size: 1.3rem;
+        padding-bottom: 0.5rem;
+      }
     }
 
     ion-thumbnail {
-      height: 5rem;
+      height: 8rem;
+      width: 5rem;
     }
 
     ion-button {

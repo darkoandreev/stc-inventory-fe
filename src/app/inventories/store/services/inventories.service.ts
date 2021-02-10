@@ -77,6 +77,13 @@ export class InventoriesService {
     );
   }
 
+  exportListToPdf(categoryId: string): Observable<Blob> {
+    return this.http.get(`${environment.API_URL}inventory/generate-pdf`, {
+      params: this.generateParams({ categoryId }),
+      responseType: 'blob',
+    });
+  }
+
   private generateParams(params: any): HttpParams {
     let httpParams = new HttpParams();
     Object.keys(params).forEach((key) => {

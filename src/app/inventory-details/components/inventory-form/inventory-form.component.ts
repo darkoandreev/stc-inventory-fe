@@ -20,10 +20,9 @@ const { Camera } = Plugins;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryFormComponent {
-  private _inventory: IInventory;
-
   inventoryForm: FormGroup;
   inventoryImageUrl: string;
+  previousYear: number = new Date().getFullYear() - 1;
 
   @Input()
   get inventory(): IInventory {
@@ -44,6 +43,8 @@ export class InventoryFormComponent {
     imageBlob: Blob;
     imageName: string;
   }>();
+
+  private _inventory: IInventory;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -126,7 +127,8 @@ export class InventoryFormComponent {
       location: ['', Validators.required],
       responsiblePerson: ['', Validators.required],
       imageName: ['test', Validators.required],
-      quantity: null,
+      quantity: 1,
+      lastYearWriteOffAmount: '',
       description: null,
       buyDate: new Date(),
       isValid: true,

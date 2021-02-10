@@ -18,7 +18,10 @@
       "PRODUCT_NAME": "Ime proizvoda",
       "PRODUCT_NUMBER": "Serijski broj",
       "VIEW_PRODUCT": "Pregledaj",
-      "TOTAL_AMOUNT": "Ukupna vrednost:"
+      "TOTAL_AMOUNT": "Ukupna vrednost:",
+      "WRITE_OFF_LAST_YEAR": "Otpis",
+      "PRINT": "Odštampaj (PDF)",
+      "VIEW_INVENTORY_TITLE": "Pregled"
     }
   },
   "INVENTORY_DETAILS": {

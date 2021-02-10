@@ -15,6 +15,7 @@ export const adapter: EntityAdapter<IInventory> = createEntityAdapter<IInventory
 const initialState: InventoriesState = adapter.getInitialState({
   categories: [],
   selectedInventory: null,
+  isPrintingDone: false,
 });
 
 const featureReducer = createReducer(

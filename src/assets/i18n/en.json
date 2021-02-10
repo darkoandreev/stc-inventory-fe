@@ -18,7 +18,10 @@
       "PRODUCT_NAME": "Product name",
       "PRODUCT_NUMBER": "Product number",
       "VIEW_PRODUCT": "View",
-      "TOTAL_AMOUNT": "Total amount:"
+      "TOTAL_AMOUNT": "Total amount:",
+      "WRITE_OFF_LAST_YEAR": "Write-off",
+      "PRINT": "Print (PDF)",
+      "VIEW_INVENTORY_TITLE": "View inventory"
     }
   },
   "INVENTORY_DETAILS": {

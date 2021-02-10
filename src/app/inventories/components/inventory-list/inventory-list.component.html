@@ -26,22 +26,27 @@
               size-sm="7"
               size-xs="12"
             >
-              <ion-row>
+              <ion-row class="ion-align-items-center">
                 <ion-label class="ion-text-center"
-                  >Ime: {{ inventory.name }}</ion-label
+                  ><strong>{{ inventory.name }}</strong></ion-label
                 >
               </ion-row>
-              <ion-row>
-                <ion-label class="ion-text-center"
-                  >Serijski broj: {{ inventory.inventoryNumber }}</ion-label
-                >
-              </ion-row>
-              <ion-row>
-                <ion-label>Lokacija: {{ inventory.location }}</ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label>Vrednost: {{ inventory.amount }} RSD</ion-label>
-              </ion-row>
+              <div class="product-details">
+                <ion-row class="ion-align-items-center">
+                  <ion-icon name="barcode-outline"></ion-icon>
+                  <ion-label class="ion-text-center">{{
+                    inventory.inventoryNumber
+                  }}</ion-label>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-icon name="location-outline"></ion-icon>
+                  <ion-label>{{ inventory.location }}</ion-label>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-icon name="cash-outline"></ion-icon>
+                  <ion-label>{{ inventory.amount }} RSD</ion-label>
+                </ion-row>
+              </div>
               <ion-row class="ion-justify-content-end">
                 <ion-button
                   size="default"
@@ -53,24 +58,6 @@
               </ion-row>
             </ion-col>
           </ion-row>
-          <!-- <ion-row class="ion-align-items-center ion-justify-content-center">
-            <ion-thumbnail>
-              <img [src]="inventory.imageName" />
-            </ion-thumbnail>
-          </ion-row>
-          <ion-row class="ion-align-items-center ion-justify-content-center">
-            <ion-label class="ion-text-center"
-              >{{ inventory.name }} {{ inventory.inventoryNumber }}</ion-label
-            >
-          </ion-row>
-          <ion-row class="ion-align-items-center ion-justify-content-center">
-            <ion-label class="font-size">{{ inventory.location }}</ion-label>
-          </ion-row>
-          <ion-row class="ion-align-items-center ion-justify-content-center">
-            <ion-button size="small" (click)="viewInventory.emit(inventory)">{{
-              'INVENTORIES.LABELS.VIEW_PRODUCT' | translate
-            }}</ion-button>
-          </ion-row> -->
         </ion-card-content>
       </ion-card>
     </ion-col>

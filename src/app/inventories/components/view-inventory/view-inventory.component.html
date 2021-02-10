@@ -5,7 +5,9 @@
         {{ 'SHARED.CLOSE' | translate }}
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ inventory.name }} {{ inventory.inventoryNumber }}</ion-title>
+    <ion-title>{{
+      'INVENTORIES.LABELS.VIEW_INVENTORY_TITLE' | translate
+    }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -32,6 +34,24 @@
           <ion-label>{{
             'INVENTORIES.LABELS.INFORMATION' | translate
           }}</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{ inventory.name }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.PRODUCT_NAME' | translate
+          }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="5">{{ inventory.inventoryNumber }}</ion-col>
+          <ion-col size="6">{{
+            'INVENTORIES.LABELS.PRODUCT_NUMBER' | translate
+          }}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="1"

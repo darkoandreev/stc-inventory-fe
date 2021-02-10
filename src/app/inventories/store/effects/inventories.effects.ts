@@ -130,13 +130,26 @@ export class InventoriesEffects {
       ofType(fromActions.uploadInventoryImage),
       switchMap(({ imageBlob, imageName }) =>
         this.service.uploadInventoryImage(imageBlob, imageName).pipe(
-          map((response) => {
-            console.log(response);
-            return fromActions.uploadInventoryImageSuccess(response);
-          }),
+          map((response) => fromActions.uploadInventoryImageSuccess(response)),
           catchError((error: Error) => [
             fromActions.uploadInventoryImageFailed(error),
           ])
+        )
+      )
+    )
+  );
+
+  exportToPdf$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.exportToPdf),
+      switchMap(({ categoryId }) =>
+        this.service.exportListToPdf(categoryId).pipe(
+          map((file) => {
+            const downloadURL = window.URL.createObjectURL(file);
+            window.open(downloadURL);
+            return fromActions.exportToPdfSuccess({ file });
+          }),
+          catchError((error: Error) => [fromActions.exportToPdfError(error)])
         )
       )
     )

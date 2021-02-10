@@ -111,3 +111,17 @@ export const uploadInventoryImageFailed = createAction(
   '[Create inventory] Upload inventory image failed',
   (error: Error) => error
 );
+
+// Export to PDF
+export const exportToPdf = createAction(
+  '[Inventories Page] Export inventories to PDF',
+  props<{ categoryId: string }>()
+);
+export const exportToPdfSuccess = createAction(
+  '[Inventories Page] Export inventories to PDF Success',
+  props<{ file: Blob }>()
+);
+export const exportToPdfError = createAction(
+  '[Inventories Page] Export inventories to PDF Error',
+  (error: Error) => error
+);

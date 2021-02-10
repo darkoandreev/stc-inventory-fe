@@ -71,4 +71,8 @@ export class InventoriesFacade {
       fromAction.uploadInventoryImage({ imageBlob, imageName })
     );
   }
+
+  exportToPdf(categoryId: string): void {
+    this.store.dispatch(fromAction.exportToPdf({ categoryId }));
+  }
 }

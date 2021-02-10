@@ -1,6 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>{{ 'INVENTORIES.TITLE' | translate }}</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="facade.exportToPdf(categoryId)">
+        <ion-icon name="print-outline"></ion-icon>
+        {{ 'INVENTORIES.LABELS.PRINT' | translate }}
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   <div class="filter-container">
     <ion-row class="ion-align-items-center">

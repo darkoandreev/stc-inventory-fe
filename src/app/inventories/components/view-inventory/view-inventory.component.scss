@@ -2,8 +2,8 @@ ion-grid {
   padding: 0;
 
   ion-thumbnail {
-    height: 130px;
-    width: 130px;
+    height: 200px;
+    width: 200px;
     margin: 0 auto;
 
     img {
@@ -22,5 +22,9 @@ ion-grid {
 
   .i-color {
     color: #9acd32;
+  }
+
+  ion-checkbox.checkbox-disabled {
+    opacity: 1;
   }
 }
