@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { IInventory } from 'src/app/inventories/store/models/inventory.model';
+import { AlertService } from '../../../core/services/alert/alert.service';
 
 @Component({
   selector: 'stc-view-inventory',
@@ -15,9 +16,9 @@ export class ViewInventoryComponent {
 
   constructor(
     public modalController: ModalController,
-    private alertController: AlertController,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private alertService: AlertService
   ) {}
 
   editInventory(): void {
@@ -25,32 +26,23 @@ export class ViewInventoryComponent {
     this.router.navigate(['tabs', 'add-inventory', this.inventory.id]);
   }
 
-  async presentAlertConfirm(): Promise<void> {
-    const alert = await this.alertController.create({
-      header: this.translateService.instant(
-        'SHARED.DELETE_CONFIRM_DIALOG.HEADER'
-      ),
-      message: this.translateService.instant(
-        'SHARED.DELETE_CONFIRM_DIALOG.MESSAGE'
-      ),
-      buttons: [
-        {
-          text: this.translateService.instant(
-            'SHARED.DELETE_CONFIRM_DIALOG.NO_BUTTON_TEXT'
-          ),
-          role: 'cancel',
-        },
-        {
-          text: this.translateService.instant(
-            'SHARED.DELETE_CONFIRM_DIALOG.YES_BUTTON_TEXT'
-          ),
-          handler: () => {
-            this.modalController.dismiss(this.inventory.id);
-          },
-        },
-      ],
-    });
+  deleteConfirmation(): void {
+    this.alertService.presentConfirmationAlert(
+      this.translateService.instant('SHARED.DELETE_CONFIRM_DIALOG.HEADER'),
+      this.translateService.instant('SHARED.DELETE_CONFIRM_DIALOG.MESSAGE'),
+      () => this.modalController.dismiss(this.inventory.id)
+    );
+  }
 
-    await alert.present();
+  writeOffConfirmation(): void {
+    this.alertService.presentConfirmationAlert(
+      this.translateService.instant('SHARED.WRITE_OFF_CONFIRM_DIALOG.HEADER'),
+      this.translateService.instant('SHARED.WRITE_OFF_CONFIRM_DIALOG.MESSAGE'),
+      () =>
+        this.modalController.dismiss({
+          inventoryId: this.inventory.id,
+          writeOff: true,
+        })
+    );
   }
 }

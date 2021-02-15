@@ -8,6 +8,7 @@ export interface InventoriesState extends EntityState<IInventory> {
   categories: ICategory[];
   selectedInventory: IInventory;
   total?: number;
+  pdfFile?: Blob;
 }
 
 export const adapter: EntityAdapter<IInventory> = createEntityAdapter<IInventory>();
@@ -15,7 +16,7 @@ export const adapter: EntityAdapter<IInventory> = createEntityAdapter<IInventory
 const initialState: InventoriesState = adapter.getInitialState({
   categories: [],
   selectedInventory: null,
-  isPrintingDone: false,
+  pdfFile: null,
 });
 
 const featureReducer = createReducer(
@@ -44,6 +45,15 @@ const featureReducer = createReducer(
       state
     )
   ),
+  on(fromActions.writeOffInventorySuccess, (state, { inventory }) =>
+    adapter.updateOne(
+      {
+        id: inventory.id,
+        changes: { amount: 0 },
+      },
+      state
+    )
+  ),
   on(fromActions.searchInventoriesSuccess, (state, { inventories }) =>
     adapter.setAll(inventories, state)
   ),
@@ -55,9 +65,21 @@ const featureReducer = createReducer(
     ...state,
     categories,
   })),
+  on(fromActions.exportToPdfSuccess, (state, { file }) => ({
+    ...state,
+    pdfFile: file,
+  })),
+  on(fromActions.exportToPdfError, (state) => ({
+    ...state,
+    pdfFile: null,
+  })),
   on(fromActions.resetInventory, (state) => ({
     ...state,
     selectedInventory: null,
+  })),
+  on(fromActions.resetPdfFile, (state) => ({
+    ...state,
+    pdfFile: null,
   }))
 );
 

@@ -84,6 +84,12 @@ export class InventoriesService {
     });
   }
 
+  writeOff(inventoryId: string): Observable<Partial<IInventory>> {
+    return this.http.get<Partial<IInventory>>(
+      `${environment.API_URL}inventory/write-off/${inventoryId}`
+    );
+  }
+
   private generateParams(params: any): HttpParams {
     let httpParams = new HttpParams();
     Object.keys(params).forEach((key) => {

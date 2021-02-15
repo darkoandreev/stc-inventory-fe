@@ -20,8 +20,14 @@
       "VIEW_PRODUCT": "View",
       "TOTAL_AMOUNT": "Total amount:",
       "WRITE_OFF_LAST_YEAR": "Write-off",
+      "WRITE_OFF_TEXT": "Write-off",
       "PRINT": "Print (PDF)",
       "VIEW_INVENTORY_TITLE": "View inventory"
+    }
+  },
+  "CATEGORY": {
+    "LABEL": {
+      "ALL": "All"
     }
   },
   "INVENTORY_DETAILS": {
@@ -54,6 +60,12 @@
       "MESSAGE": "Are you sure you want to <strong>delete</strong> this product?",
       "NO_BUTTON_TEXT": "No",
       "YES_BUTTON_TEXT": "Yes"
+    },
+    "WRITE_OFF_CONFIRM_DIALOG": {
+      "HEADER": "Write-off product",
+      "MESSAGE": "Are you sure you want to <strong>write-off</strong> this product?",
+      "NO_BUTTON_TEXT": "Yes",
+      "YES_BUTTON_TEXT": "No"
     }
   }
 }

@@ -20,8 +20,14 @@
       "VIEW_PRODUCT": "Pregledaj",
       "TOTAL_AMOUNT": "Ukupna vrednost:",
       "WRITE_OFF_LAST_YEAR": "Otpis",
+      "WRITE_OFF_TEXT": "Otpiši",
       "PRINT": "Odštampaj (PDF)",
       "VIEW_INVENTORY_TITLE": "Pregled"
+    }
+  },
+  "CATEGORY": {
+    "LABEL": {
+      "ALL": "Sve"
     }
   },
   "INVENTORY_DETAILS": {
@@ -52,6 +58,12 @@
     "DELETE_CONFIRM_DIALOG": {
       "HEADER": "Obriši proizvod",
       "MESSAGE": "Da li ste sigurni da želite <strong>obrisati</strong> ovaj proizvod?",
+      "NO_BUTTON_TEXT": "Ne",
+      "YES_BUTTON_TEXT": "Da"
+    },
+    "WRITE_OFF_CONFIRM_DIALOG": {
+      "HEADER": "Otpiši proizvod",
+      "MESSAGE": "Da li ste sigurni da želite <strong>otpisati</strong> ovaj proizvod?",
       "NO_BUTTON_TEXT": "Ne",
       "YES_BUTTON_TEXT": "Da"
     }

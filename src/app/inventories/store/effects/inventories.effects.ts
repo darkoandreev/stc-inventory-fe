@@ -144,12 +144,25 @@ export class InventoriesEffects {
       ofType(fromActions.exportToPdf),
       switchMap(({ categoryId }) =>
         this.service.exportListToPdf(categoryId).pipe(
-          map((file) => {
-            const downloadURL = window.URL.createObjectURL(file);
-            window.open(downloadURL);
-            return fromActions.exportToPdfSuccess({ file });
-          }),
+          map((file) => fromActions.exportToPdfSuccess({ file })),
           catchError((error: Error) => [fromActions.exportToPdfError(error)])
+        )
+      )
+    )
+  );
+
+  writeOff$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.writeOffInventory),
+      switchMap(({ inventoryId }) =>
+        this.service.writeOff(inventoryId).pipe(
+          map((inventory) => {
+            inventory.id = inventoryId;
+            return fromActions.writeOffInventorySuccess({ inventory });
+          }),
+          catchError((error: Error) => [
+            fromActions.writeOffInventoryError(error),
+          ])
         )
       )
     )

@@ -12,6 +12,9 @@ import { InventoriesStoreModule } from './store/inventories-store.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -28,7 +31,13 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     InventoryListComponent,
     ViewInventoryComponent,
   ],
-  providers: [InventoriesService, InventoriesFacade, BarcodeScanner],
+  providers: [
+    InventoriesService,
+    InventoriesFacade,
+    BarcodeScanner,
+    File,
+    FileOpener,
+  ],
   exports: [TranslateModule],
 })
 export class InventoriesModule {}

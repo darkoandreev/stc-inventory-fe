@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>{{ 'INVENTORIES.TITLE' | translate }}</ion-title>
     <ion-buttons slot="secondary">
-      <ion-button (click)="facade.exportToPdf(categoryId)">
+      <ion-button (click)="exportToPdf()">
         <ion-icon name="print-outline"></ion-icon>
         {{ 'INVENTORIES.LABELS.PRINT' | translate }}
       </ion-button>
@@ -26,8 +26,12 @@
           <ion-select
             interface="popover"
             placeholder="Izaberi kategoriju"
+            [value]="null"
             (ionChange)="getInventories($event, 'select')"
           >
+            <ion-select-option [value]="null"
+              >{{ 'CATEGORY.LABEL.ALL' | translate }}</ion-select-option
+            >
             <ion-select-option
               *ngFor="let category of categories"
               [value]="category"

@@ -2,7 +2,7 @@ import { ICategory } from './category.model';
 
 export interface IInventory {
   id?: string;
-  inventoryNumber: number;
+  inventoryNumber: string;
   name: string;
   amount: number;
   location: string;

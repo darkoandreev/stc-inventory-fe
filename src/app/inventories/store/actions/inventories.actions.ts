@@ -125,3 +125,18 @@ export const exportToPdfError = createAction(
   '[Inventories Page] Export inventories to PDF Error',
   (error: Error) => error
 );
+
+export const writeOffInventory = createAction(
+  '[View Inventory Page] Write-off Inventory',
+  props<{ inventoryId: string }>()
+);
+export const writeOffInventorySuccess = createAction(
+  '[View Inventory Page] Write-off Inventory Success',
+  props<{ inventory: Partial<IInventory> }>()
+);
+export const writeOffInventoryError = createAction(
+  '[View Inventory Page] Write-off Inventory Error',
+  (error: Error) => error
+);
+
+export const resetPdfFile = createAction('[Inventories Page] Reset pdf file');

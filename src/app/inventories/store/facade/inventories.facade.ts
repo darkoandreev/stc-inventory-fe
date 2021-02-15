@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { EMPTY, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import * as fromAction from '../actions/inventories.actions';
 import { ICategory } from '../models/category.model';
 import { IGetInventoriesParams } from '../models/get-inventories.param';
@@ -13,6 +13,7 @@ import {
   getAllCategories,
   getInventory,
   getTotalAmount,
+  getPdfFile,
 } from '../selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -26,6 +27,10 @@ export class InventoriesFacade {
   );
   inventory$: Observable<IInventory> = this.store.pipe(select(getInventory));
   totalAmount$: Observable<number> = this.store.pipe(select(getTotalAmount));
+  pdfFile$: Observable<Blob> = this.store.pipe(select(getPdfFile)).pipe(
+    filter((file) => !!file),
+    take(1)
+  );
 
   constructor(private store: Store<State>) {}
 
@@ -74,5 +79,13 @@ export class InventoriesFacade {
 
   exportToPdf(categoryId: string): void {
     this.store.dispatch(fromAction.exportToPdf({ categoryId }));
+  }
+
+  resetPdfFile(): void {
+    this.store.dispatch(fromAction.resetPdfFile());
+  }
+
+  writeOff(inventoryId: string): void {
+    this.store.dispatch(fromAction.writeOffInventory({ inventoryId }));
   }
 }
