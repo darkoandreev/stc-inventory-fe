@@ -6,8 +6,13 @@
       *ngFor="let inventory of inventories; let i = index; trackBy: trackBy"
     >
       <ion-card>
+        <ion-card-header>
+          <ion-text *ngIf="!inventory.isValid">{{
+            'INVENTORIES.LABELS.SPENT' | translate
+          }}</ion-text>
+        </ion-card-header>
         <ion-card-content>
-          <ion-row class="ion-align-items-center">
+          <ion-row class="card-content-row">
             <ion-col
               size="4"
               size-lg="3.5"

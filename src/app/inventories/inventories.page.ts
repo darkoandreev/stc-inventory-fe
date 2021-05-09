@@ -7,7 +7,17 @@ import { IInventory } from './store/models/inventory.model';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalService } from '../core/services/modal/modal.service';
 import { IGetInventoriesParams } from './store/models/get-inventories.param';
-import { filter, finalize, map, skip, take, takeUntil } from 'rxjs/operators';
+import {
+  defaultIfEmpty,
+  filter,
+  finalize,
+  last,
+  map,
+  skip,
+  startWith,
+  take,
+  takeUntil,
+} from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
@@ -93,17 +103,12 @@ export class InventoriesPage {
 
     const barcodeInventory: IInventory = JSON.parse(barcodeResult.text);
 
-    this.facade.getInventory(barcodeInventory.inventoryNumber);
+    this.facade.getInventory(barcodeInventory?.id);
     this.facade.inventory$
-      .pipe(
-        filter((inv) => !!inv),
-        take(1),
-        takeUntil(this.destroyed$)
-      )
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((inventory) => {
         this.viewInventoryModal(inventory);
       });
-
     //      this.facade.createNewItem(inventory);
   }
 

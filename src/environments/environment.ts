@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://192.168.0.118:3000/api/',
+  API_URL: 'http://stc-inventory-be-dev.eu-central-1.elasticbeanstalk.com/api/',
 };
 
 /*

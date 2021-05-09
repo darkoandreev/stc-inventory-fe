@@ -82,14 +82,3 @@
     <img src="assets/images/no-products.png" />
   </ng-template>
 </ion-content>
-
-<ng-container *ngrxLet="facade.totalAmount$; let totalAmount">
-  <ion-footer *ngIf="totalAmount > 0">
-    <ion-toolbar>
-      <ion-title class="ion-text-center"
-        >{{ 'INVENTORIES.LABELS.TOTAL_AMOUNT' | translate }}
-        <span>{{ totalAmount | number: '1.2' }} RSD</span></ion-title
-      >
-    </ion-toolbar>
-  </ion-footer>
-</ng-container>

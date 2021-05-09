@@ -22,14 +22,20 @@ export class InventoriesEffects {
   createNewItem$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.createItem),
-      switchMap((action) =>
-        this.service.createNewItem(action.inventory).pipe(
-          map((inventory: IInventory) =>
-            fromActions.createItemSuccess({ inventory })
+      switchMap((action) => {
+        const inventoriesByQuantity = [];
+
+        for (let i = 0; i < action.inventory.quantity; i++) {
+          inventoriesByQuantity.push(action.inventory);
+        }
+
+        return this.service.createNewItem(inventoriesByQuantity).pipe(
+          map((inventories: IInventory[]) =>
+            fromActions.createItemSuccess({ inventories })
           ),
           catchError((error: Error) => [fromActions.createItemsError(error)])
-        )
-      )
+        );
+      })
     )
   );
 
@@ -80,11 +86,10 @@ export class InventoriesEffects {
       ofType(fromActions.getInventories),
       switchMap((action) =>
         this.service.getInventories(action.params).pipe(
-          map((inventories: IInventoriesResponse) =>
+          map((inventories: IInventory[]) =>
             fromActions.getInventoriesSuccess({
-              inventories: inventories.result,
+              inventories,
               reset: action.reset,
-              total: inventories.total,
             })
           ),
           catchError((error: Error) => [fromActions.getInventoriesError(error)])

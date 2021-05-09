@@ -11,7 +11,7 @@ export const createItem = createAction(
 );
 export const createItemSuccess = createAction(
   '[Inventories Page] Create new inventory Success',
-  props<{ inventory: IInventory }>()
+  props<{ inventories: IInventory[] }>()
 );
 export const createItemsError = createAction(
   '[Inventories Page] Create new inventory Error',
@@ -66,7 +66,7 @@ export const getInventories = createAction(
 );
 export const getInventoriesSuccess = createAction(
   '[Inventories Page] Get Inventories Success',
-  props<{ inventories: IInventory[]; reset: boolean; total: number }>()
+  props<{ inventories: IInventory[]; reset: boolean }>()
 );
 export const getInventoriesError = createAction(
   '[Inventories Page] Get Inventories Error',

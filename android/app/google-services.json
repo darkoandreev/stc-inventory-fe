@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "537776951404",
+    "project_id": "stc-inventory",
+    "storage_bucket": "stc-inventory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537776951404:android:673f7bda23dff974468849",
+        "android_client_info": {
+          "package_name": "stc.inventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537776951404-htao769besfnl94n5it5rdbvcfo0e43s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB693E5M_WzHeULRO419KT6LmjnQP4vtNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537776951404-htao769besfnl94n5it5rdbvcfo0e43s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

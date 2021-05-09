@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { filter, skip, take } from 'rxjs/operators';
 import * as fromAction from '../actions/inventories.actions';
 import { ICategory } from '../models/category.model';
 import { IGetInventoriesParams } from '../models/get-inventories.param';
@@ -12,7 +12,6 @@ import {
   getAllInventories,
   getAllCategories,
   getInventory,
-  getTotalAmount,
   getPdfFile,
 } from '../selectors';
 
@@ -25,8 +24,11 @@ export class InventoriesFacade {
     select(getAllCategories),
     filter((x) => !!x && x.length > 0)
   );
-  inventory$: Observable<IInventory> = this.store.pipe(select(getInventory));
-  totalAmount$: Observable<number> = this.store.pipe(select(getTotalAmount));
+  inventory$: Observable<IInventory> = this.store.pipe(
+    select(getInventory),
+    skip(1),
+    take(1)
+  );
   pdfFile$: Observable<Blob> = this.store.pipe(select(getPdfFile)).pipe(
     filter((file) => !!file),
     take(1)

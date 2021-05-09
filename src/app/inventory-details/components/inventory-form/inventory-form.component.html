@@ -25,6 +25,14 @@
               </ng-template>
             </ion-select>
           </ion-item>
+          <ion-row
+            *ngIf="
+              inventoryForm.get('categoryId').touched &&
+              inventoryForm.get('categoryId').hasError('required')
+            "
+          >
+            <ion-text color="danger">Obavezno popuniti polje</ion-text>
+          </ion-row>
         </ion-col>
       </ion-row>
 
@@ -36,15 +44,66 @@
             >
             <ion-input type="text" formControlName="name"></ion-input>
           </ion-item>
+          <ion-row
+            *ngIf="
+              inventoryForm.get('name').touched &&
+              inventoryForm.get('name').hasError('required')
+            "
+          >
+            <ion-text color="danger">Obavezno popuniti polje</ion-text>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating"
+              >{{ 'INVENTORIES.LABELS.LOCATION' | translate }}*</ion-label
+            >
+            <ion-input type="text" formControlName="location"></ion-input>
+          </ion-item>
+          <ion-row
+            *ngIf="
+              inventoryForm.get('location').touched &&
+              inventoryForm.get('location').hasError('required')
+            "
+          >
+            <ion-text color="danger">Obavezno popuniti polje</ion-text>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating"
+              >{{
+                'INVENTORIES.LABELS.RESPONSIBLE_PERSON' | translate
+              }}*</ion-label
+            >
+            <ion-input
+              type="text"
+              formControlName="responsiblePerson"
+            ></ion-input>
+          </ion-item>
+          <ion-row
+            *ngIf="
+              inventoryForm.get('responsiblePerson').touched &&
+              inventoryForm.get('responsiblePerson').hasError('required')
+            "
+          >
+            <ion-text color="danger">Obavezno popuniti polje</ion-text>
+          </ion-row>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="6">
           <ion-item>
-            <ion-label position="floating"
-              >{{ 'INVENTORIES.LABELS.VALUE' | translate }}*</ion-label
-            >
+            <ion-label position="floating">{{
+              'INVENTORIES.LABELS.VALUE' | translate
+            }}</ion-label>
             <ion-input type="number" formControlName="amount"></ion-input>
           </ion-item>
         </ion-col>
@@ -61,9 +120,9 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating"
-              >{{ 'INVENTORIES.LABELS.PRODUCT_NUMBER' | translate }}*</ion-label
-            >
+            <ion-label position="floating">{{
+              'INVENTORIES.LABELS.PRODUCT_NUMBER' | translate
+            }}</ion-label>
             <ion-input
               type="text"
               formControlName="inventoryNumber"
@@ -76,33 +135,6 @@
               'INVENTORIES.LABELS.DATE_OF_PURCHAES' | translate
             }}</ion-label>
             <ion-datetime formControlName="buyDate"></ion-datetime>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating"
-              >{{ 'INVENTORIES.LABELS.LOCATION' | translate }}*</ion-label
-            >
-            <ion-input type="text" formControlName="location"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating"
-              >{{
-                'INVENTORIES.LABELS.RESPONSIBLE_PERSON' | translate
-              }}*</ion-label
-            >
-            <ion-input
-              type="text"
-              formControlName="responsiblePerson"
-            ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -185,6 +217,13 @@
           *ngIf="inventoryForm.get('imageName').value"
           [src]="inventoryImageUrl"
         ></ion-img>
+      </ion-row>
+
+      <ion-row
+        *ngIf="!inventoryForm.get('imageName').value"
+        class="ion-justify-content-center"
+      >
+        <ion-text color="danger">Slika je obavezna!</ion-text>
       </ion-row>
 
       <ion-button

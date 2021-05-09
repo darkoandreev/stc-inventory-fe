@@ -35,11 +35,6 @@ const selectCurrentInventory = createSelector(
   (state) => state.selectedInventory
 );
 
-const selectTotalAmount = createSelector(
-  selectInventoriesState,
-  (state) => state.total
-);
-
 const selectPdfFile = createSelector(
   selectInventoriesState,
   (state) => state.pdfFile
@@ -48,11 +43,6 @@ const selectPdfFile = createSelector(
 export const getInventory = createSelector(
   selectInventoriesState,
   selectCurrentInventory
-);
-
-export const getTotalAmount = createSelector(
-  selectInventoriesState,
-  selectTotalAmount
 );
 
 export const getPdfFile = createSelector(selectInventoriesState, selectPdfFile);

@@ -39,6 +39,8 @@ export class InventoryDetailsPage {
     this.inventoryFormComponent.inventoryForm.reset({
       isAmortization: false,
       isValid: true,
+      quantity: 1,
+      buyDate: new Date().toISOString(),
     });
     this.facade.resetInventory();
   }

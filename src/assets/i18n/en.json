@@ -22,7 +22,8 @@
       "WRITE_OFF_LAST_YEAR": "Write-off",
       "WRITE_OFF_TEXT": "Write-off",
       "PRINT": "Print (PDF)",
-      "VIEW_INVENTORY_TITLE": "View inventory"
+      "VIEW_INVENTORY_TITLE": "View inventory",
+      "SPENT": "Spent"
     }
   },
   "CATEGORY": {

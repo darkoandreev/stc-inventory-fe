@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">STC Popis</string>
+    <string name="title_activity_main">STC Popis</string>
+    <string name="package_name">stc.inventory</string>
+    <string name="custom_url_scheme">stc.inventory</string>
+</resources>

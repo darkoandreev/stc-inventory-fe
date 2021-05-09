@@ -14,15 +14,10 @@ import { ISearchInventoriesParams } from '../models/search-inventories.params';
 export class InventoriesService {
   constructor(private http: HttpClient) {}
 
-  getInventories(
-    params: IGetInventoriesParams
-  ): Observable<IInventoriesResponse> {
-    return this.http.get<IInventoriesResponse>(
-      `${environment.API_URL}inventory`,
-      {
-        params: this.generateParams(params),
-      }
-    );
+  getInventories(params: IGetInventoriesParams): Observable<IInventory[]> {
+    return this.http.get<IInventory[]>(`${environment.API_URL}inventory`, {
+      params: this.generateParams(params),
+    });
   }
 
   searchInventories(
@@ -46,10 +41,10 @@ export class InventoriesService {
     );
   }
 
-  createNewItem(inventory: IInventory): Observable<IInventory> {
-    return this.http.post<IInventory>(
+  createNewItem(inventories: IInventory[]): Observable<IInventory[]> {
+    return this.http.post<IInventory[]>(
       `${environment.API_URL}inventory`,
-      inventory
+      inventories
     );
   }
 

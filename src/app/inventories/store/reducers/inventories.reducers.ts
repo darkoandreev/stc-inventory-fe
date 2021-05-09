@@ -26,15 +26,11 @@ const featureReducer = createReducer(
       ? adapter.setAll(inventories, state)
       : adapter.addMany(inventories, state)
   ),
-  on(fromActions.getInventoriesSuccess, (state, { total }) => ({
-    ...state,
-    total,
-  })),
   on(fromActions.deleteInventorySuccess, (state, { response }) =>
     adapter.removeOne(response.data.id, state)
   ),
-  on(fromActions.createItemSuccess, (state, { inventory }) =>
-    adapter.addOne(inventory, state)
+  on(fromActions.createItemSuccess, (state, { inventories }) =>
+    adapter.addMany(inventories, state)
   ),
   on(fromActions.editInventorySuccess, (state, { editInventoryResponse }) =>
     adapter.updateOne(
@@ -49,7 +45,7 @@ const featureReducer = createReducer(
     adapter.updateOne(
       {
         id: inventory.id,
-        changes: { amount: 0 },
+        changes: { amount: 0, isValid: false },
       },
       state
     )

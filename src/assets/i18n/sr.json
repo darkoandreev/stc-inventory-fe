@@ -22,7 +22,8 @@
       "WRITE_OFF_LAST_YEAR": "Otpis",
       "WRITE_OFF_TEXT": "Otpiši",
       "PRINT": "Odštampaj (PDF)",
-      "VIEW_INVENTORY_TITLE": "Pregled"
+      "VIEW_INVENTORY_TITLE": "Pregled",
+      "SPENT": "Razhodovano"
     }
   },
   "CATEGORY": {
