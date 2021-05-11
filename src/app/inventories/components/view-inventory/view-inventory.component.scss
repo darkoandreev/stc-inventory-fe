@@ -20,6 +20,15 @@ ion-grid {
     font-size: 75%;
   }
 
+  .information-title {
+    font-size: 1.5rem;
+  }
+
+  .flex-col {
+    display: flex;
+    align-items: center;
+  }
+
   .i-color {
     color: #9acd32;
   }

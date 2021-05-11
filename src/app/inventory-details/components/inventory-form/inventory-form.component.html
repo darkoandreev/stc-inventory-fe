@@ -121,12 +121,11 @@
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating">{{
-              'INVENTORIES.LABELS.PRODUCT_NUMBER' | translate
+              'INVENTORIES.LABELS.SERIAL_NUMBER' | translate
             }}</ion-label>
-            <ion-input
-              type="text"
-              formControlName="inventoryNumber"
-            ></ion-input>
+            <ng-container formGroupName="inventoryTech">
+              <ion-input type="text" formControlName="serialNumber"></ion-input>
+            </ng-container>
           </ion-item>
         </ion-col>
         <ion-col size="12">

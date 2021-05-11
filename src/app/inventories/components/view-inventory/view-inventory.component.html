@@ -19,101 +19,117 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-row>
-          <ion-label>{{
-            'INVENTORIES.LABELS.DESCRIPTION' | translate
-          }}</ion-label>
-        </ion-row>
-        <ion-row>{{ inventory.description }}</ion-row>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-row>
-          <ion-label>{{
+        <ion-row
+          class="ion-justify-content-center ion-padding-top ion-padding-bottom"
+        >
+          <ion-label class="information-title">{{
             'INVENTORIES.LABELS.INFORMATION' | translate
           }}</ion-label>
         </ion-row>
         <ion-row>
-          <ion-col size="1"
+          <ion-col size="1" class="flex-col"
             ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
           ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{ 'INVENTORIES.LABELS.PRODUCT_NAME' | translate }}:</strong
+            ></ion-col
+          >
           <ion-col size="5">{{ inventory.name }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.PRODUCT_NAME' | translate
+        </ion-row>
+        <ion-row>
+          <ion-col size="1" class="flex-col"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{ 'INVENTORIES.LABELS.PRODUCT_NUMBER' | translate }}:</strong
+            ></ion-col
+          >
+          <ion-col size="5">{{ inventory.id }}</ion-col>
+        </ion-row>
+        <ion-row *ngIf="inventory.inventoryTech?.serialNumber">
+          <ion-col size="1" class="flex-col"
+            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
+          ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{ 'INVENTORIES.LABELS.SERIAL_NUMBER' | translate }}:</strong
+            ></ion-col
+          >
+          <ion-col size="5">{{
+            inventory.inventoryTech?.serialNumber
           }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"
+          <ion-col size="1" class="flex-col"
             ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
           ></ion-col>
-          <ion-col size="5">{{ inventory.inventoryNumber }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.PRODUCT_NUMBER' | translate
-          }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"
-            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
-          ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{ 'INVENTORIES.LABELS.CATEGORY' | translate }}:</strong
+            ></ion-col
+          >
           <ion-col size="5">{{ inventory.category.name }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.CATEGORY' | translate
-          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"
+          <ion-col size="1" class="flex-col"
             ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
           ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{ 'INVENTORIES.LABELS.VALUE' | translate }}:</strong
+            ></ion-col
+          >
           <ion-col size="5">{{ inventory.amount }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.VALUE' | translate
-          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"
+          <ion-col size="1" class="flex-col"
             ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
           ></ion-col>
-          <ion-col size="5">{{ inventory.quantity }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.QUANTITY' | translate
-          }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"
-            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
-          ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{ 'INVENTORIES.LABELS.DATE_OF_PURCHAES' | translate }}:</strong
+            ></ion-col
+          >
           <ion-col size="5">{{
             inventory.buyDate | date: 'mediumDate'
           }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.DATE_OF_PURCHAES' | translate
-          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"
+          <ion-col size="1" class="flex-col"
             ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
           ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{ 'INVENTORIES.LABELS.LOCATION' | translate }}:</strong
+            ></ion-col
+          >
           <ion-col size="5">{{ inventory.location }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.LOCATION' | translate
-          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"
+          <ion-col size="1" class="flex-col"
             ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
           ></ion-col>
+          <ion-col size="6" class="flex-col"
+            ><strong
+              >{{
+                'INVENTORIES.LABELS.RESPONSIBLE_PERSON' | translate
+              }}:</strong
+            ></ion-col
+          >
           <ion-col size="5">{{ inventory.responsiblePerson }}</ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.RESPONSIBLE_PERSON' | translate
-          }}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="1"
+          <ion-col size="1" class="flex-col"
             ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
           ></ion-col>
           <ion-col size="5">
+            <ion-col size="6"
+              ><strong
+                >{{ 'INVENTORIES.LABELS.IS_VALID' | translate }} -
+              </strong></ion-col
+            >
             <ion-checkbox
               color="warning"
               [checked]="inventory.isValid"
@@ -121,15 +137,12 @@
             >
             </ion-checkbox>
           </ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.IS_VALID' | translate
-          }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="1"
-            ><ion-icon name="ellipse-sharp" class="i-color"></ion-icon
-          ></ion-col>
-          <ion-col size="5">
+          <ion-col size="6">
+            <ion-col size="6"
+              ><strong
+                >{{ 'INVENTORIES.LABELS.AMORTIZATION' | translate }} -
+              </strong></ion-col
+            >
             <ion-checkbox
               color="warning"
               [checked]="inventory.isAmortization"
@@ -137,22 +150,37 @@
             >
             </ion-checkbox>
           </ion-col>
-          <ion-col size="6">{{
-            'INVENTORIES.LABELS.AMORTIZATION' | translate
-          }}</ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="inventory.growth" class="ion-align-items-center">
-      <ion-label>{{ 'INVENTORIES.LABELS.GROWTH' | translate }}</ion-label>
-      <ion-col size="10"
-        ><ion-progress-bar
+    <div *ngIf="inventory.description" class="ion-padding">
+      <ion-row>
+        <ion-label>{{
+          'INVENTORIES.LABELS.DESCRIPTION' | translate
+        }}</ion-label>
+      </ion-row>
+
+      <ion-row>
+        {{ inventory.description }}
+      </ion-row>
+    </div>
+
+    <ion-row
+      *ngIf="inventory.growth"
+      class="ion-align-items-center ion-padding-top ion-padding-bottom"
+    >
+      <ion-col size="12">
+        <ion-label
+          >{{ 'INVENTORIES.LABELS.GROWTH' | translate }} -
+          {{ inventory.growth }}</ion-label
+        >
+
+        <ion-progress-bar
           color="warning"
           [value]="inventory.growth / 100"
-        ></ion-progress-bar
-      ></ion-col>
-      <ion-col size="2">{{ inventory.growth }} %</ion-col>
+        ></ion-progress-bar>
+      </ion-col>
     </ion-row>
 
     <ion-row style="justify-content: space-around">

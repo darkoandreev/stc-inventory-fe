@@ -1,8 +1,9 @@
 import { ICategory } from './category.model';
+import { InventoryTechnique } from './inventory-technique.model';
 
 export interface IInventory {
   id?: string;
-  inventoryNumber: string;
+  inventoryTech: InventoryTechnique;
   name: string;
   amount: number;
   location: string;

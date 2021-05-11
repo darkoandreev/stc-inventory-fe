@@ -59,11 +59,22 @@ export class InventoryFormComponent {
     const inventory: IInventory = {
       ...this.inventoryForm.value,
       id: this.inventoryId,
+      inventoryTech: {
+        id: this.inventory?.inventoryTech.id,
+        serialNumber: this.inventoryForm
+          .get('inventoryTech')
+          .get('serialNumber').value,
+      },
     };
+
+    if (!inventory.inventoryTech.serialNumber) {
+      delete inventory.inventoryTech;
+    }
 
     if (!this.inventoryId) {
       delete inventory.id;
     }
+
     this.submitInventory.emit(inventory);
   }
 
@@ -122,8 +133,10 @@ export class InventoryFormComponent {
     this.inventoryForm = this.formbuilder.group({
       categoryId: ['', Validators.required],
       name: ['', Validators.required],
-      amount: '',
-      inventoryNumber: '',
+      amount: null,
+      inventoryTech: this.formbuilder.group({
+        serialNumber: null,
+      }),
       location: ['', Validators.required],
       responsiblePerson: ['', Validators.required],
       imageName: ['', Validators.required],
